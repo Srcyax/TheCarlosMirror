@@ -239,7 +239,7 @@ public class EnemyAI : NetworkBehaviour
 
         for (int i = 0; i < players.Length; i++)
         {
-            if (Vector3.Distance(transform.position, players[i].transform.position) < 8)
+            if (Vector3.Distance(transform.position, players[i].transform.position) < 15 && players[i].GetComponent<CharacterController>().velocity.magnitude > 0)
             {
                 target = players[i].transform;
                 lastPositionKnown = target.position;
