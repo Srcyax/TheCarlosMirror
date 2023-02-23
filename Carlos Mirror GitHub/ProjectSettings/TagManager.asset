@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - CanvasMenu
+  - Enemy
+  - ItemFloor
+  - WayPoint
+  - PointHolder
+  - DeadText
+  - EndScreen
+  - WaitingPlayers
+  - NetworkManager
+  - SlotInventory
+  - PlayerHand
+  - Cruz
+  - Points
+  - Energy
+  - itemHold
+  - Eye
+  - ProximitySlotInventory
+  - WeightInventory
+  - WinScreen
+  - RitualPos
+  - Ritual
+  - PlayerBody
+  - Cabinet
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - PostProcess
+  - PlayerDead
+  - Wolrd
+  - Inventory
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
