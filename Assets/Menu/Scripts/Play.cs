@@ -7,6 +7,8 @@ public class Play : MonoBehaviour
     [Space(10)]
     [SerializeField] private GameObject choosePanel;
     [SerializeField] private Button playButton;
+    [Space(10)]
+    [SerializeField] private GetSettings getSettings;
 
     public void ChooseRoomMode()
     {
@@ -16,7 +18,7 @@ public class Play : MonoBehaviour
     private void Update()
     {
 #if !UNITY_EDITOR
-        playButton.interactable = settings.playerName.Length > 1;
+        playButton.interactable = settings.playerName.Length > 1 && Application.version == getSettings.GetGameVersion();
 #endif
     }
 }

@@ -27,8 +27,8 @@ public class UIManager : MonoBehaviour
         var holdSense = settings.sensitivy;
         var holdGraphics = settings.graphics;
 
-        File.WriteAllText(@"userdata/sense.txt", holdSense.ToString());
-        File.WriteAllText(@"userdata/graphics.txt", holdGraphics.ToString());
+        File.WriteAllText("C:/userdata/sense.txt", holdSense.ToString());
+        File.WriteAllText("C:/userdata/graphics.txt", holdGraphics.ToString());
 
         HostButton?.onClick.AddListener(() =>
         {

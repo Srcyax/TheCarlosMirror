@@ -191,9 +191,9 @@ public class PlayerController : NetworkBehaviour
         var holdSense = sensitivity.value;
         var holdGraphics = graphics.value;
 
-        File.WriteAllText(@"userdata/sense.txt", holdSense.ToString());
-        File.WriteAllText(@"userdata/graphics.txt", holdGraphics.ToString());
-        File.WriteAllText(@"userdata/tutorial.txt", "false");
+        File.WriteAllText("C:/userdata/sense.txt", holdSense.ToString());
+        File.WriteAllText("C:/userdata/graphics.txt", holdGraphics.ToString());
+        File.WriteAllText("C:/userdata/tutorial.txt", "false");
 
         Application.Quit();
     }
