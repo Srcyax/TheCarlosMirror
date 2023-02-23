@@ -3,7 +3,6 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject inventory;
     [SerializeField] private GameObject[] playerUI;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject settingsMenu;
@@ -23,7 +22,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (inventory.activeSelf || player.isDead || player.playerPoints.gameWon.activeSelf)
+        if (player.IsInventoryActivated || !player.IsLocalPlayerAlive || player.IsGameOver)
             return;
 
         if (Input.GetKeyUp(KeyCode.Escape))

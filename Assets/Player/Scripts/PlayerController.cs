@@ -2,6 +2,7 @@ using Mirror;
 using System;
 using System.Collections;
 using System.IO;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
@@ -105,12 +106,12 @@ public class PlayerController : NetworkBehaviour
         Graphics();
 
         // Command server
-        CmdPlayerIsDead(IsLocalPlayerAlive());
+        CmdPlayerIsDead(!IsLocalPlayerAlive);
     }
 
     void PlayerControler()
     {
-        if (IsGameOver() || IsInventoryActivated() || IsGamePaused())
+        if (IsGameOver || IsInventoryActivated || IsGamePaused)
             return;
 
         Vector3 forward = transform.TransformDirection(Vector3.forward);
@@ -201,7 +202,7 @@ public class PlayerController : NetworkBehaviour
     string animName;
     void Inventory()
     {
-        if (IsGamePaused() || IsLocalPlayerAlive() || IsGameOver())
+        if (IsGamePaused || !IsLocalPlayerAlive || IsGameOver)
             return;
 
         if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Tab))
@@ -224,7 +225,7 @@ public class PlayerController : NetworkBehaviour
 
     void CleanSelectedSlot()
     {
-        if (IsInventoryActivated())
+        if (IsInventoryActivated)
             return;
 
         if (selectedSlot.childCount > 0)
@@ -276,19 +277,16 @@ public class PlayerController : NetworkBehaviour
 
     void CheckEffects()
     {
-        if (isDead)
+        if (!IsLocalPlayerAlive)
         {
             jumpScare.SetActive(true);
             StartCoroutine(JumpScare(jumpScare.GetComponent<Image>()));
         }
+
         if (energyEffect)
-        {
             StartCoroutine(EnergyEffectEnd());
-        }
         if (eyeEffect)
-        {
             StartCoroutine(EyeEffectEnd());
-        }
     }
 
     [Command]
@@ -379,23 +377,35 @@ public class PlayerController : NetworkBehaviour
         playerTutorial.SetActive(false);
     }
 
-    public bool IsGamePaused()
+    public bool IsGamePaused
     {
-        return pauseMenu.activeSelf;
+        get
+        {
+            return pauseMenu.activeSelf;
+        }
     }
 
-    public bool IsGameOver()
+    public bool IsGameOver
     {
-        return gameOver.activeSelf || playerPoints.gameWon.activeSelf;
+        get
+        {
+            return gameOver.activeSelf || playerPoints.gameWon.activeSelf;
+        }
     }
 
-    public bool IsInventoryActivated()
+    public bool IsInventoryActivated
     {
-        return inventory.activeSelf;
+        get 
+        { 
+            return inventory.activeSelf;
+        }
     }
 
-    public bool IsLocalPlayerAlive()
+    public bool IsLocalPlayerAlive
     {
-        return isDead;
+        get
+        {
+            return !isDead;
+        }
     }
 }

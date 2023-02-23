@@ -3,6 +3,7 @@ using UnityEngine;
 public class CameraBob : MonoBehaviour
 {
     [SerializeField] private CharacterController controller;
+    [SerializeField] private PlayerController player;
 
     [Header("Foot step sound")]
     [SerializeField] private AudioSource audioSource;
@@ -21,6 +22,9 @@ public class CameraBob : MonoBehaviour
 
     void Update()
     {
+        if (player.IsInventoryActivated || player.IsGameOver || !player.IsLocalPlayerAlive)
+            return;
+
         walkingBobbingSpeed = Input.GetKey(KeyCode.LeftShift) ? 15 : 10;
         bobbingAmount = Input.GetKey(KeyCode.LeftShift) ? 0.1f : 0.05f;
 

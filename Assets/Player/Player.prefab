@@ -14593,6 +14593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 7823481797320664010}
+  player: {fileID: 7823481797320664011}
   audioSource: {fileID: 2272744920877874709}
   clips:
   - {fileID: 8300000, guid: 42e65e088b3f4374e851b8dbd38f3df9, type: 3}
