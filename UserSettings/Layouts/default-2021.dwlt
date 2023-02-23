@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 894
+  controlID: 108
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 895
+  controlID: 42
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 896
+  controlID: 43
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -189,8 +189,8 @@ MonoBehaviour:
     y: 0
     width: 251
     height: 522
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -406,7 +406,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: f642feff4243feff2448fefff248feff3e49feff204efeffee4efeff3a4ffeff3256feff06fbffffac870000
+      m_ExpandedIDs: 2054feff6c54feffc45bfeffec72ffff0674ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -699,9 +699,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 65.831474, y: 24.051693, z: 52.324547}
+    m_Target: {x: 100.22594, y: 52.393646, z: 97.858765}
     speed: 2
-    m_Value: {x: 65.831474, y: 24.051693, z: 52.324547}
+    m_Value: {x: 100.22594, y: 52.393646, z: 97.858765}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -748,13 +748,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.076
   m_Rotation:
-    m_Target: {x: 0.12941502, y: 0.7465518, z: -0.15598406, w: 0.63459915}
+    m_Target: {x: 0.1744931, y: -0.82792324, z: 0.3972017, w: 0.3570618}
     speed: 2
-    m_Value: {x: 0.12957534, y: 0.7451763, z: -0.15570143, w: 0.63535786}
+    m_Value: {x: 0.17498663, y: -0.8269043, z: 0.39670807, w: 0.35809436}
   m_Size:
-    m_Target: 3.8355994
+    m_Target: 1.9346628
     speed: 2
-    m_Value: 4.0163345
+    m_Value: 1.9346629
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -980,22 +980,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Player
+    - Assets/Enemy/Scripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 76
   m_LastFolders:
-  - Assets/Player
+  - Assets/Enemy/Scripts
   m_LastFoldersGridSize: 76
-  m_LastProjectPath: C:\Unity\The Carlos Mirror
+  m_LastProjectPath: C:\Users\cya\Documents\GitHub\TheCarlosMirror
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 20bb0000
-    m_LastClickedID: 47904
-    m_ExpandedIDs: 00000000eeba0000f0ba0000f2ba000016bb000020bb000000ca9a3bffffff7f
+    m_SelectedIDs: 44b00300
+    m_LastClickedID: 241732
+    m_ExpandedIDs: 00000000e0e20000e2e20000e4e20000eae200005e8b010000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1023,7 +1023,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000eeba0000f0ba0000f2ba000000ca9a3bffffff7f
+    m_ExpandedIDs: 
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1050,7 +1050,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300009e8f0000949f0000b49f0000749f000084ee0600c8930000aa9200004e90000092340200
     m_RenameOverlay:
       m_UserAcceptedRename: 0
