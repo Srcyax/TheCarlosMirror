@@ -18,10 +18,10 @@ public class FlashlightSystem : NetworkBehaviour
 
     void Update()
     {
-        if (player.inventoryActive)
+        if (player.IsInventoryActivated())
             return;
 
-        if (player.playerPoints.gameWon.activeSelf)
+        if (player.IsGameOver())
             Destroy(playerLight);
 
         bool button = Input.GetKeyDown(KeyCode.F);

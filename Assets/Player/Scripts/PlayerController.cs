@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.IO;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
@@ -13,11 +12,6 @@ using UnityEngine.UI;
 [Serializable]
 public class PlayerController : NetworkBehaviour
 {
-    [Serializable]
-    public sealed class Test {
-        public bool cyu;
-    }
-
     [Header("Settings")]
     [Tooltip("Get current settings player")]
     [SerializeField] private Settings settings;
@@ -76,7 +70,7 @@ public class PlayerController : NetworkBehaviour
     [HideInInspector] bool energyEffectCheck = false;
     [HideInInspector] public bool eyeEffect = false;
     [HideInInspector] public CurrentPoints current;
-    [SyncVar] [HideInInspector] public bool isDead = false;
+    [SyncVar][HideInInspector] public bool isDead = false;
 
     #region Others
     CharacterController characterController;
@@ -102,7 +96,7 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer)
             return;
-            
+
         PlayerControler();
         Animations();
         Stamine();
@@ -111,12 +105,12 @@ public class PlayerController : NetworkBehaviour
         Graphics();
 
         // Command server
-        CmdPlayerIsDead(isDead);
+        CmdPlayerIsDead(IsLocalPlayerAlive());
     }
 
     void PlayerControler()
     {
-        if (pauseMenu.activeSelf || gameOver.activeSelf || inventory.activeSelf || playerPoints.gameWon.activeSelf)
+        if (IsGameOver() || IsInventoryActivated() || IsGamePaused())
             return;
 
         Vector3 forward = transform.TransformDirection(Vector3.forward);
@@ -207,7 +201,7 @@ public class PlayerController : NetworkBehaviour
     string animName;
     void Inventory()
     {
-        if (pauseMenu.activeSelf || isDead || playerPoints.gameWon.activeSelf)
+        if (IsGamePaused() || IsLocalPlayerAlive() || IsGameOver())
             return;
 
         if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Tab))
@@ -230,7 +224,7 @@ public class PlayerController : NetworkBehaviour
 
     void CleanSelectedSlot()
     {
-        if (inventory.activeSelf)
+        if (IsInventoryActivated())
             return;
 
         if (selectedSlot.childCount > 0)
@@ -383,5 +377,25 @@ public class PlayerController : NetworkBehaviour
         playerTutorialText.text = "press F to turn on/off your flashlight";
         yield return new WaitForSeconds(5f);
         playerTutorial.SetActive(false);
+    }
+
+    public bool IsGamePaused()
+    {
+        return pauseMenu.activeSelf;
+    }
+
+    public bool IsGameOver()
+    {
+        return gameOver.activeSelf || playerPoints.gameWon.activeSelf;
+    }
+
+    public bool IsInventoryActivated()
+    {
+        return inventory.activeSelf;
+    }
+
+    public bool IsLocalPlayerAlive()
+    {
+        return isDead;
     }
 }
