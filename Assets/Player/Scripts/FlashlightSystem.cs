@@ -1,6 +1,7 @@
+using Mirror;
 using UnityEngine;
 
-public class FlashlightSystem : MonoBehaviour
+public class FlashlightSystem : NetworkBehaviour
 {
 
     [SerializeField] private PlayerController player;
@@ -23,7 +24,21 @@ public class FlashlightSystem : MonoBehaviour
         if (player.playerPoints.gameWon.activeSelf)
             Destroy(playerLight);
 
-        if (Input.GetKeyDown(KeyCode.F))
+        bool button = Input.GetKeyDown(KeyCode.F);
+
+        CmdFlashlight(button);
+    }
+
+    [Command]
+    void CmdFlashlight(bool button)
+    {
+        RpcFlashlight(button);
+    }
+
+    [ClientRpc]
+    void RpcFlashlight(bool button)
+    {
+        if (button)
         {
             playerLight.enabled = !playerLight.enabled;
             flashLightAudio.clip = playerLight.enabled ? turnOffClip : turnOnClip;

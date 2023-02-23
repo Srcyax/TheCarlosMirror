@@ -7245,7 +7245,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5670232129518172978}
   - component: {fileID: 7799958965624716824}
-  - component: {fileID: 5700833715480014485}
   - component: {fileID: 2917006022544549996}
   - component: {fileID: 6878798720293123263}
   m_Layer: 0
@@ -7313,7 +7312,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 2800000, guid: 91119179d5a6c8d44a29c07f23333738, type: 3}
+  m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 1
@@ -7332,23 +7331,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &5700833715480014485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4190317406635115135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8b7e96535781e4a86e0397e4c7dae6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 7823481797320664011}
-  playerLight: {fileID: 7799958965624716824}
-  turnOnClip: {fileID: 8300000, guid: 72d306e70cb7cc44791f11e074f9060b, type: 3}
-  turnOffClip: {fileID: 8300000, guid: 86d3e2274ab98f74ebb0e071a0ea215f, type: 3}
-  flashLightAudio: {fileID: 2917006022544549996}
 --- !u!82 &2917006022544549996
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14820,6 +14802,7 @@ GameObject:
   - component: {fileID: 3479670438247696627}
   - component: {fileID: 2412742043826749293}
   - component: {fileID: 3981745458648961239}
+  - component: {fileID: 4495898476974845925}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -14912,7 +14895,7 @@ MonoBehaviour:
   playerTutorialText: {fileID: 6041630852063310288}
   jumpScare: {fileID: 505667800452461482}
   flashLight: {fileID: 7799958965624716824}
-  flashlightSystem: {fileID: 5700833715480014485}
+  swayFlashlight: {fileID: 6878798720293123263}
   gameOver: {fileID: 2641939607177808862}
   inventory: {fileID: 8748174543729967809}
   selectedSlot: {fileID: 8919370158848440824}
@@ -15221,6 +15204,26 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   player: {fileID: 7823481797320664011}
+--- !u!114 &4495898476974845925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7823481797320664016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8b7e96535781e4a86e0397e4c7dae6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  player: {fileID: 7823481797320664011}
+  playerLight: {fileID: 7799958965624716824}
+  turnOnClip: {fileID: 8300000, guid: 72d306e70cb7cc44791f11e074f9060b, type: 3}
+  turnOffClip: {fileID: 8300000, guid: 86d3e2274ab98f74ebb0e071a0ea215f, type: 3}
+  flashLightAudio: {fileID: 2917006022544549996}
 --- !u!1 &7865347360311255896
 GameObject:
   m_ObjectHideFlags: 0

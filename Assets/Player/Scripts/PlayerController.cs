@@ -55,7 +55,7 @@ public class PlayerController : NetworkBehaviour
     [Space(10)]
     [Header("Player flashlight")]
     [SerializeField] private Light flashLight;
-    [SerializeField] private FlashlightSystem flashlightSystem;
+    [SerializeField] private Sway swayFlashlight;
 
     [Space(10)]
     [Header("Player screen Game state")]
@@ -262,10 +262,9 @@ public class PlayerController : NetworkBehaviour
         playerCamera.GetComponent<AudioListener>().enabled = isLocalPlayer;
         playerCamera.enabled = isLocalPlayer;
         playerNameSystem.playerName.enabled = !isLocalPlayer;
-        flashLight.enabled = isLocalPlayer;
-        flashlightSystem.enabled = isLocalPlayer;
         playerModel.SetActive(!isLocalPlayer);
         inventory.SetActive(isLocalPlayer);
+        swayFlashlight.enabled = isLocalPlayer;
         characterController = GetComponent<CharacterController>();
         postProcess = playerCamera.GetComponent<PostProcessVolume>();
         postProcess.enabled = isLocalPlayer;
