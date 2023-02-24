@@ -65,7 +65,6 @@ public class GetSettings : MonoBehaviour
         settings.sensitivy = sense.value;
         settings.graphics = graphics.value;
         settings.resolution = resolution.value;
-        settings.fullscreen = fullscreen.enabled;
         settings.playerName = playerName.text;
 
         Resolution();

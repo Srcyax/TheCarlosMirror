@@ -10524,6 +10524,7 @@ GameObject:
   - component: {fileID: 1538107501}
   - component: {fileID: 1538107503}
   - component: {fileID: 1538107504}
+  - component: {fileID: 1538107505}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: NetworkManager
@@ -10657,6 +10658,19 @@ MonoBehaviour:
   - {fileID: 4111732259749621476, guid: 293daba87e997064ba6582e4a67beff1, type: 3}
   - {fileID: 7253768642424272106, guid: db2610d2e1783dc489f44351fefad8be, type: 3}
   - {fileID: 8875758300981108766, guid: 1c4eb92317d16bc4e95cf97e7458c4a0, type: 3}
+--- !u!114 &1538107505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538107498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27714f463048535449855cec4af0a062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  networkManager: {fileID: 1538107499}
 --- !u!1 &1541300726
 GameObject:
   m_ObjectHideFlags: 0
@@ -15127,6 +15141,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  server: {fileID: 1538107505}
   bonePrefab: {fileID: 6546216986672101964, guid: 1d5dafb31bd10e14db7e4425a4a720f8, type: 3}
 --- !u!212 &1123838919088079393
 SpriteRenderer:
@@ -15730,6 +15745,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   carlosSetup: {fileID: 11400000, guid: a2fd290f305b4884cbff6c24b716adbd, type: 2}
+  server: {fileID: 1538107505}
   headSpot: {fileID: 1951490956929185935}
   musicSource: {fileID: 1951490956929185923}
   followingMusic: {fileID: 8300000, guid: f6362a565adfaf140a8ea220765fceef, type: 3}
@@ -15792,6 +15808,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  server: {fileID: 1538107505}
   enemyHead: {fileID: 5368153342849729958}
   networkManager: {fileID: 1538107499}
   visibleTarget: []
@@ -16603,6 +16620,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  server: {fileID: 1538107505}
   bonePrefab: {fileID: 6546216986672101964, guid: 1d5dafb31bd10e14db7e4425a4a720f8, type: 3}
 --- !u!82 &3333043577187665498
 AudioSource:
@@ -18106,6 +18124,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  server: {fileID: 1538107505}
   bonePrefab: {fileID: 6546216986672101964, guid: 1d5dafb31bd10e14db7e4425a4a720f8, type: 3}
 --- !u!114 &5848234379662153463
 MonoBehaviour:
@@ -18757,6 +18776,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  server: {fileID: 1538107505}
   bonePrefab: {fileID: 6546216986672101964, guid: 1d5dafb31bd10e14db7e4425a4a720f8, type: 3}
 --- !u!114 &7261222337009072139
 MonoBehaviour:
@@ -19065,6 +19085,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  server: {fileID: 1538107505}
   bonePrefab: {fileID: 6546216986672101964, guid: 1d5dafb31bd10e14db7e4425a4a720f8, type: 3}
 --- !u!212 &7877276057125320809
 SpriteRenderer:
@@ -19693,6 +19714,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  server: {fileID: 1538107505}
   bonePrefab: {fileID: 6546216986672101964, guid: 1d5dafb31bd10e14db7e4425a4a720f8, type: 3}
 --- !u!82 &8954637234124537683
 AudioSource:

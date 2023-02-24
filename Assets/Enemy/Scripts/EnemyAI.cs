@@ -18,6 +18,7 @@ public class EnemyAI : NetworkBehaviour
     [Header("Carlos setup")]
     [Tooltip("Get Carlos standard settings")]
     [SerializeField] private CarlosSetup carlosSetup;
+    [SerializeField] private PlayersAlreadyJoined server;
 
     [Space(10)]
     [Header("Raycast Spots")]
@@ -55,21 +56,13 @@ public class EnemyAI : NetworkBehaviour
         currentWayPoint = Random.Range(0, wayPoints.Length);
         stateAI = AIstate.walking;
     }
-    int test;
+
     void Update()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        if (!server.PlayersAlreadyJoinedInServer())
+            return;
 
-        if (players.Length >= networkManager.maxConnections && test < 10)
-        {
-            test++;           
-        }
-
-        if (test > 0)
-        {
-            CmdMainCode();
-        }
-
+        CmdMainCode();
         CmdCruzEffect();
     }
 

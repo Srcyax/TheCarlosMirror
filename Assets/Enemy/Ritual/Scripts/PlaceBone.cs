@@ -3,11 +3,12 @@ using UnityEngine;
 
 public class PlaceBone : NetworkBehaviour
 {
+    [SerializeField] private PlayersAlreadyJoined server;
+
     [SerializeField] private GameObject bonePrefab;
 
     private CurrentPoints current;
     private RitualComplet ritual;
-    private NetworkManager networkManager;
 
     AudioSource audioSource => GetComponent<AudioSource>();
 
@@ -15,20 +16,14 @@ public class PlaceBone : NetworkBehaviour
     {
         current = GameObject.FindGameObjectWithTag("PointHolder").GetComponent<CurrentPoints>();
         ritual = GameObject.FindGameObjectWithTag("Ritual").GetComponent<RitualComplet>();
-        networkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>();
     }
 
-    int test;
     private void Update()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        if (!server.PlayersAlreadyJoinedInServer())
+            return;
 
-        if (players.Length >= networkManager.maxConnections && test < 10)
-        {
-            test++;
-        }
-        if (test > 0)
-            CmdPlaceBone();
+        CmdPlaceBone();
     }
 
 

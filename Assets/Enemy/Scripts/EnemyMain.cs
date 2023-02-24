@@ -6,6 +6,9 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyMain : NetworkBehaviour
 {
+    [SerializeField] private PlayersAlreadyJoined server;
+    [Space(10)]
+
     private float visionDistance = 316.5f;
     private float radiusLayer = 74.2f;
     private float visionAngle = 250f;
@@ -16,6 +19,7 @@ public class EnemyMain : NetworkBehaviour
     private const string targetTag = "Player";
 
     private float timeToCheck = 0;
+    private float check = 0;
 
     [SerializeField] private Transform enemyHead;
     [SerializeField] NetworkManager networkManager;
@@ -23,27 +27,22 @@ public class EnemyMain : NetworkBehaviour
     [SyncVar] public List<Transform> visibleTarget = new List<Transform>();
     [SyncVar] public List<Transform> collisionList = new List<Transform>();
 
-    float check = 0;
-    int test;
+
     void Update()
     {
+        if (!server.PlayersAlreadyJoinedInServer())
+            return;
+
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
         AIPerformance(players);
 
-        if (players.Length >= networkManager.maxConnections && test < 10)
+        check += Time.fixedDeltaTime;
+        if (check > timeToCheck)
         {
-            test++;       
-        }
-        if (test > 0)
-        {
-            check += Time.fixedDeltaTime;
-            if (check > timeToCheck)
-            {
-                CmdChecarInimigos();
-                check = 0;
-            }
-        }
+            CmdChecarInimigos();
+            check = 0;
+        }    
     }
 
     [Command(requiresAuthority = false)]
