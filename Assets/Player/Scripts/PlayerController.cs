@@ -269,12 +269,14 @@ public class PlayerController : NetworkBehaviour
 
     private void LocalPlayerStart()
     {
+#if !UNITY_EDITOR
         GetSettings version = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<GetSettings>();
         if (version)
         {
             if (Application.version != version.GetGameVersion())
                 SceneManager.LoadScene("Game");
         }
+#endif
 
         sensitivity.value = settings.sensitivy;
         resolution.value = settings.resolution;

@@ -8,7 +8,8 @@ namespace Mirror.Examples.AdditiveLevels
         // LateUpdate so that all camera updates are finished.
         void LateUpdate()
         {
-            transform.forward = Camera.main.transform.forward;
+            if (Camera.main)
+                transform.forward = Camera.main.transform.forward;
         }
     }
 }
