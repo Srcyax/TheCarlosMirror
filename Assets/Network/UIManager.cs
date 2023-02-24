@@ -2,18 +2,18 @@ using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Button HostButton;
     [SerializeField] private Button ClientButton;
 
-    [SerializeField] TMP_Dropdown maxClient;
-    [SerializeField] NetworkManager transport;
-    [SerializeField] TextMeshProUGUI ipAdress;
+    [SerializeField] private TMP_Dropdown maxClient;
+    [SerializeField] private NetworkManager transport;
+    [SerializeField] private TextMeshProUGUI ipAdress;
     [Space(10)]
-    [SerializeField] Settings settings;
+    [SerializeField] private Settings settings;
+    [SerializeField] private JsonReadWriteSystem json;
     [Space(10)]
     [SerializeField] private GameObject loadScreen;
     [SerializeField] private SpawnScene scene;
@@ -25,11 +25,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        var holdSense = settings.sensitivy;
-        var holdGraphics = settings.graphics;
-
-        File.WriteAllText("C:/userdata/sense.txt", holdSense.ToString());
-        File.WriteAllText("C:/userdata/graphics.txt", holdGraphics.ToString());
+        json.SaveToJson((int)settings.sensitivy, settings.graphics, settings.tutorial, settings.resolution);
 
         HostButton?.onClick.AddListener(() =>
         {

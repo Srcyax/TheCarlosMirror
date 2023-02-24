@@ -185,14 +185,8 @@ public class PlayerController : NetworkBehaviour
 
     public void Disconnect()
     {
-        var holdSense = Mathf.Floor(sensitivity.value);
-        var holdGraphics = graphics.value;
-        var holdResolution = resolution.value;
-
-        File.WriteAllText("C:/userdata/sense.txt", holdSense.ToString());
-        File.WriteAllText("C:/userdata/graphics.txt", holdGraphics.ToString());
-        File.WriteAllText("C:/userdata/tutorial.txt", "false");
-        File.WriteAllText("C:/userdata/resolution.txt", holdResolution.ToString());
+        JsonReadWriteSystem json = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<JsonReadWriteSystem>();
+        json.SaveToJson((int)Mathf.Floor(sensitivity.value), graphics.value, false, resolution.value);
 
         Application.Quit();
     }

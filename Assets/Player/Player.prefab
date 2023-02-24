@@ -3410,6 +3410,8 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: 1024x768
       m_Image: {fileID: 0}
+    - m_Text: 800x600
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -16641,10 +16643,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fps: {fileID: 114080662448728860}
-  frameCount: 0
-  deltaTimee: 0
-  fpss: 0
-  updateRate: 4
 --- !u!1 &7865347360311255896
 GameObject:
   m_ObjectHideFlags: 0

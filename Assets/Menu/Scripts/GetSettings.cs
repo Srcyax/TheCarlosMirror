@@ -14,6 +14,7 @@ public class GetSettings : MonoBehaviour
     [SerializeField] TextMeshProUGUI playerName;
 
     [SerializeField] Settings settings;
+    [SerializeField] JsonReadWriteSystem json;
 
     [Space(10)]
     [SerializeField] GameObject wrongVersion;
@@ -24,60 +25,17 @@ public class GetSettings : MonoBehaviour
 
         if (Directory.Exists("C:/userdata"))
         {
-            if (File.Exists("C:/userdata/sense.txt"))
-            {
-                foreach (string line in File.ReadLines("C:/userdata/sense.txt"))
-                {
-                    sense.value = Int32.Parse(line);
-                }
-            }
+            if(File.Exists(Application.dataPath + "C:/userdata.json"))
+                json.LoadFromJson(sense, graphics, settings, resolution);
             else
-            {
-                File.WriteAllText("C:/userdata/sense.txt", "3");
-            }
-            if (File.Exists("C:/userdata/graphics.txt"))
-            {
-                foreach (string line in File.ReadLines("C:/userdata/graphics.txt"))
-                {
-                    graphics.value = Int32.Parse(line);
-                }
-            }
-            else
-            {
-                File.WriteAllText("C:/userdata/graphics.txt", "0");
-            }
-            if (File.Exists("C:/userdata/tutorial.txt"))
-            {
-                foreach (string line in File.ReadLines("C:/userdata/tutorial.txt"))
-                {
-                    settings.tutorial = Boolean.Parse(line);
-                }
-            }
-            else
-            {
-                File.WriteAllText("C:/userdata/tutorial.txt", "true");
-            }
-            if (File.Exists("C:/userdata/resolution.txt")) 
-            { 
-                foreach (string line in File.ReadLines("C:/userdata/resolution.txt"))
-                {
-                    resolution.value = Int32.Parse(line);
-                } 
-            }
-            else
-            {
-                            File.WriteAllText("C:/userdata/resolution.txt", "0");
-            }
+                json.SaveToJson(3, 0, true, 0);
         }
         else
         {
             DirectoryInfo di = Directory.CreateDirectory("C:/userdata");
             di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
-            File.WriteAllText("C:/userdata/sense.txt", "3");
-            File.WriteAllText("C:/userdata/graphics.txt", "0");
-            File.WriteAllText("C:/userdata/resolution.txt", "0");
-            File.WriteAllText("C:/userdata/tutorial.txt", "true");
-        }
+            json.SaveToJson(3, 0, true, 0);
+        }     
     }
 
     void Update()

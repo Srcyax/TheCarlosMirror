@@ -1408,6 +1408,7 @@ MonoBehaviour:
   transport: {fileID: 1538107499}
   ipAdress: {fileID: 2086125472}
   settings: {fileID: 11400000, guid: 64d270527731652429011bd4f604b27c, type: 2}
+  json: {fileID: 1538107506}
   loadScreen: {fileID: 5352372178552532066, guid: eb93088189cc72047a11e993348274e5, type: 3}
   scene: {fileID: 1538107504}
 --- !u!114 &276949980
@@ -8383,6 +8384,7 @@ MonoBehaviour:
   transport: {fileID: 1538107499}
   ipAdress: {fileID: 903119964}
   settings: {fileID: 11400000, guid: 64d270527731652429011bd4f604b27c, type: 2}
+  json: {fileID: 1538107506}
   loadScreen: {fileID: 5352372178552532066, guid: eb93088189cc72047a11e993348274e5, type: 3}
   scene: {fileID: 1538107504}
 --- !u!114 &1078920962
@@ -10525,6 +10527,7 @@ GameObject:
   - component: {fileID: 1538107503}
   - component: {fileID: 1538107504}
   - component: {fileID: 1538107505}
+  - component: {fileID: 1538107506}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: NetworkManager
@@ -10625,6 +10628,7 @@ MonoBehaviour:
   fullscreen: {fileID: 0}
   playerName: {fileID: 939362903}
   settings: {fileID: 11400000, guid: 64d270527731652429011bd4f604b27c, type: 2}
+  json: {fileID: 1538107506}
   wrongVersion: {fileID: 624110455}
 --- !u!114 &1538107504
 MonoBehaviour:
@@ -10671,6 +10675,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   networkManager: {fileID: 1538107499}
+--- !u!114 &1538107506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538107498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2bf0351c242089489f3b63ad3463a5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1541300726
 GameObject:
   m_ObjectHideFlags: 0
@@ -14059,6 +14075,8 @@ MonoBehaviour:
     - m_Text: 1400x900
       m_Image: {fileID: 0}
     - m_Text: 1024x768
+      m_Image: {fileID: 0}
+    - m_Text: 800x600
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
