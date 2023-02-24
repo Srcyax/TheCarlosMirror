@@ -25,6 +25,6 @@ public class Sway : MonoBehaviour
 
         finalPosition = new Vector3(mouseX, mouseY, 0);
 
-        transform.localPosition = Vector3.Lerp(transform.localPosition, finalPosition + initialPosition, Time.deltaTime * (_smoothAmout / settings.sensitivy));
+        transform.localPosition = Vector3.Lerp(transform.localPosition, finalPosition + initialPosition, Time.deltaTime * (_smoothAmout / (settings.sensitivy / 4)));
     }
 }
