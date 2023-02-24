@@ -16,7 +16,7 @@ public class RitualComplet : NetworkBehaviour
         CmdRitualComplet(currentBones);
     }
 
-    [Command (requiresAuthority = false)]
+    [ClientRpc]
     void CmdRitualComplet(int bones)
     {
         if (!(bones > 5))
