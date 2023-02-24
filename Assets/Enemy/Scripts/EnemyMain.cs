@@ -24,13 +24,18 @@ public class EnemyMain : NetworkBehaviour
     [SyncVar] public List<Transform> collisionList = new List<Transform>();
 
     float check = 0;
+    int test;
     void Update()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
         AIPerformance(players);
 
-        if (players.Length >= networkManager.maxConnections)
+        if (players.Length >= networkManager.maxConnections && test < 10)
+        {
+            test++;       
+        }
+        if (test > 0)
         {
             check += Time.fixedDeltaTime;
             if (check > timeToCheck)
@@ -39,7 +44,6 @@ public class EnemyMain : NetworkBehaviour
                 check = 0;
             }
         }
-
     }
 
     [Command(requiresAuthority = false)]

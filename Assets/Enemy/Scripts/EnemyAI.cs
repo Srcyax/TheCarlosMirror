@@ -55,12 +55,17 @@ public class EnemyAI : NetworkBehaviour
         currentWayPoint = Random.Range(0, wayPoints.Length);
         stateAI = AIstate.walking;
     }
-
+    int test;
     void Update()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-        if (players.Length >= networkManager.maxConnections)
+        if (players.Length >= networkManager.maxConnections && test < 10)
+        {
+            test++;           
+        }
+
+        if (test > 0)
         {
             CmdMainCode();
         }
