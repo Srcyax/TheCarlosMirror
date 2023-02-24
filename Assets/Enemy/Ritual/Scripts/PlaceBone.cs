@@ -11,14 +11,30 @@ public class PlaceBone : NetworkBehaviour
 
     AudioSource audioSource => GetComponent<AudioSource>();
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if (!(transform.childCount < 1) || !(current.points > 0) || !other.gameObject.CompareTag("Player"))
+        CmdPlaceBone();
+    }
+
+
+    [Command (requiresAuthority = false)]
+    void CmdPlaceBone()
+    {
+        if (!(transform.childCount < 1) || !(current.points > 0))
             return;
 
-        Instantiate(bonePrefab, transform);
-        audioSource.Play();
-        current.points--;
-        ritual.currentBones++;
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        print(players.Length);
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (Vector3.Distance(transform.position, players[i].transform.position) > 3)
+                continue;
+            print(Vector3.Distance(transform.position, players[i].transform.position));
+            Instantiate(bonePrefab, transform);
+            audioSource.Play();
+            current.points--;
+            ritual.currentBones++;
+        }
     }
 }
