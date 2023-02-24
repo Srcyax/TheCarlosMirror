@@ -16,11 +16,9 @@ public class PlaceBone : NetworkBehaviour
         if (!(transform.childCount < 1) || !(current.points > 0) || !other.gameObject.CompareTag("Player"))
             return;
 
-        if (Instantiate(bonePrefab, transform))
-        {
-            audioSource.Play();
-            current.points--;
-            ritual.currentBones++;
-        }
+        Instantiate(bonePrefab, transform);
+        audioSource.Play();
+        current.points--;
+        ritual.currentBones++;
     }
 }

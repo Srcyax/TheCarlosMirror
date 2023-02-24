@@ -106,7 +106,7 @@ public class PlayerController : NetworkBehaviour
         Graphics();
 
         // Command server
-        CmdPlayerIsDead(!IsLocalPlayerAlive);
+        CmdPlayerIsDead(isDead);
     }
 
     void PlayerControler()
@@ -298,17 +298,16 @@ public class PlayerController : NetworkBehaviour
     [ClientRpc]
     void RpcPlayerIsDead(bool isDead)
     {
-        if (!isDead)
-            return;
-
-        gameObject.layer = 7;
-        foreach (Transform child in transform)
+        if (isDead)
         {
-            child.gameObject.layer = 7;
+            gameObject.layer = 7;
+            foreach (Transform child in transform)
+            {
+                child.gameObject.layer = 7;
+            }
+            gameObject.tag = "Untagged";
+            playerIsDead.enabled = true;
         }
-        gameObject.tag = "Untagged";
-        Destroy(playerModel);
-        playerIsDead.enabled = true;
 
         PlayersAlive();
     }

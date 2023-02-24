@@ -13,7 +13,13 @@ public class RitualComplet : NetworkBehaviour
 
     void Update()
     {
-        if (!(currentBones > 5))
+        CmdRitualComplet(currentBones);
+    }
+
+    [Command]
+    void CmdRitualComplet(int bones)
+    {
+        if (!(bones > 5))
             return;
 
         ritualCamera.enabled = true;

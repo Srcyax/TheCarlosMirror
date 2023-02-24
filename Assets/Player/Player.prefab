@@ -15181,7 +15181,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86592b5d4e23cf4e98a7ba62aedf174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 8748174543729967809}
   playerUI:
   - {fileID: 2461380512491995211}
   - {fileID: 8897720085152008372}
