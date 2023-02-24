@@ -2,7 +2,6 @@ using Mirror;
 using System;
 using System.Collections;
 using System.IO;
-using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
@@ -18,6 +17,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private Settings settings;
     [SerializeField] private Slider sensitivity;
     [SerializeField] private TMP_Dropdown graphics;
+    [SerializeField] private TMP_Dropdown resolution;
 
     [Space(10)]
 
@@ -104,6 +104,7 @@ public class PlayerController : NetworkBehaviour
         Inventory();
         CheckEffects();
         Graphics();
+        Resolution();
 
         // Command server
         CmdPlayerIsDead(isDead);
@@ -185,10 +186,12 @@ public class PlayerController : NetworkBehaviour
     {
         var holdSense = sensitivity.value;
         var holdGraphics = graphics.value;
+        var holdResolution = resolution.value;
 
         File.WriteAllText("C:/userdata/sense.txt", holdSense.ToString());
         File.WriteAllText("C:/userdata/graphics.txt", holdGraphics.ToString());
         File.WriteAllText("C:/userdata/tutorial.txt", "false");
+        File.WriteAllText("C:/userdata/resolution.txt", holdResolution.ToString());
 
         Application.Quit();
     }
@@ -197,6 +200,28 @@ public class PlayerController : NetworkBehaviour
     {
         QualitySettings.SetQualityLevel(graphics.value);
         postProcess.weight = graphics.value < 2 ? 1f : .25f;
+    }
+
+    void Resolution()
+    {
+        switch (resolution.value)
+        {
+            case 0:
+                Screen.SetResolution(1920, 1080, true);
+                break;
+            case 1:
+                Screen.SetResolution(1650, 1080, true);
+                break;
+            case 2:
+                Screen.SetResolution(1400, 900, true);
+                break;
+            case 3:
+                Screen.SetResolution(1024, 768, true);
+                break;
+            case 4:
+                Screen.SetResolution(800, 600, true);
+                break;
+        }
     }
 
     string animName;
@@ -250,6 +275,7 @@ public class PlayerController : NetworkBehaviour
     private void LocalPlayerStart()
     {
         sensitivity.value = settings.sensitivy;
+        resolution.value = settings.resolution;
         graphics.value = settings.graphics;
 
         GameObject.FindGameObjectWithTag("CanvasMenu")?.SetActive(false);
@@ -394,8 +420,8 @@ public class PlayerController : NetworkBehaviour
 
     public bool IsInventoryActivated
     {
-        get 
-        { 
+        get
+        {
             return inventory.activeSelf;
         }
     }

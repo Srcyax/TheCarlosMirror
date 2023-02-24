@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class OpenGates : NetworkBehaviour
 {
-    [SerializeField] private NetworkManager networkManager;
-    [SerializeField] private GameObject[] gates;
-
     GameObject[] players;
     GameObject[] waitingForPlayers;
+    GameObject[] gates;
+    NetworkManager network;
+    void Start()
+    {
+        gates = GameObject.FindGameObjectsWithTag("Gate");
+        network = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>();
+    }
 
     void Update()
     {
@@ -21,7 +25,7 @@ public class OpenGates : NetworkBehaviour
         players = GameObject.FindGameObjectsWithTag("Player");
         waitingForPlayers = GameObject.FindGameObjectsWithTag("WaitingPlayers");
 
-        if ((players.Length >= networkManager.maxConnections))
+        if ((players.Length >= network.maxConnections))
         {
             foreach (GameObject wait in waitingForPlayers)
             {

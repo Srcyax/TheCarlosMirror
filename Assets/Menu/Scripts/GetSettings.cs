@@ -1,14 +1,16 @@
+using System;
+using System.IO;
+using System.Net;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
-using System;
-using System.Net;
 
 public class GetSettings : MonoBehaviour
 {
-    [SerializeField] Slider slider;
-    [SerializeField] TMP_Dropdown dropdown;
+    [SerializeField] Slider sense;
+    [SerializeField] TMP_Dropdown graphics;
+    [SerializeField] TMP_Dropdown resolution;
+    [SerializeField] Toggle fullscreen;
     [SerializeField] TextMeshProUGUI playerName;
 
     [SerializeField] Settings settings;
@@ -32,15 +34,19 @@ public class GetSettings : MonoBehaviour
         {
             foreach (string line in File.ReadLines("C:/userdata/sense.txt"))
             {
-                slider.value = Int32.Parse(line);
+                sense.value = Int32.Parse(line);
             }
             foreach (string line in File.ReadLines("C:/userdata/graphics.txt"))
             {
-                dropdown.value = Int32.Parse(line);
+                graphics.value = Int32.Parse(line);
             }
             foreach (string line in File.ReadLines("C:/userdata/tutorial.txt"))
             {
                 settings.tutorial = Boolean.Parse(line);
+            }
+            foreach (string line in File.ReadLines("C:/userdata/resolution.txt"))
+            {
+                resolution.value = Int32.Parse(line);
             }
         }
         else
@@ -49,17 +55,44 @@ public class GetSettings : MonoBehaviour
             di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
             File.WriteAllText("C:/userdata/sense.txt", "3");
             File.WriteAllText("C:/userdata/graphics.txt", "0");
+            File.WriteAllText("C:/userdata/resolution.txt", "0");
             File.WriteAllText("C:/userdata/tutorial.txt", "true");
         }
     }
 
     void Update()
     {
-        settings.sensitivy = slider.value;
-        settings.graphics = dropdown.value;
+        settings.sensitivy = sense.value;
+        settings.graphics = graphics.value;
+        settings.resolution = resolution.value;
+        settings.fullscreen = fullscreen.enabled;
         settings.playerName = playerName.text;
+
+        Resolution();
     }
 
+
+    void Resolution()
+    {
+        switch (resolution.value)
+        {
+            case 0:
+                Screen.SetResolution(1920, 1080, true);
+                break;        
+            case 1:
+                Screen.SetResolution(1650, 1080, true);
+                break;
+            case 2:
+                Screen.SetResolution(1400, 900, true);
+                break;
+            case 3:
+                Screen.SetResolution(1024, 768, true);
+                break;
+            case 4:
+                Screen.SetResolution(800, 600, true);
+                break;
+        }
+    }
 
     public string GetGameVersion()
     {

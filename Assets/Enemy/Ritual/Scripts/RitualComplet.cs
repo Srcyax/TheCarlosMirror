@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RitualComplet : NetworkBehaviour
 {
-    [SerializeField] private GameObject enemy;
+    
     [SerializeField] private GameObject enemyRitualPrefab;
     [SerializeField] private Transform enemyRitualPos;
     [SerializeField] private Camera ritualCamera;
@@ -11,12 +11,19 @@ public class RitualComplet : NetworkBehaviour
 
     [SyncVar] public int currentBones = 0;
 
+    private GameObject enemy;
+
+    private void Start()
+    {
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
+    }
+
     void Update()
     {
         CmdRitualComplet(currentBones);
     }
 
-    [ClientRpc]
+    [Command (requiresAuthority = false)]
     void CmdRitualComplet(int bones)
     {
         if (!(bones > 5))

@@ -6,6 +6,8 @@ public class Settings : ScriptableObject
 {
     public float sensitivy;
     public int graphics;
+    public int resolution;
+    public bool fullscreen;
     public bool tutorial = true;
 
     [Space(10)]

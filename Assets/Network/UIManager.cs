@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] Settings settings;
     [Space(10)]
     [SerializeField] private GameObject loadScreen;
+    [SerializeField] private SpawnScene scene;
 
     void Awake()
     {
@@ -36,12 +37,14 @@ public class UIManager : MonoBehaviour
             {
                 NetworkManager.singleton.StartHost();
                 transport.maxConnections = maxClient.value;
+                scene.LoadScene();
                 Instantiate(loadScreen);
             }
         });
         ClientButton?.onClick.AddListener(() =>
         {
             NetworkManager.singleton.StartClient();
+            scene.LoadScene();
             Instantiate(loadScreen);
         });
     }
