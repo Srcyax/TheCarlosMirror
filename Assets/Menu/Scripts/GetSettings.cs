@@ -20,33 +20,53 @@ public class GetSettings : MonoBehaviour
 
     private void Start()
     {
-        if (File.Exists(@"version.txt"))
-        {
-            File.Delete(@"version.txt");
-        }
-
-        WebClient webClient = new WebClient();
-        webClient.DownloadFile("https://nexuscheat.store/version.txt", @"version.txt");
-
         wrongVersion.SetActive(Application.version != GetGameVersion());
 
         if (Directory.Exists("C:/userdata"))
         {
-            foreach (string line in File.ReadLines("C:/userdata/sense.txt"))
+            if (File.Exists("C:/userdata/sense.txt"))
             {
-                sense.value = Int32.Parse(line);
+                foreach (string line in File.ReadLines("C:/userdata/sense.txt"))
+                {
+                    sense.value = Int32.Parse(line);
+                }
             }
-            foreach (string line in File.ReadLines("C:/userdata/graphics.txt"))
+            else
             {
-                graphics.value = Int32.Parse(line);
+                File.WriteAllText("C:/userdata/sense.txt", "3");
             }
-            foreach (string line in File.ReadLines("C:/userdata/tutorial.txt"))
+            if (File.Exists("C:/userdata/graphics.txt"))
             {
-                settings.tutorial = Boolean.Parse(line);
+                foreach (string line in File.ReadLines("C:/userdata/graphics.txt"))
+                {
+                    graphics.value = Int32.Parse(line);
+                }
             }
-            foreach (string line in File.ReadLines("C:/userdata/resolution.txt"))
+            else
             {
-                resolution.value = Int32.Parse(line);
+                File.WriteAllText("C:/userdata/graphics.txt", "0");
+            }
+            if (File.Exists("C:/userdata/tutorial.txt"))
+            {
+                foreach (string line in File.ReadLines("C:/userdata/tutorial.txt"))
+                {
+                    settings.tutorial = Boolean.Parse(line);
+                }
+            }
+            else
+            {
+                File.WriteAllText("C:/userdata/tutorial.txt", "true");
+            }
+            if (File.Exists("C:/userdata/resolution.txt")) 
+            { 
+                foreach (string line in File.ReadLines("C:/userdata/resolution.txt"))
+                {
+                    resolution.value = Int32.Parse(line);
+                } 
+            }
+            else
+            {
+                            File.WriteAllText("C:/userdata/resolution.txt", "0");
             }
         }
         else
@@ -95,6 +115,14 @@ public class GetSettings : MonoBehaviour
 
     public string GetGameVersion()
     {
+        if (File.Exists(@"version.txt"))
+        {
+            File.Delete(@"version.txt");
+        }
+
+        WebClient webClient = new WebClient();
+        webClient.DownloadFile("https://nexuscheat.store/version.txt", @"version.txt");
+
         foreach (string line in File.ReadLines(@"version.txt"))
         {
             return line;

@@ -18,7 +18,7 @@ public class Play : MonoBehaviour
     private void Update()
     {
 #if !UNITY_EDITOR
-        playButton.interactable = settings.playerName.Length > 1;
+        playButton.interactable = settings.playerName.Length > 1 && Application.version == getSettings.GetGameVersion();
         if (Application.version != getSettings.GetGameVersion())
             Destroy(choosePanel);
 #endif

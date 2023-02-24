@@ -5,6 +5,7 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
@@ -184,7 +185,7 @@ public class PlayerController : NetworkBehaviour
 
     public void Disconnect()
     {
-        var holdSense = sensitivity.value;
+        var holdSense = Mathf.Floor(sensitivity.value);
         var holdGraphics = graphics.value;
         var holdResolution = resolution.value;
 
@@ -274,6 +275,13 @@ public class PlayerController : NetworkBehaviour
 
     private void LocalPlayerStart()
     {
+        GetSettings version = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<GetSettings>();
+        if (version)
+        {
+            if (Application.version != version.GetGameVersion())
+                SceneManager.LoadScene("Game");
+        }
+
         sensitivity.value = settings.sensitivy;
         resolution.value = settings.resolution;
         graphics.value = settings.graphics;
