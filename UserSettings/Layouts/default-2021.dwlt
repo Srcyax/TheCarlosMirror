@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1680
     height: 959
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -272,8 +272,8 @@ MonoBehaviour:
     y: 0
     width: 357
     height: 909
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
@@ -433,9 +433,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 3aab0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 7684fbffc284fbffde8bfbff8638fdffd638fdffee3ffdfffa83feff4a84feff7e8cfeffc0cdfeff10cefeff44d6feff98ebffffe8ebffff04f3fffff6faffff82b40000da250100a86a0100801702008e170200
+      m_ExpandedIDs: fefaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -801,7 +801,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.16003901, y: 0.82986677, z: -0.43627122, w: 0.31084225}
     speed: 2
-    m_Value: {x: 0.1604041, y: 0.82869476, z: -0.4372434, w: 0.31040892}
+    m_Value: {x: 0.15993933, y: 0.8293499, z: -0.43599948, w: 0.31064865}
   m_Size:
     m_Target: 2.9892142
     speed: 2
@@ -1065,22 +1065,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Enemy/Carlos/Scripts
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Enemy/Carlos/Scripts
+  - Assets
   m_LastFoldersGridSize: 96
   m_LastProjectPath: C:\Users\cya\Documents\GitHub\TheCarlosMirror
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 6e8d0100
-    m_LastClickedID: 101742
-    m_ExpandedIDs: 000000007ca600009ca60000f0a60000f2a60000f4a6000000ca9a3bffffff7f
+    m_SelectedIDs: e0a70000
+    m_LastClickedID: 42976
+    m_ExpandedIDs: 00000000e0a70000fea700004ca8000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1108,7 +1108,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000007ca60000
+    m_ExpandedIDs: 00000000e0a70000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
