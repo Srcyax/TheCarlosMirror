@@ -10,9 +10,6 @@ public class Interaction : MonoBehaviour
         anim = GetDistanceBetweenPoints(Camera.main.transform) < 5 ? "FadeIn" : "FadeOut";
 
         animator.Play(anim);
-
-        if (transform.root.GetComponent<Outline>())
-            transform.root.GetComponent<Outline>().enabled = GetDistanceBetweenPoints(Camera.main.transform) < 5;
     }
 
     float GetDistanceBetweenPoints(Transform a)

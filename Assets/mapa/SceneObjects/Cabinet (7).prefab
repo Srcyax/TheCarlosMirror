@@ -156,7 +156,6 @@ GameObject:
   - component: {fileID: 8869731129545554460}
   - component: {fileID: 4246450106562321582}
   - component: {fileID: 843416169492203150}
-  - component: {fileID: 456184806454438300}
   m_Layer: 0
   m_Name: Cabinet (7)
   m_TagString: Untagged
@@ -264,24 +263,6 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
---- !u!114 &456184806454438300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7175334794296170598}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 3
-  outlineColor: {r: 1, g: 0.6273585, b: 0.6273585, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1 &7268496057507059539
 GameObject:
   m_ObjectHideFlags: 0

@@ -135,6 +135,9 @@ public class PlayerController : NetworkBehaviour
         rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * sensitivity.value, 0);
+
+        if (characterController.velocity.magnitude > 30)
+            Application.Quit();
     }
 
     void Animations()
