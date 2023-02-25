@@ -18,7 +18,7 @@ public class FlashlightSystem : NetworkBehaviour
 
     void Update()
     {
-        if (player.IsInventoryActivated)
+        if (player.IsInventoryActivated || !isLocalPlayer)
             return;
 
         if (player.IsGameOver)
@@ -29,7 +29,7 @@ public class FlashlightSystem : NetworkBehaviour
         CmdFlashlight(button);
     }
 
-    [Command]
+    [Command (requiresAuthority = false)]
     void CmdFlashlight(bool button)
     {
         RpcFlashlight(button);

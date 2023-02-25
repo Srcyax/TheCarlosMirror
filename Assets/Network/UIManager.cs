@@ -26,21 +26,19 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         json.SaveToJson((int)settings.sensitivy, settings.graphics, settings.tutorial, settings.resolution);
-
+        scene.LoadScene();
         HostButton?.onClick.AddListener(() =>
         {
             if ((maxClient.value + 1) > 1)
             {
                 NetworkManager.singleton.StartHost();
                 transport.maxConnections = maxClient.value;
-                scene.LoadScene();
                 Instantiate(loadScreen);
             }
         });
         ClientButton?.onClick.AddListener(() =>
         {
-            NetworkManager.singleton.StartClient();
-            scene.LoadScene();
+            NetworkManager.singleton.StartClient();           
             Instantiate(loadScreen);
         });
     }

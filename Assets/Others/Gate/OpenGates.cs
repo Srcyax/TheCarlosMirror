@@ -6,11 +6,10 @@ public class OpenGates : NetworkBehaviour
 {
     GameObject[] players;
     GameObject[] waitingForPlayers;
-    GameObject[] gates;
+    [SerializeField] GameObject[] gates;
     NetworkManager network;
     void Start()
     {
-        gates = GameObject.FindGameObjectsWithTag("Gate");
         network = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>();
     }
 

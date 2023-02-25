@@ -23,7 +23,7 @@ public class PlaceBone : NetworkBehaviour
         if (!server.PlayersAlreadyJoinedInServer())
             return;
 
-        CmdPlaceBone();
+        //CmdPlaceBone();
     }
 
 

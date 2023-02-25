@@ -7,6 +7,9 @@ public class Interaction : MonoBehaviour
 
     void Update()
     {
+        if (!Camera.main)
+            return;
+
         anim = GetDistanceBetweenPoints(Camera.main.transform) < 5 ? "FadeIn" : "FadeOut";
 
         animator.Play(anim);
