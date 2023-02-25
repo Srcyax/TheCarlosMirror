@@ -9,12 +9,12 @@ public class EnemyMain : NetworkBehaviour
     [SerializeField] private PlayersAlreadyJoined server;
     [Space(10)]
 
-    private float visionDistance = 316.5f;
-    private float radiusLayer = 74.2f;
-    private float visionAngle = 250f;
-    private float distanceBetweenLayers = 0.03f;
+    [SerializeField] private float visionDistance = 316.5f;
+    [SerializeField] private float radiusLayer = 74.2f;
+    [SerializeField] private float visionAngle = 250f;
+    [SerializeField] private float distanceBetweenLayers = 0.03f;
 
-    private int numberOfLayers = 24;
+    [SerializeField] private int numberOfLayers = 24;
 
     private const string targetTag = "Player";
 

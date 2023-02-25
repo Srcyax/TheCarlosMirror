@@ -50,8 +50,6 @@ public class EnemyAI : NetworkBehaviour
 
     void Start()
     {
-        wayPoints = GameObject.FindGameObjectsWithTag("WayPoint");
-
         Physics.IgnoreLayerCollision(0, 11);
         currentWayPoint = Random.Range(0, wayPoints.Length);
         stateAI = AIstate.walking;
