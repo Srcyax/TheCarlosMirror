@@ -23,18 +23,12 @@ public class PlaceBone : NetworkBehaviour
         if (!server.PlayersAlreadyJoinedInServer())
             return;
 
-        //CmdPlaceBone();
+        CmdPlaceBone();
     }
 
 
     [Command (requiresAuthority = false)]
     void CmdPlaceBone()
-    {
-        RpcPlaceBone();
-    }
-
-    [ClientRpc]
-    void RpcPlaceBone()
     {
         if (!(transform.childCount < 1) || !(current.points > 0))
             return;
