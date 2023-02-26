@@ -123,18 +123,25 @@ public class PlayerController : NetworkBehaviour
 
         float curSpeedX = (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical");
         float curSpeedY = (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal");
-        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+        moveDirection = ((forward * curSpeedX) + (right * curSpeedY));
+
+        moveDirection = Vector3.ClampMagnitude(moveDirection, 10.7f);
 
         if (!characterController.isGrounded)
         {
             moveDirection.y -= gravity;
         }
 
+        print(characterController.velocity.magnitude);
+
         characterController.Move(moveDirection * Time.deltaTime);
         rotationX += -Input.GetAxis("Mouse Y") * sensitivity.value;
         rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * sensitivity.value, 0);
+
+        if (transform.localPosition.y < 0)
+            transform.localPosition = new Vector3(69.2f, 12.6f, 46f);
     }
 
     void Animations()
@@ -169,15 +176,15 @@ public class PlayerController : NetworkBehaviour
 
         if (isRunning && !energyEffectCheck)
         {
-            stamine -= Time.fixedDeltaTime * 5;
+            stamine -= Time.deltaTime * 5;
         }
         else
         {
             if (stamine < 100)
-                stamine += Time.fixedDeltaTime * 7;
+                stamine += Time.deltaTime * 7;
         }
 
-        breath.volume = isRunning ? breath.volume + Time.fixedDeltaTime * 0.3f : breath.volume - Time.fixedDeltaTime * 0.1f;
+        breath.volume = isRunning && stamine < 60 ? breath.volume + Time.deltaTime * 0.3f : breath.volume - Time.deltaTime * 0.1f;
 
         stamineSlider.value = stamine;
         stamineSlider.gameObject.SetActive(stamineSlider.value < 100);

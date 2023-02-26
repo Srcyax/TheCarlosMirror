@@ -1,5 +1,6 @@
 using Mirror;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FlashlightSystem : NetworkBehaviour
 {
@@ -16,10 +17,20 @@ public class FlashlightSystem : NetworkBehaviour
     [SerializeField] private AudioClip turnOffClip;
     [SerializeField] private AudioSource flashLightAudio;
 
+    private float flashLightTime = 100;
+    [SerializeField] private Slider flashLightSlider;
+
     void Update()
     {
+        if (flashLightTime <= 0)
+        {
+            playerLight.enabled = false;
+            return;
+        }
+
         if (player.IsInventoryActivated || !isLocalPlayer)
             return;
+
 
         if (player.IsGameOver)
             Destroy(playerLight);
@@ -27,6 +38,7 @@ public class FlashlightSystem : NetworkBehaviour
         bool button = Input.GetKeyDown(KeyCode.F);
 
         CmdFlashlight(button);
+        FlashLightTime();
     }
 
     [Command (requiresAuthority = false)]
@@ -44,5 +56,17 @@ public class FlashlightSystem : NetworkBehaviour
             flashLightAudio.clip = playerLight.enabled ? turnOffClip : turnOnClip;
             flashLightAudio.Play();
         }
+    }
+
+    void FlashLightTime()
+    {
+        if (!playerLight.enabled)
+            return;
+
+        flashLightTime = flashLightTime > 0 ? flashLightTime - Time.deltaTime : flashLightTime;
+        flashLightSlider.value = flashLightTime;
+
+        if (flashLightTime < 9)
+            playerLight.intensity = flashLightTime / 10;
     }
 }
