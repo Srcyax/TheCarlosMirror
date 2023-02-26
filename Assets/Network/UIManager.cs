@@ -16,7 +16,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private JsonReadWriteSystem json;
     [Space(10)]
     [SerializeField] private GameObject loadScreen;
-    [SerializeField] private SpawnScene scene;
 
     void Awake()
     {
@@ -26,7 +25,6 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         json.SaveToJson((int)settings.sensitivy, settings.graphics, settings.tutorial, settings.resolution);
-        scene.LoadScene();
         HostButton?.onClick.AddListener(() =>
         {
             if ((maxClient.value + 1) > 1)

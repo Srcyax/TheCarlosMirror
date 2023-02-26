@@ -18,11 +18,12 @@ public class GetSettings : MonoBehaviour
 
     [Space(10)]
     [SerializeField] GameObject wrongVersion;
+    [SerializeField] private SpawnScene scene;
 
     private void Start()
     {
         wrongVersion.SetActive(Application.version != GetGameVersion());
-
+        scene.LoadScene();
         if (Directory.Exists("C:/userdata"))
         {
             if(File.Exists(Application.dataPath + "C:/userdata.json"))
@@ -45,7 +46,7 @@ public class GetSettings : MonoBehaviour
         settings.resolution = resolution.value;
         settings.playerName = playerName.text;
 
-        Resolution();
+        //Resolution();
     }
 
 

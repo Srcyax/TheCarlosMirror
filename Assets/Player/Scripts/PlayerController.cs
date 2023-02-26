@@ -72,7 +72,7 @@ public class PlayerController : NetworkBehaviour
     [HideInInspector] bool energyEffectCheck = false;
     [HideInInspector] public bool eyeEffect = false;
     [HideInInspector] public CurrentPoints current;
-    [SyncVar][HideInInspector] public bool isDead = false;
+    [SyncVar] public bool isDead = false;
 
     #region Others
     CharacterController characterController;
@@ -105,7 +105,7 @@ public class PlayerController : NetworkBehaviour
         Inventory();
         CheckEffects();
         Graphics();
-        Resolution();
+        //Resolution();
 
         // Command server
         CmdPlayerIsDead(isDead);
@@ -132,8 +132,6 @@ public class PlayerController : NetworkBehaviour
             moveDirection.y -= gravity;
         }
 
-        print(characterController.velocity.magnitude);
-
         characterController.Move(moveDirection * Time.deltaTime);
         rotationX += -Input.GetAxis("Mouse Y") * sensitivity.value;
         rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
@@ -141,7 +139,7 @@ public class PlayerController : NetworkBehaviour
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * sensitivity.value, 0);
 
         if (transform.localPosition.y < 0)
-            transform.localPosition = new Vector3(69.2f, 12.6f, 46f);
+            transform.localPosition = new Vector3(69.2f, 15.6f, 46f);
     }
 
     void Animations()
@@ -344,6 +342,7 @@ public class PlayerController : NetworkBehaviour
             }
             gameObject.tag = "Untagged";
             playerIsDead.enabled = true;
+            inventory.SetActive(false);
         }
 
         PlayersAlive();

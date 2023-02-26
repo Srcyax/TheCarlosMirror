@@ -60,7 +60,7 @@ public class FlashlightSystem : NetworkBehaviour
 
     void FlashLightTime()
     {
-        if (!playerLight.enabled)
+        if (playerLight && !playerLight.enabled)
             return;
 
         flashLightTime = flashLightTime > 0 ? flashLightTime - Time.deltaTime : flashLightTime;
