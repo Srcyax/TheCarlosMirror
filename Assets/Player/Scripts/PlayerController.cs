@@ -56,6 +56,7 @@ public class PlayerController : NetworkBehaviour
     [Space(10)]
     [Header("Player screen Game state")]
     [SerializeField] private GameObject gameOver;
+    [SerializeField] GameObject bonePrefab;
 
     [Space(10)]
     [Header("Player inventory components")]
@@ -109,6 +110,9 @@ public class PlayerController : NetworkBehaviour
 
         // Command server
         CmdPlayerIsDead(isDead);
+
+        if (current.points > 0)            
+            CmdPlaceBone();
     }
 
     void PlayerControler()
@@ -356,6 +360,30 @@ public class PlayerController : NetworkBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             gameOver.SetActive(true);
+        }
+    }
+
+    [Command]
+    void CmdPlaceBone()
+    {
+        GameObject[] placeBoneRitual = GameObject.FindGameObjectsWithTag("RitualPos");
+
+        for (int j = 0; j < placeBoneRitual.Length; j++)
+        {
+            if (Vector3.Distance(placeBoneRitual[j].transform.position, transform.position) > 2)
+                continue;
+
+            if (placeBoneRitual[j].transform.childCount > 0)
+                continue;
+
+            AudioSource audioSource = placeBoneRitual[j].GetComponent<AudioSource>();
+            RitualComplet ritual = GameObject.FindGameObjectWithTag("Ritual").GetComponent<RitualComplet>();
+
+            GameObject prefab = Instantiate(bonePrefab, placeBoneRitual[j].transform);
+            NetworkServer.Spawn(prefab);
+            audioSource.Play();
+            current.points--;
+            ritual.currentBones++;
         }
     }
 

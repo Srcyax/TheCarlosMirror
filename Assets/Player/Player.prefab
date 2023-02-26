@@ -16622,6 +16622,7 @@ MonoBehaviour:
   flashLight: {fileID: 7799958965624716824}
   swayFlashlight: {fileID: 6878798720293123263}
   gameOver: {fileID: 2641939607177808862}
+  bonePrefab: {fileID: 6546216986672101964, guid: 1d5dafb31bd10e14db7e4425a4a720f8, type: 3}
   inventory: {fileID: 8748174543729967809}
   selectedSlot: {fileID: 8919370158848440824}
   inventoryObjects:

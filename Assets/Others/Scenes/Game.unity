@@ -11655,6 +11655,7 @@ MonoBehaviour:
   - {fileID: 194271705709898193, guid: 6ea77ac13761ef74da856b839410e78b, type: 3}
   - {fileID: 7151430464683482394, guid: f3fa09f840acc73419a84817bcdca4fb, type: 3}
   - {fileID: 6157300693107407642, guid: d27a3f5a2739a044e8a6552067ffd558, type: 3}
+  - {fileID: 6546216986672101964, guid: 1d5dafb31bd10e14db7e4425a4a720f8, type: 3}
   timeInterpolationGui: 0
 --- !u!4 &1538107500
 Transform:
@@ -17180,6 +17181,7 @@ GameObject:
   - component: {fileID: 1123838919088079392}
   - component: {fileID: 1123838919088079399}
   - component: {fileID: 1123838919088079398}
+  - component: {fileID: 1123838919088079405}
   m_Layer: 0
   m_Name: 5
   m_TagString: RitualPos
@@ -17187,6 +17189,34 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1123838919088079405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123838919088079404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 1123838919088079395}
+  clientAuthority: 0
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!4 &1158540771522959629
 Transform:
   m_ObjectHideFlags: 0
@@ -19658,6 +19688,7 @@ GameObject:
   - component: {fileID: 3333043577187665497}
   - component: {fileID: 3333043577187665498}
   - component: {fileID: 3333043577187665499}
+  - component: {fileID: 3333043577187665504}
   m_Layer: 0
   m_Name: 6
   m_TagString: RitualPos
@@ -19693,6 +19724,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.5600011, y: 2.5600011, z: 1.196103}
   m_Center: {x: -0.0000038146973, y: 0.000015258789, z: 0}
+--- !u!114 &3333043577187665504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3333043577187665501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 3333043577187665502}
+  clientAuthority: 0
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!1 &3337883833692266648
 GameObject:
   m_ObjectHideFlags: 0
@@ -22408,6 +22467,7 @@ GameObject:
   - component: {fileID: 5848234379662153461}
   - component: {fileID: 5848234379662153460}
   - component: {fileID: 5848234379662153463}
+  - component: {fileID: 5848234379662153464}
   m_Layer: 0
   m_Name: 3
   m_TagString: RitualPos
@@ -22610,6 +22670,34 @@ MonoBehaviour:
   serverOnly: 0
   visible: 0
   hasSpawned: 0
+--- !u!114 &5848234379662153464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5848234379662153457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 5848234379662153456}
+  clientAuthority: 0
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!1 &5848407680966443683
 GameObject:
   m_ObjectHideFlags: 0
@@ -23983,6 +24071,7 @@ GameObject:
   - component: {fileID: 7261222337009072137}
   - component: {fileID: 7261222337009072136}
   - component: {fileID: 7261222337009072139}
+  - component: {fileID: 7261222337009072144}
   m_Layer: 0
   m_Name: 4
   m_TagString: RitualPos
@@ -24055,6 +24144,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.5600019, y: 2.559998, z: 1.196103}
   m_Center: {x: -0.000015196688, y: 0.000003861453, z: -0.49805146}
+--- !u!114 &7261222337009072144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7261222337009072141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 7261222337009072140}
+  clientAuthority: 0
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!4 &7266437534318143935
 Transform:
   m_ObjectHideFlags: 0
@@ -24776,6 +24893,7 @@ GameObject:
   - component: {fileID: 7877276057125320808}
   - component: {fileID: 7877276057125320811}
   - component: {fileID: 7877276057125320810}
+  - component: {fileID: 7877276057125320816}
   m_Layer: 0
   m_Name: 1
   m_TagString: RitualPos
@@ -24811,6 +24929,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &7877276057125320816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7877276057125320812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 7877276057125320815}
+  clientAuthority: 0
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!1 &7912120528161728569
 GameObject:
   m_ObjectHideFlags: 0
@@ -25981,6 +26127,7 @@ GameObject:
   - component: {fileID: 8954637234124537682}
   - component: {fileID: 8954637234124537683}
   - component: {fileID: 8954637234124537680}
+  - component: {fileID: 8954637234124537712}
   m_Layer: 0
   m_Name: 2
   m_TagString: RitualPos
@@ -26003,6 +26150,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 56.679}
+--- !u!114 &8954637234124537712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8954637234124537710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 8954637234124537711}
+  clientAuthority: 0
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!1 &8985506833799073876
 GameObject:
   m_ObjectHideFlags: 0

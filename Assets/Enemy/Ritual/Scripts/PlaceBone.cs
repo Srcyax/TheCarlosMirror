@@ -20,31 +20,16 @@ public class PlaceBone : NetworkBehaviour
 
     private void Update()
     {
-        if (!server.PlayersAlreadyJoinedInServer())
-            return;
-
-        CmdPlaceBone();
+       
     }
 
-
-    [Command (requiresAuthority = false)]
-    void CmdPlaceBone()
+    [Command(requiresAuthority = false)]
+    private void CmdPlaceBone()
     {
-        if (!(transform.childCount < 1) || !(current.points > 0))
-            return;
-
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        print("a");
-        for (int i = 0; i < players.Length; i++)
-        {
-            if (Vector3.Distance(transform.position, players[i].transform.position) > 2)
-                continue;
-
-            GameObject prefab = Instantiate(bonePrefab, transform);
-            NetworkServer.Spawn(prefab);
-            audioSource.Play();
-            ritual.currentBones++;
-            current.points--;
-        }
+        GameObject prefab = Instantiate(bonePrefab, transform);
+        NetworkServer.Spawn(prefab);
+        audioSource.Play();
+        current.points--;
+        ritual.currentBones++;
     }
 }
