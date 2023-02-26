@@ -373,14 +373,13 @@ public class PlayerController : NetworkBehaviour
             if (Vector3.Distance(placeBoneRitual[j].transform.position, transform.position) > 2)
                 continue;
 
-            if (placeBoneRitual[j].transform.childCount > 0)
+            if (placeBoneRitual[j].transform.GetChild(0).gameObject.GetComponent<Animator>().enabled)
                 continue;
 
             AudioSource audioSource = placeBoneRitual[j].GetComponent<AudioSource>();
             RitualComplet ritual = GameObject.FindGameObjectWithTag("Ritual").GetComponent<RitualComplet>();
 
-            GameObject prefab = Instantiate(bonePrefab, placeBoneRitual[j].transform);
-            NetworkServer.Spawn(prefab);
+            placeBoneRitual[j].transform.GetChild(0).gameObject.GetComponent<Animator>().enabled = true;
             audioSource.Play();
             current.points--;
             ritual.currentBones++;
