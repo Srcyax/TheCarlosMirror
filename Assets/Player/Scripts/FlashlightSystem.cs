@@ -23,17 +23,13 @@ public class FlashlightSystem : NetworkBehaviour
     void Update()
     {
         if (flashLightTime <= 0)
-        {
-            playerLight.enabled = false;
             return;
-        }
 
         if (player.IsInventoryActivated || !isLocalPlayer)
             return;
 
-
         if (player.IsGameOver || !player.IsLocalPlayerAlive)
-            Destroy(playerLight);
+            return;
 
         bool button = Input.GetKeyDown(KeyCode.F);
 

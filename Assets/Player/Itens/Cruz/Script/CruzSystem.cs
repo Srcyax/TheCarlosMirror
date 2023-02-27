@@ -8,7 +8,7 @@ public class CruzSystem : NetworkBehaviour
 
     void Update()
     {
-        if (!isLocalPlayer)
+        if (!isLocalPlayer || !playerHand)
             return;
 
         if (playerHand.transform.childCount > 0 && !playerHand.transform.GetChild(0).gameObject.CompareTag("Cruz"))

@@ -90,6 +90,7 @@ public class PlayerController : NetworkBehaviour
     PostProcessVolume postProcess;
     ChromaticAberration chromaticAberration;
     ColorGrading colorGrading;
+    LensDistortion lensDistortion;
     Bloom bloom;
     #endregion
 
@@ -177,6 +178,13 @@ public class PlayerController : NetworkBehaviour
 
     void Stamine()
     {
+        if (!IsLocalPlayerAlive)
+        {
+            stamine = 100;
+            return;
+        }
+            
+
         bool isRunning = Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W);
 
         if (isRunning && !energyEffectCheck)
@@ -209,6 +217,8 @@ public class PlayerController : NetworkBehaviour
         postProcess.weight = graphics.value < 2 ? 1f : .25f;
 
         colorGrading.temperature.value = IsLocalPlayerAlive ? 11f : -100f;
+
+        lensDistortion.intensity.value = IsLocalPlayerAlive ? 16 : -48;
     }
 
     void Resolution()
@@ -310,6 +320,7 @@ public class PlayerController : NetworkBehaviour
         chromaticAberration = postProcess.profile.GetSetting<ChromaticAberration>();
         bloom = postProcess.profile.GetSetting<Bloom>();
         colorGrading = postProcess.profile.GetSetting<ColorGrading>();
+        lensDistortion= postProcess.profile.GetSetting<LensDistortion>();
         current = GameObject.FindGameObjectWithTag("PointHolder").GetComponent<CurrentPoints>();
         waitForPlayers.enabled = isServer;
 
@@ -359,6 +370,8 @@ public class PlayerController : NetworkBehaviour
             gameObject.tag = "Untagged";
             playerIsDead.enabled = true;
             inventory.SetActive(false);
+            playerModel.SetActive(false);
+            flashLight.enabled = false;
             Destroy(playerHand);
         }
 
