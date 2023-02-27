@@ -17,8 +17,7 @@ public class EnemyAI : NetworkBehaviour
 
     [Header("Carlos setup")]
     [Tooltip("Get Carlos standard settings")]
-    [SerializeField] private CarlosSetup carlosSetup;
-    [SerializeField] private PlayersAlreadyJoined server;
+    [SerializeField] private CarlosSetup carlosSetup; 
 
     [Space(10)]
     [Header("Raycast Spots")]
@@ -48,11 +47,15 @@ public class EnemyAI : NetworkBehaviour
     [SyncVar] public bool cruzEffect = false;
     [SyncVar] Transform target = null;
 
+    PlayersAlreadyJoined server;
+
     void Start()
     {
         Physics.IgnoreLayerCollision(0, 11);
         currentWayPoint = Random.Range(0, wayPoints.Length);
         stateAI = AIstate.walking;
+
+        server = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<PlayersAlreadyJoined>();
     }
 
     void Update()

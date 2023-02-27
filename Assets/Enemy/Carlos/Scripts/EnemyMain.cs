@@ -6,9 +6,6 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyMain : NetworkBehaviour
 {
-    [SerializeField] private PlayersAlreadyJoined server;
-    [Space(10)]
-
     [SerializeField] private float visionDistance = 316.5f;
     [SerializeField] private float radiusLayer = 74.2f;
     [SerializeField] private float visionAngle = 250f;
@@ -22,11 +19,16 @@ public class EnemyMain : NetworkBehaviour
     private float check = 0;
 
     [SerializeField] private Transform enemyHead;
-    [SerializeField] NetworkManager networkManager;
     [Space(10)]
     [SyncVar] public List<Transform> visibleTarget = new List<Transform>();
     [SyncVar] public List<Transform> collisionList = new List<Transform>();
 
+    PlayersAlreadyJoined server;
+
+    private void Start()
+    {
+        server = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<PlayersAlreadyJoined>();
+    }
 
     void Update()
     {

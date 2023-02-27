@@ -1,6 +1,7 @@
 using Mirror;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -24,6 +25,7 @@ public class UIManager : MonoBehaviour
         {
             if ((maxClient.value + 1) > 1)
             {
+                //SceneManager.LoadScene("OnlineGame");
                 NetworkManager.singleton.StartHost();
                 transport.maxConnections = maxClient.value;
                 Instantiate(loadScreen);
@@ -31,6 +33,7 @@ public class UIManager : MonoBehaviour
         });
         ClientButton?.onClick.AddListener(() =>
         {
+            //SceneManager.LoadScene("OnlineGame");
             NetworkManager.singleton.StartClient();           
             Instantiate(loadScreen);
         });

@@ -11999,7 +11999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 0
+  dontDestroyOnLoad: 1
   runInBackground: 1
   autoStartServerBuild: 1
   autoConnectClientBuild: 0
@@ -18330,7 +18330,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   carlosSetup: {fileID: 11400000, guid: a2fd290f305b4884cbff6c24b716adbd, type: 2}
-  server: {fileID: 1538107505}
   headSpot: {fileID: 1951490956929185935}
   musicSource: {fileID: 1951490956929185923}
   followingMusic: {fileID: 8300000, guid: f6362a565adfaf140a8ea220765fceef, type: 3}
@@ -18400,14 +18399,12 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  server: {fileID: 1538107505}
   visionDistance: 316.5
   radiusLayer: 74.2
   visionAngle: 250
   distanceBetweenLayers: 0.03
   numberOfLayers: 24
   enemyHead: {fileID: 5368153342849729958}
-  networkManager: {fileID: 1538107499}
   visibleTarget: []
   collisionList: []
 --- !u!4 &1956642777666165309
@@ -21891,7 +21888,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   carlosSetup: {fileID: 11400000, guid: ad8b8440114257f4d96311c9a3c711a2, type: 2}
-  server: {fileID: 1538107505}
   headSpot: {fileID: 5215976453460575523}
   musicSource: {fileID: 5215976453460575524}
   followingMusic: {fileID: 8300000, guid: f6362a565adfaf140a8ea220765fceef, type: 3}
@@ -21924,14 +21920,12 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  server: {fileID: 1538107505}
   visionDistance: 316.5
   radiusLayer: 74.2
   visionAngle: 290
   distanceBetweenLayers: 0.03
   numberOfLayers: 24
   enemyHead: {fileID: 5215976451610719836}
-  networkManager: {fileID: 1538107499}
   visibleTarget: []
   collisionList: []
 --- !u!82 &5215976453460575524
