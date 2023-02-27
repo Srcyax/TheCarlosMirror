@@ -73,7 +73,7 @@ public class PlayerController : NetworkBehaviour
     [HideInInspector] public bool energyEffect = false;
     [HideInInspector] bool energyEffectCheck = false;
     [HideInInspector] public bool eyeEffect = false;
-    [HideInInspector] public bool whatIsItJumpscare = false;
+    [HideInInspector] [SyncVar] public bool whatIsItJumpscare = false;
     [HideInInspector] public CurrentPoints current;
     [SyncVar] public bool isDead = false;
 
@@ -110,7 +110,6 @@ public class PlayerController : NetworkBehaviour
         Inventory();
         CheckEffects();
         Graphics();
-        //Resolution();
 
         // Command server
         CmdPlayerIsDead(isDead);
@@ -206,7 +205,7 @@ public class PlayerController : NetworkBehaviour
     public void Disconnect()
     {
         JsonReadWriteSystem json = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<JsonReadWriteSystem>();
-        json.SaveToJson((int)Mathf.Floor(sensitivity.value), graphics.value, false, resolution.value);
+        json.SaveToJson((int)Mathf.Floor(sensitivity.value), graphics.value, false, resolution.value, settings.playerName);
 
         Application.Quit();
     }
@@ -221,7 +220,7 @@ public class PlayerController : NetworkBehaviour
         lensDistortion.intensity.value = IsLocalPlayerAlive ? 16 : -48;
     }
 
-    void Resolution()
+    public void ChangeResolution()
     {
         switch (resolution.value)
         {
@@ -338,12 +337,6 @@ public class PlayerController : NetworkBehaviour
             StartCoroutine(JumpScare(jumpScare.GetComponent<Image>()));
         }
 
-        if (whatIsItJumpscare)
-        {
-            wiiJumpScare.SetActive(true);
-            StartCoroutine(JumpScare2(wiiJumpScare));
-        }
-
         if (energyEffect)
             StartCoroutine(EnergyEffectEnd());
 
@@ -412,6 +405,15 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
+    public void JumpScare()
+    {
+        print("Cu");
+        wiiJumpScare.SetActive(true);
+        whatIsItJumpscare = true;
+        if (whatIsItJumpscare)
+            StartCoroutine(JumpScare2());
+    }
+
     IEnumerator EnergyEffectEnd()
     {
         energyEffect = false;
@@ -428,10 +430,10 @@ public class PlayerController : NetworkBehaviour
         image.enabled = false;
     }
 
-    IEnumerator JumpScare2(GameObject gameObject)
+    IEnumerator JumpScare2()
     {
         yield return new WaitForSeconds(5f);
-        gameObject.SetActive(false);
+        wiiJumpScare.SetActive(false);
         whatIsItJumpscare = false;
     }
 

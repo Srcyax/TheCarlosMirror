@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class GetSettings : MonoBehaviour
 {
     [SerializeField] Slider sense;
+    [SerializeField] Slider musicVolumeSlider;
     [SerializeField] TMP_Dropdown graphics;
     [SerializeField] TMP_Dropdown resolution;
     [SerializeField] Toggle fullscreen;
@@ -23,7 +24,11 @@ public class GetSettings : MonoBehaviour
 
     private void Start()
     {
-        playerName.text = Environment.UserName;
+        string playerData = File.ReadAllText("C:/userdata/data.json");
+        PlayerData data = JsonUtility.FromJson<PlayerData>(playerData);
+
+        playerName.text = data.playerName != null ? data.playerName : Environment.UserName;
+        resolution.value = data.resolution;
 
         wrongVersion.SetActive(Application.version != GetGameVersion());
         scene.LoadScene();
@@ -32,13 +37,13 @@ public class GetSettings : MonoBehaviour
             if(File.Exists(Application.dataPath + "C:/userdata.json"))
                 json.LoadFromJson(sense, graphics, settings, resolution);
             else
-                json.SaveToJson(3, 0, true, 0);
+                json.SaveToJson(3, 0, true, 0, playerName.text);
         }
         else
         {
             DirectoryInfo di = Directory.CreateDirectory("C:/userdata");
             di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
-            json.SaveToJson(3, 0, true, 0);
+            json.SaveToJson(3, 0, true, 0, playerName.text);
         }     
     }
 
@@ -48,6 +53,28 @@ public class GetSettings : MonoBehaviour
         settings.graphics = graphics.value;
         settings.resolution = resolution.value;
         settings.playerName = playerName.text;
+    }
+
+    public void ChangeResolution()
+    {
+        switch (resolution.value)
+        {
+            case 0:
+                Screen.SetResolution(1920, 1080, true);
+                break;
+            case 1:
+                Screen.SetResolution(1650, 1080, true);
+                break;
+            case 2:
+                Screen.SetResolution(1400, 900, true);
+                break;
+            case 3:
+                Screen.SetResolution(1024, 768, true);
+                break;
+            case 4:
+                Screen.SetResolution(800, 600, true);
+                break;
+        }
     }
 
     public string GetGameVersion()

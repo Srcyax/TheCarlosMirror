@@ -1,13 +1,13 @@
 using Mirror;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Button HostButton;
     [SerializeField] private Button ClientButton;
+    [SerializeField] private Slider musicVolumeSlider;
 
     [SerializeField] private TMP_Dropdown maxClient;
     [SerializeField] private NetworkManager transport;
@@ -20,12 +20,11 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        json.SaveToJson((int)settings.sensitivy, settings.graphics, settings.tutorial, settings.resolution);
+        json.SaveToJson((int)settings.sensitivy, settings.graphics, settings.tutorial, settings.resolution, settings.playerName);
         HostButton?.onClick.AddListener(() =>
         {
             if ((maxClient.value + 1) > 1)
             {
-                //SceneManager.LoadScene("OnlineGame");
                 NetworkManager.singleton.StartHost();
                 transport.maxConnections = maxClient.value;
                 Instantiate(loadScreen);
@@ -33,8 +32,7 @@ public class UIManager : MonoBehaviour
         });
         ClientButton?.onClick.AddListener(() =>
         {
-            //SceneManager.LoadScene("OnlineGame");
-            NetworkManager.singleton.StartClient();           
+            NetworkManager.singleton.StartClient();
             Instantiate(loadScreen);
         });
     }

@@ -18,9 +18,13 @@ public class WhatIsIt : NetworkBehaviour
         {
             anim = Vector3.Distance(transform.position, Camera.main.transform.position) < 15 ? "UnHide" : "Hide";
             animator.Play(anim);
-            players[i].GetComponent<PlayerController>().whatIsItJumpscare = Vector3.Distance(transform.position, players[i].transform.position) < 4;
+            if (Vector3.Distance(transform.position, players[i].transform.position) < 4)
+                players[i].GetComponent<PlayerController>().JumpScare();
+
             if (players[i].GetComponent<PlayerController>().whatIsItJumpscare)
+            {
                 NetworkServer.Destroy(gameObject);
+            }
         }
     }
 }

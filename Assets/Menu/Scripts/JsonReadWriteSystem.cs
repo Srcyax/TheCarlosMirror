@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class JsonReadWriteSystem : MonoBehaviour
 {
-    public void SaveToJson(int sensibility, int graphics, bool tutorial, int resolution)
+    public void SaveToJson(int sensibility, int graphics, bool tutorial, int resolution, string playerName)
     {
         PlayerData data = new PlayerData();
         data.sensibility = sensibility;
         data.resolution = resolution;
         data.tutorial = tutorial;
         data.graphics = graphics;
+        data.playerName = playerName;
 
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText("C:/userdata/data.json", json);
@@ -25,5 +26,6 @@ public class JsonReadWriteSystem : MonoBehaviour
         graphics.value = data.graphics;
         resolution.value = data.resolution;
         settings.tutorial = data.tutorial;
+        settings.playerName = data.playerName;
     }
 }
