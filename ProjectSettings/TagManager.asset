@@ -28,6 +28,7 @@ TagManager:
   - PlayerBody
   - Cabinet
   - Gate
+  - JumpScare
   layers:
   - Default
   - TransparentFX

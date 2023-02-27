@@ -1,4 +1,5 @@
 using Mirror;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CruzSystem : NetworkBehaviour
@@ -20,6 +21,12 @@ public class CruzSystem : NetworkBehaviour
 
     [Command]
     void CmdCruzSystem(bool pressSpace, Vector3 position, Vector3 forward)
+    {
+        RpcCruzSystem(pressSpace, position, forward);
+    }
+
+    [ClientRpc]
+    void RpcCruzSystem(bool pressSpace, Vector3 position, Vector3 forward)
     {
         RaycastHit hit;
         if (Physics.Raycast(position, forward, out hit, 41))

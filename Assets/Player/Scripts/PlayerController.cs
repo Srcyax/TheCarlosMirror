@@ -47,6 +47,7 @@ public class PlayerController : NetworkBehaviour
     [Space(10)]
 
     [SerializeField] private GameObject jumpScare;
+    [SerializeField] private GameObject wiiJumpScare;
 
     [Space(10)]
     [Header("Player flashlight")]
@@ -72,6 +73,7 @@ public class PlayerController : NetworkBehaviour
     [HideInInspector] public bool energyEffect = false;
     [HideInInspector] bool energyEffectCheck = false;
     [HideInInspector] public bool eyeEffect = false;
+    [HideInInspector] public bool whatIsItJumpscare = false;
     [HideInInspector] public CurrentPoints current;
     [SyncVar] public bool isDead = false;
 
@@ -87,6 +89,7 @@ public class PlayerController : NetworkBehaviour
     float rotationX = 0;
     PostProcessVolume postProcess;
     ChromaticAberration chromaticAberration;
+    ColorGrading colorGrading;
     Bloom bloom;
     #endregion
 
@@ -204,6 +207,8 @@ public class PlayerController : NetworkBehaviour
     {
         QualitySettings.SetQualityLevel(graphics.value);
         postProcess.weight = graphics.value < 2 ? 1f : .25f;
+
+        colorGrading.temperature.value = IsLocalPlayerAlive ? 11f : -100f;
     }
 
     void Resolution()
@@ -255,7 +260,7 @@ public class PlayerController : NetworkBehaviour
     void CleanSelectedSlot()
     {
         if (IsInventoryActivated)
-            return;
+            return;       
 
         if (selectedSlot.childCount > 0)
         {
@@ -304,7 +309,7 @@ public class PlayerController : NetworkBehaviour
         postProcess.enabled = isLocalPlayer;
         chromaticAberration = postProcess.profile.GetSetting<ChromaticAberration>();
         bloom = postProcess.profile.GetSetting<Bloom>();
-
+        colorGrading = postProcess.profile.GetSetting<ColorGrading>();
         current = GameObject.FindGameObjectWithTag("PointHolder").GetComponent<CurrentPoints>();
         waitForPlayers.enabled = isServer;
 
@@ -322,8 +327,15 @@ public class PlayerController : NetworkBehaviour
             StartCoroutine(JumpScare(jumpScare.GetComponent<Image>()));
         }
 
+        if (whatIsItJumpscare)
+        {
+            wiiJumpScare.SetActive(true);
+            StartCoroutine(JumpScare2(wiiJumpScare));
+        }
+
         if (energyEffect)
             StartCoroutine(EnergyEffectEnd());
+
         if (eyeEffect)
             StartCoroutine(EyeEffectEnd());
     }
@@ -347,6 +359,7 @@ public class PlayerController : NetworkBehaviour
             gameObject.tag = "Untagged";
             playerIsDead.enabled = true;
             inventory.SetActive(false);
+            Destroy(playerHand);
         }
 
         PlayersAlive();
@@ -400,6 +413,13 @@ public class PlayerController : NetworkBehaviour
     {
         yield return new WaitForSeconds(5f);
         image.enabled = false;
+    }
+
+    IEnumerator JumpScare2(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(5f);
+        gameObject.SetActive(false);
+        whatIsItJumpscare = false;
     }
 
     IEnumerator EyeEffectEnd()

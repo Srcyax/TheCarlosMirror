@@ -22,7 +22,7 @@ public class CameraBob : MonoBehaviour
 
     void Update()
     {
-        if (player.IsInventoryActivated || player.IsGameOver || !player.IsLocalPlayerAlive)
+        if (player.IsInventoryActivated || player.IsGameOver || !player.IsLocalPlayerAlive || player.IsGamePaused)
             return;
 
         walkingBobbingSpeed = Input.GetKey(KeyCode.LeftShift) ? 15 : 10;

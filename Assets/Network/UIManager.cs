@@ -17,11 +17,6 @@ public class UIManager : MonoBehaviour
     [Space(10)]
     [SerializeField] private GameObject loadScreen;
 
-    void Awake()
-    {
-        Cursor.visible = true;
-    }
-
     private void Start()
     {
         json.SaveToJson((int)settings.sensitivy, settings.graphics, settings.tutorial, settings.resolution);

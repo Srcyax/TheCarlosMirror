@@ -32,7 +32,7 @@ public class FlashlightSystem : NetworkBehaviour
             return;
 
 
-        if (player.IsGameOver)
+        if (player.IsGameOver || !player.IsLocalPlayerAlive)
             Destroy(playerLight);
 
         bool button = Input.GetKeyDown(KeyCode.F);
