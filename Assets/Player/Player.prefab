@@ -16532,6 +16532,7 @@ GameObject:
   - component: {fileID: 2855544250543858361}
   - component: {fileID: 7736337603173894544}
   - component: {fileID: 2027115840548164578}
+  - component: {fileID: 4844037890123956645}
   - component: {fileID: 2412742043826749293}
   - component: {fileID: 3981745458648961239}
   - component: {fileID: 4495898476974845925}
@@ -16640,13 +16641,11 @@ MonoBehaviour:
   swayFlashlight: {fileID: 6878798720293123263}
   gameOver: {fileID: 2641939607177808862}
   bonePrefab: {fileID: 6546216986672101964, guid: 1d5dafb31bd10e14db7e4425a4a720f8, type: 3}
-  inventory: {fileID: 8748174543729967809}
   stamineSlider: {fileID: 7079699878601224015}
   stamine: 100
   energyEffect: 0
   eyeEffect: 0
   whatIsItJumpscare: 0
-  current: {fileID: 0}
   isDead: 0
   walkingSpeed: 5
   runningSpeed: 10.7
@@ -16666,6 +16665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46e5e6ce416c4449addef73ad52140f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryObject: {fileID: 8748174543729967809}
   selectedSlot: {fileID: 8919370158848440824}
   inventoryObjects:
   - {fileID: 4612505569169542555}
@@ -16744,7 +16744,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playersPoint: {fileID: 6959448756785726569}
-  playerController: {fileID: 7823481797320664011}
   gameWon: {fileID: 5437260516670093368}
   playerUI:
   - {fileID: 7205649182747586871}
@@ -16754,6 +16753,21 @@ MonoBehaviour:
   - {fileID: 7035052281027073284}
   - {fileID: 505667800452461482}
   - {fileID: 440128074406770390}
+--- !u!114 &4844037890123956645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7823481797320664016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e67d0d83280d08499f517b363a60a55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!114 &2412742043826749293
 MonoBehaviour:
   m_ObjectHideFlags: 0

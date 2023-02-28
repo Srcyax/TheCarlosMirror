@@ -5,21 +5,23 @@ using UnityEngine;
 public class PlayerPoints : NetworkBehaviour
 {
     [SerializeField] private TextMeshProUGUI playersPoint;
-    [SerializeField] private PlayerController playerController;
 
     [SerializeField] public GameObject gameWon;
     [SerializeField] public GameObject[] playerUI;
 
-    RitualComplet ritual;
+    private CurrentPoints current;
+
+    void Start()
+    {
+        current = GameObject.FindGameObjectWithTag("PointHolder").GetComponent<CurrentPoints>(); ;
+    }
 
     void Update()
     {
         if (!isLocalPlayer)
             return;
 
-        ritual = GameObject.FindGameObjectWithTag("Ritual").GetComponent<RitualComplet>();
-
-        CmdPointText(playerController.current.points.ToString() + "/6");
+        CmdPointText(current.points.ToString() + "/6");
     }
 
     [Command]

@@ -59,32 +59,30 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private GameObject gameOver;
     [SerializeField] GameObject bonePrefab;
 
-    [Space(10)]
-    [Header("Player inventory components")]
-    [SerializeField] public GameObject inventory;
-
     [Header("Stamine")]
     [SerializeField] private Slider stamineSlider;
     [SerializeField] private float stamine = 100;
-
 
     [HideInInspector] public bool energyEffect = false;
     [HideInInspector] bool energyEffectCheck = false;
     [HideInInspector] public bool eyeEffect = false;
     [HideInInspector][SyncVar] public bool whatIsItJumpscare = false;
-    [HideInInspector] public CurrentPoints current;
     [SyncVar] public bool isDead = false;
 
     #region Others
-    CharacterController characterController;
-    Vector3 moveDirection = Vector3.zero;
-    GameObject[] players;
+    private CharacterController characterController;
+    private PlayerInventory inventory => GetComponent<PlayerInventory>();
+    private Vector3 moveDirection = Vector3.zero;
+    private GameObject[] players;
+
     public float walkingSpeed = .1f;
     public float runningSpeed = 10.7f;
-    float gravity = 20.0f;
-    float lookXLimit = 80.0f;
-    float rotationX = 0;
-    PostProcessVolume postProcess;
+
+    private float gravity = 20.0f;
+    private float lookXLimit = 80.0f;
+    private float rotationX = 0;
+    private PostProcessVolume postProcess;
+
     [HideInInspector] public ChromaticAberration chromaticAberration;
     [HideInInspector] public ColorGrading colorGrading;
     [HideInInspector] public LensDistortion lensDistortion;
@@ -109,9 +107,6 @@ public class PlayerController : NetworkBehaviour
 
         // Command server
         CmdPlayerIsDead(isDead);
-
-        if (current.points > 0)
-            CmdPlaceBone();
     }
 
     void PlayerControler()
@@ -227,7 +222,7 @@ public class PlayerController : NetworkBehaviour
         playerCamera.enabled = isLocalPlayer;
         playerNameSystem.playerName.enabled = !isLocalPlayer;
         playerModel.SetActive(!isLocalPlayer);
-        inventory.SetActive(isLocalPlayer);
+        inventory.inventoryObject.SetActive(isLocalPlayer);
         swayFlashlight.enabled = isLocalPlayer;
         characterController = GetComponent<CharacterController>();
         postProcess = playerCamera.GetComponent<PostProcessVolume>();
@@ -236,7 +231,6 @@ public class PlayerController : NetworkBehaviour
         bloom = postProcess.profile.GetSetting<Bloom>();
         colorGrading = postProcess.profile.GetSetting<ColorGrading>();
         lensDistortion = postProcess.profile.GetSetting<LensDistortion>();
-        current = GameObject.FindGameObjectWithTag("PointHolder").GetComponent<CurrentPoints>();
         waitForPlayers.enabled = isServer;
 
         if (settings.tutorial)
@@ -255,9 +249,6 @@ public class PlayerController : NetworkBehaviour
 
         if (energyEffect)
             StartCoroutine(EnergyEffectEnd());
-
-        if (eyeEffect)
-            StartCoroutine(EyeEffectEnd());
     }
 
     [Command]
@@ -278,7 +269,7 @@ public class PlayerController : NetworkBehaviour
             }
             gameObject.tag = "Untagged";
             playerIsDead.enabled = true;
-            inventory.SetActive(false);
+            inventory.inventoryObject.SetActive(false);
             playerModel.SetActive(false);
             flashLight.enabled = false;
             Destroy(playerHand);
@@ -298,32 +289,8 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    [Command]
-    void CmdPlaceBone()
-    {
-        GameObject[] placeBoneRitual = GameObject.FindGameObjectsWithTag("RitualPos");
-
-        for (int j = 0; j < placeBoneRitual.Length; j++)
-        {
-            if (Vector3.Distance(placeBoneRitual[j].transform.position, transform.position) > 2)
-                continue;
-
-            if (placeBoneRitual[j].transform.GetChild(0).gameObject.GetComponent<Animator>().enabled)
-                continue;
-
-            AudioSource audioSource = placeBoneRitual[j].GetComponent<AudioSource>();
-            RitualComplet ritual = GameObject.FindGameObjectWithTag("Ritual").GetComponent<RitualComplet>();
-
-            placeBoneRitual[j].transform.GetChild(0).gameObject.GetComponent<Animator>().enabled = true;
-            audioSource.Play();
-            current.points--;
-            ritual.currentBones++;
-        }
-    }
-
     public void JumpScare()
     {
-        print("Cu");
         wiiJumpScare.SetActive(true);
         whatIsItJumpscare = true;
         if (whatIsItJumpscare)
@@ -351,21 +318,6 @@ public class PlayerController : NetworkBehaviour
         yield return new WaitForSeconds(5f);
         wiiJumpScare.SetActive(false);
         whatIsItJumpscare = false;
-    }
-
-    IEnumerator EyeEffectEnd()
-    {
-        eyeEffect = false;
-        GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
-        chromaticAberration.intensity.value = 1f;
-        if (Vector3.Distance(transform.position, enemy.transform.position) <= 70)
-        {
-            print(Vector3.Distance(transform.position, enemy.transform.position));
-            enemy.GetComponent<Outline>().enabled = true;
-        }
-        yield return new WaitForSeconds(7f);
-        chromaticAberration.intensity.value = 0.246f;
-        enemy.GetComponent<Outline>().enabled = false;
     }
 
     IEnumerator RemoveTutorial()
@@ -410,7 +362,7 @@ public class PlayerController : NetworkBehaviour
     {
         get
         {
-            return inventory.activeSelf;
+            return inventory.inventoryObject.activeSelf;
         }
     }
 

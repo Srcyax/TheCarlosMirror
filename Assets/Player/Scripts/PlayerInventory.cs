@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     [Header("Player inventory components")]
+    [SerializeField] public GameObject inventoryObject;
     [SerializeField] private Transform selectedSlot;
     [SerializeField] private GameObject[] inventoryObjects;
     [SerializeField] private Light flashLight;
@@ -21,16 +22,16 @@ public class PlayerInventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Tab))
             inventoryActive = !inventoryActive;
 
-        player.inventory.SetActive(inventoryActive);
+        inventoryObject.SetActive(inventoryActive);
 
-        flashLight.enabled = player.inventory.activeSelf || flashLight.enabled;
-        player.chromaticAberration.intensity.value = player.inventory.activeSelf ? 0.04f : .5f;
-        player.bloom.intensity.value = player.inventory.activeSelf ? 1f : 23f;
+        flashLight.enabled = inventoryObject.activeSelf || flashLight.enabled;
+        player.chromaticAberration.intensity.value = inventoryObject.activeSelf ? 0.04f : .5f;
+        player.bloom.intensity.value = inventoryObject.activeSelf ? 1f : 23f;
 
-        Cursor.lockState = player.inventory.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = player.inventory.activeSelf;
+        Cursor.lockState = inventoryObject.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = inventoryObject.activeSelf;
 
-        animName = player.inventory.activeSelf ? "Hide" : "UnHide";
+        animName = inventoryObject.activeSelf ? "Hide" : "UnHide";
         player.playerHand.GetComponent<Animator>().Play(animName);
 
         CleanSelectedSlot();
