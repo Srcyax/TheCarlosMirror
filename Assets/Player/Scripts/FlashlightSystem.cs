@@ -6,6 +6,7 @@ public class FlashlightSystem : NetworkBehaviour
 {
 
     [SerializeField] private PlayerController player;
+    
 
     [Space(10)]
 
@@ -17,8 +18,15 @@ public class FlashlightSystem : NetworkBehaviour
     [SerializeField] private AudioClip turnOffClip;
     [SerializeField] private AudioSource flashLightAudio;
 
-    private float flashLightTime = 100;
     [SerializeField] private Slider flashLightSlider;
+
+    private float flashLightTime = 100;
+    private PlayersAlreadyJoined server;
+
+    void Start()
+    {
+        server = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<PlayersAlreadyJoined>();
+    }
 
     void Update()
     {
@@ -56,6 +64,9 @@ public class FlashlightSystem : NetworkBehaviour
 
     void FlashLightTime()
     {
+        if (!server.PlayersAlreadyJoinedInServer())
+            return;
+
         if (playerLight && !playerLight.enabled)
             return;
 
