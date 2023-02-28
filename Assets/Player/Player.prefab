@@ -3289,7 +3289,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e022e86852f534f962894eed1c19d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 64d270527731652429011bd4f604b27c, type: 2}
+  amount: 0.02
+  maxAmonut: 0.06
+  smoothAmount: 6
+  rotationAmount: 4
+  maxRotationAmount: 5
+  smoothRotation: 12
+  rotationX: 1
+  rotationY: 1
+  rotationZ: 1
 --- !u!1 &1684088471956161170
 GameObject:
   m_ObjectHideFlags: 0
@@ -8402,7 +8410,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4190317406635115135}
   m_LocalRotation: {x: 0.000000007385089, y: -0.000000016603733, z: -0.000000015368522, w: 1}
-  m_LocalPosition: {x: -0.15944092, y: -0.06762386, z: -0.080669485}
+  m_LocalPosition: {x: 0.006, y: 0.046, z: -0.081}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8597,7 +8605,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e022e86852f534f962894eed1c19d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 64d270527731652429011bd4f604b27c, type: 2}
+  amount: 0.1
+  maxAmonut: 0.5
+  smoothAmount: 23.15
+  rotationAmount: 4
+  maxRotationAmount: 5
+  smoothRotation: 12
+  rotationX: 1
+  rotationY: 1
+  rotationZ: 1
 --- !u!1 &4217793342400691069
 GameObject:
   m_ObjectHideFlags: 0

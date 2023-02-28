@@ -19,7 +19,6 @@ public class PlayerPlaceBone : NetworkBehaviour
         CmdPlaceBone();
     }
 
-
     [Command(requiresAuthority = false)]
     void CmdPlaceBone()
     {
