@@ -71,7 +71,7 @@ public class PlayerController : NetworkBehaviour
     [HideInInspector] public bool energyEffect = false;
     [HideInInspector] bool energyEffectCheck = false;
     [HideInInspector] public bool eyeEffect = false;
-    [HideInInspector] [SyncVar] public bool whatIsItJumpscare = false;
+    [HideInInspector][SyncVar] public bool whatIsItJumpscare = false;
     [HideInInspector] public CurrentPoints current;
     [SyncVar] public bool isDead = false;
 
@@ -110,7 +110,7 @@ public class PlayerController : NetworkBehaviour
         // Command server
         CmdPlayerIsDead(isDead);
 
-        if (current.points > 0)            
+        if (current.points > 0)
             CmdPlaceBone();
     }
 
@@ -178,7 +178,7 @@ public class PlayerController : NetworkBehaviour
             stamine = 100;
             return;
         }
-            
+
 
         bool isRunning = Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W);
 
@@ -235,7 +235,7 @@ public class PlayerController : NetworkBehaviour
         chromaticAberration = postProcess.profile.GetSetting<ChromaticAberration>();
         bloom = postProcess.profile.GetSetting<Bloom>();
         colorGrading = postProcess.profile.GetSetting<ColorGrading>();
-        lensDistortion= postProcess.profile.GetSetting<LensDistortion>();
+        lensDistortion = postProcess.profile.GetSetting<LensDistortion>();
         current = GameObject.FindGameObjectWithTag("PointHolder").GetComponent<CurrentPoints>();
         waitForPlayers.enabled = isServer;
 
