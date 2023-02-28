@@ -18,7 +18,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private Settings settings;
     [SerializeField] private Slider sensitivity;
     [SerializeField] private TMP_Dropdown graphics;
-    [SerializeField] private TMP_Dropdown resolution;
+    [SerializeField] public TMP_Dropdown resolution;
 
     [Space(10)]
 
@@ -32,7 +32,7 @@ public class PlayerController : NetworkBehaviour
     [Space(10)]
     [SerializeField] private Camera playerCamera;
     [SerializeField] private GameObject playerCanvas;
-    [SerializeField] private GameObject playerHand;
+    [SerializeField] public GameObject playerHand;
     [SerializeField] private GameObject playerModel;
     [SerializeField] private AudioSource breath;
     [SerializeField] private Animator animator;
@@ -61,9 +61,7 @@ public class PlayerController : NetworkBehaviour
 
     [Space(10)]
     [Header("Player inventory components")]
-    [SerializeField] private GameObject inventory;
-    [SerializeField] private Transform selectedSlot;
-    [SerializeField] private GameObject[] inventoryObjects;
+    [SerializeField] public GameObject inventory;
 
     [Header("Stamine")]
     [SerializeField] private Slider stamineSlider;
@@ -83,15 +81,14 @@ public class PlayerController : NetworkBehaviour
     GameObject[] players;
     public float walkingSpeed = .1f;
     public float runningSpeed = 10.7f;
-    public bool inventoryActive = false;
     float gravity = 20.0f;
     float lookXLimit = 80.0f;
     float rotationX = 0;
     PostProcessVolume postProcess;
-    ChromaticAberration chromaticAberration;
-    ColorGrading colorGrading;
-    LensDistortion lensDistortion;
-    Bloom bloom;
+    [HideInInspector] public ChromaticAberration chromaticAberration;
+    [HideInInspector] public ColorGrading colorGrading;
+    [HideInInspector] public LensDistortion lensDistortion;
+    [HideInInspector] public Bloom bloom;
     #endregion
 
     void Start()
@@ -107,7 +104,6 @@ public class PlayerController : NetworkBehaviour
         PlayerControler();
         Animations();
         Stamine();
-        Inventory();
         CheckEffects();
         Graphics();
 
@@ -202,93 +198,12 @@ public class PlayerController : NetworkBehaviour
         stamineSlider.gameObject.SetActive(stamineSlider.value < 100);
     }
 
-    public void Disconnect()
-    {
-        JsonReadWriteSystem json = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<JsonReadWriteSystem>();
-        json.PlayerDataSaveToJson(false, settings.playerName);
-        json.SettingsDataSaveToJson((int)settings.sensitivy, settings.graphics, settings.resolution, settings.menuMusicVolume);
-
-        Application.Quit();
-    }
-
     void Graphics()
     {
         QualitySettings.SetQualityLevel(graphics.value);
         postProcess.weight = graphics.value < 2 ? 1f : .25f;
-
         colorGrading.temperature.value = IsLocalPlayerAlive ? 11f : -100f;
-
         lensDistortion.intensity.value = IsLocalPlayerAlive ? 16 : -48;
-    }
-
-    public void ChangeResolution()
-    {
-        switch (resolution.value)
-        {
-            case 0:
-                Screen.SetResolution(1920, 1080, true);
-                break;
-            case 1:
-                Screen.SetResolution(1650, 1080, true);
-                break;
-            case 2:
-                Screen.SetResolution(1400, 900, true);
-                break;
-            case 3:
-                Screen.SetResolution(1024, 768, true);
-                break;
-            case 4:
-                Screen.SetResolution(800, 600, true);
-                break;
-        }
-    }
-
-    string animName;
-    void Inventory()
-    {
-        if (IsGamePaused || !IsLocalPlayerAlive || IsGameOver)
-            return;
-
-        if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Tab))
-            inventoryActive = !inventoryActive;
-
-        inventory.SetActive(inventoryActive);
-
-        flashLight.enabled = inventory.activeSelf || flashLight.enabled;
-        chromaticAberration.intensity.value = inventory.activeSelf ? 0.04f : .5f;
-        bloom.intensity.value = inventory.activeSelf ? 1f : 23f;
-
-        Cursor.lockState = inventory.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = inventory.activeSelf;
-
-        animName = inventory.activeSelf ? "Hide" : "UnHide";
-        playerHand.GetComponent<Animator>().Play(animName);
-
-        CleanSelectedSlot();
-    }
-
-    void CleanSelectedSlot()
-    {
-        if (IsInventoryActivated)
-            return;       
-
-        if (selectedSlot.childCount > 0)
-        {
-            for (int i = 0; i < inventoryObjects.Length; i++)
-            {
-                if (inventoryObjects[i].transform.GetChild(0).childCount > 0 && !inventoryObjects[i].transform.GetChild(0).transform.GetChild(0).CompareTag(selectedSlot.transform.GetChild(0).gameObject.tag))
-                    continue;
-
-                if (inventoryObjects[i].transform.GetChild(0).childCount > 0 && !(inventoryObjects[i].transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<ItemInfo>().itemType == ItemType.Consumable))
-                    continue;
-
-                if (Instantiate(selectedSlot.transform.GetChild(0).gameObject, inventoryObjects[i].transform.GetChild(0).transform))
-                {
-                    Destroy(selectedSlot.transform.GetChild(0).gameObject);
-                    break;
-                }
-            }
-        }
     }
 
     private void LocalPlayerStart()
