@@ -24,27 +24,21 @@ public class GetSettings : MonoBehaviour
 
     private void Start()
     {
-        string playerData = File.ReadAllText("C:/userdata/data.json");
-        PlayerData data = JsonUtility.FromJson<PlayerData>(playerData);
-
-        playerName.text = data.playerName != null ? data.playerName : Environment.UserName;
-        resolution.value = data.resolution;
-
         wrongVersion.SetActive(Application.version != GetGameVersion());
         scene.LoadScene();
-        if (Directory.Exists("C:/userdata"))
+
+        if (DataSetup())
         {
-            if(File.Exists(Application.dataPath + "C:/userdata.json"))
-                json.LoadFromJson(sense, graphics, settings, resolution);
-            else
-                json.SaveToJson(3, 0, true, 0, playerName.text);
+            string playerData = File.ReadAllText("C:/userdata/playerData.json");
+            PlayerData pData = JsonUtility.FromJson<PlayerData>(playerData);
+
+            string settingsData = File.ReadAllText("C:/userdata/settingsData.json");
+            SettingsData sData = JsonUtility.FromJson<SettingsData>(settingsData);
+
+            playerName.text = pData.playerName != null ? pData.playerName : Environment.UserName;
+            resolution.value = sData.resolution;
+            musicVolumeSlider.value = sData.menuMusicVolume;
         }
-        else
-        {
-            DirectoryInfo di = Directory.CreateDirectory("C:/userdata");
-            di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
-            json.SaveToJson(3, 0, true, 0, playerName.text);
-        }     
     }
 
     void Update()
@@ -53,6 +47,7 @@ public class GetSettings : MonoBehaviour
         settings.graphics = graphics.value;
         settings.resolution = resolution.value;
         settings.playerName = playerName.text;
+        settings.menuMusicVolume = musicVolumeSlider.value;
     }
 
     public void ChangeResolution()
@@ -74,6 +69,32 @@ public class GetSettings : MonoBehaviour
             case 4:
                 Screen.SetResolution(800, 600, true);
                 break;
+        }
+    }
+
+    bool DataSetup()
+    {
+        if (Directory.Exists("C:/userdata"))
+        {
+            if (File.Exists("C:/userdata/playerData.json") && File.Exists("C:/userdata/settingsData.json"))
+            {
+                json.PlayerDataLoadFromJson(settings);
+                json.SettingsDataLoadFromJson(sense, graphics, resolution, musicVolumeSlider);
+            }
+            else
+            {
+                json.PlayerDataSaveToJson(true, playerName.text);
+                json.SettingsDataSaveToJson(3, 0, 0, 0.1f);
+            }
+            return true;
+        }
+        else
+        {
+            DirectoryInfo di = Directory.CreateDirectory("C:/userdata");
+            di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+            json.PlayerDataSaveToJson(true, playerName.text);
+            json.SettingsDataSaveToJson(3, 0, 0, 0.5f);
+            return true;
         }
     }
 

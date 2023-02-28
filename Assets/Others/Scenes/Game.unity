@@ -12758,7 +12758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sense: {fileID: 341777979}
-  musicVolumeSlider: {fileID: 0}
+  musicVolumeSlider: {fileID: 1446438726}
   graphics: {fileID: 1004995906}
   resolution: {fileID: 2012856549}
   fullscreen: {fileID: 0}

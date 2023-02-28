@@ -205,7 +205,8 @@ public class PlayerController : NetworkBehaviour
     public void Disconnect()
     {
         JsonReadWriteSystem json = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<JsonReadWriteSystem>();
-        json.SaveToJson((int)Mathf.Floor(sensitivity.value), graphics.value, false, resolution.value, settings.playerName);
+        json.PlayerDataSaveToJson(false, settings.playerName);
+        json.SettingsDataSaveToJson((int)settings.sensitivy, settings.graphics, settings.resolution, settings.menuMusicVolume);
 
         Application.Quit();
     }

@@ -20,7 +20,8 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        json.SaveToJson((int)settings.sensitivy, settings.graphics, settings.tutorial, settings.resolution, settings.playerName);
+        json.PlayerDataSaveToJson(settings.tutorial, settings.playerName);
+        json.SettingsDataSaveToJson((int)settings.sensitivy, settings.graphics, settings.resolution, settings.menuMusicVolume);
         HostButton?.onClick.AddListener(() =>
         {
             if ((maxClient.value + 1) > 1)

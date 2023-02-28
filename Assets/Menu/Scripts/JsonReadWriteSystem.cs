@@ -5,27 +5,43 @@ using UnityEngine.UI;
 
 public class JsonReadWriteSystem : MonoBehaviour
 {
-    public void SaveToJson(int sensibility, int graphics, bool tutorial, int resolution, string playerName)
+    public void PlayerDataSaveToJson(bool tutorial, string playerName)
     {
         PlayerData data = new PlayerData();
-        data.sensibility = sensibility;
-        data.resolution = resolution;
         data.tutorial = tutorial;
-        data.graphics = graphics;
         data.playerName = playerName;
 
         string json = JsonUtility.ToJson(data, true);
-        File.WriteAllText("C:/userdata/data.json", json);
+        File.WriteAllText("C:/userdata/playerData.json", json);
     }
 
-    public void LoadFromJson(Slider sensibility, TMP_Dropdown graphics, Settings settings, TMP_Dropdown resolution)
+    public void PlayerDataLoadFromJson(Settings settings)
     {
-        string json = File.ReadAllText("C:/userdata/data.json");
+        string json = File.ReadAllText("C:/userdata/playerData.json");
         PlayerData data = JsonUtility.FromJson<PlayerData>(json);
+        settings.tutorial = data.tutorial;
+        settings.playerName = data.playerName;
+    }
+
+    public void SettingsDataSaveToJson(int sensibility, int graphics, int resolution, float menuMusicVolume)
+    {
+        SettingsData data = new SettingsData();
+        data.sensibility = sensibility;
+        data.graphics = graphics;
+        data.resolution = resolution;
+        data.menuMusicVolume = menuMusicVolume;
+
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText("C:/userdata/settingsData.json", json);
+    }
+
+    public void SettingsDataLoadFromJson(Slider sensibility, TMP_Dropdown graphics, TMP_Dropdown resolution, Slider menuMusicVolume)
+    {
+        string json = File.ReadAllText("C:/userdata/settingsData.json");
+        SettingsData data = JsonUtility.FromJson<SettingsData>(json);
         sensibility.value = data.sensibility;
         graphics.value = data.graphics;
         resolution.value = data.resolution;
-        settings.tutorial = data.tutorial;
-        settings.playerName = data.playerName;
+        menuMusicVolume.value = data.menuMusicVolume;
     }
 }
