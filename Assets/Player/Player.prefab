@@ -16550,11 +16550,11 @@ GameObject:
   - component: {fileID: 2027115840548164578}
   - component: {fileID: 4844037890123956645}
   - component: {fileID: 2412742043826749293}
-  - component: {fileID: 3981745458648961239}
   - component: {fileID: 4495898476974845925}
   - component: {fileID: 3497388279061110151}
   - component: {fileID: 3026080349399431942}
   - component: {fileID: 292321598383274280}
+  - component: {fileID: 5107051647581715850}
   - component: {fileID: 7823481797320664015}
   - component: {fileID: 6700677090540638104}
   - component: {fileID: -5939566803344362626}
@@ -16803,22 +16803,6 @@ MonoBehaviour:
   settingsMenu: {fileID: 2928062497763045863}
   playerCamera: {fileID: 7823481796285217512}
   player: {fileID: 7823481797320664011}
---- !u!114 &3981745458648961239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7823481797320664016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13d4c0c07e02fe2498fb23fb638fb2c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0.1
-  player: {fileID: 7823481797320664011}
 --- !u!114 &4495898476974845925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16878,6 +16862,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31073de21bc298844808d512cf086343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5107051647581715850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7823481797320664016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec174dda89d34fd4c9bd6b510501503e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!114 &7823481797320664015
 MonoBehaviour:
   m_ObjectHideFlags: 0

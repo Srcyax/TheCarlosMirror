@@ -111,6 +111,8 @@ GameObject:
   - component: {fileID: 4340188958811529381}
   - component: {fileID: 9061951037192062487}
   - component: {fileID: 5519307727331302455}
+  - component: {fileID: 3172150308567302850}
+  - component: {fileID: 6289530152888861275}
   m_Layer: 0
   m_Name: Cabinet (4)
   m_TagString: Untagged
@@ -132,7 +134,6 @@ Transform:
   m_Children:
   - {fileID: 1983115933321429760}
   - {fileID: 1213135336319919651}
-  - {fileID: 7195601656657400573}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90.914, z: 0}
@@ -218,6 +219,34 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!114 &3172150308567302850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2647843153197384415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d4c0c07e02fe2498fb23fb638fb2c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+--- !u!65 &6289530152888861275
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2647843153197384415}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.9103484, y: 5.87381, z: 3.0038993}
+  m_Center: {x: -0.004493143, y: 2.436905, z: 0.060087793}
 --- !u!1 &5811927233763065758
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,51 +345,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.00087237, y: 0.017468432, z: 0.047234446}
   m_Center: {x: 0.000008100862, y: -0.008760567, z: -0.00008111166}
---- !u!1 &6753068333316928451
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7195601656657400573}
-  - component: {fileID: 3086245034281242126}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Cabinet
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7195601656657400573
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6753068333316928451}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3455624296766347365}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3086245034281242126
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6753068333316928451}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.9103484, y: 5.87381, z: 3.0038993}
-  m_Center: {x: -0.004493143, y: 2.436905, z: 0.060087793}
 --- !u!1001 &3308965461973977861
 PrefabInstance:
   m_ObjectHideFlags: 0
