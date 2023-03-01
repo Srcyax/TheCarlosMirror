@@ -4,13 +4,10 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
 
 [RequireComponent(typeof(CharacterController))]
 
-[Serializable]
 public class PlayerController : NetworkBehaviour
 {
     [Header("Settings")]
@@ -166,25 +163,32 @@ public class PlayerController : NetworkBehaviour
         cameraAnimator.SetBool("run", run);
     }
 
+    float timeStamine;
     void Stamine()
     {
         if (!IsLocalPlayerAlive)
         {
             stamine = 100;
+            timeStamine = 0;
             return;
         }
-
 
         bool isRunning = Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W);
 
         if (isRunning && !energyEffectCheck)
         {
             stamine -= Time.deltaTime * 5;
+            timeStamine = 0;
         }
         else
         {
-            if (stamine < 100)
-                stamine += Time.deltaTime * 7;
+            timeStamine  = timeStamine < 3 ? timeStamine + Time.deltaTime : 2;
+
+            if (timeStamine >= 2)
+            {
+                if (stamine < 100)
+                    stamine += Time.deltaTime * 20;
+            }
         }
 
         breath.volume = isRunning && stamine < 60 ? breath.volume + Time.deltaTime * 0.3f : breath.volume - Time.deltaTime * 0.1f;
