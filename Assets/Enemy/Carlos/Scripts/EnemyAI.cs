@@ -35,9 +35,8 @@ public class EnemyAI : NetworkBehaviour
     [SerializeField] private GameObject playerRagdoll;
     [SerializeField] private GameObject jumpScare;
 
-    [SerializeField] private NetworkManager networkManager;
     [SerializeField] public AIstate stateAI;
-    [SerializeField] private GameObject[] wayPoints;
+    private GameObject[] wayPoints;
 
     [SyncVar] float searchTime = 0;
     [SyncVar] float wayPointTime = 0;
@@ -51,6 +50,8 @@ public class EnemyAI : NetworkBehaviour
 
     void Start()
     {
+        wayPoints = GameObject.FindGameObjectsWithTag("WayPoint");
+
         Physics.IgnoreLayerCollision(0, 11);
         currentWayPoint = Random.Range(0, wayPoints.Length);
         stateAI = AIstate.walking;

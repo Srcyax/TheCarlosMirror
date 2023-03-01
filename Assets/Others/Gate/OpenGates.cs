@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class OpenGates : NetworkBehaviour
 {
+    [SerializeField] private TMP_Dropdown gameMode;
+    [SerializeField] private Transform enemyPosSapawn;
+    [SerializeField] GameObject[] gates;
     GameObject[] players;
     GameObject[] waitingForPlayers;
-    [SerializeField] GameObject[] gates;
     NetworkManager network;
     void Start()
     {
@@ -33,8 +35,9 @@ public class OpenGates : NetworkBehaviour
 
             foreach (GameObject gate in gates)
             {
-                Destroy(gate, 5f);
-                Destroy(gameObject, 5f);
+                Destroy(gate);
+                Destroy(gameObject);
+                SpawnEnemys();
             }
         }
         else
@@ -44,6 +47,19 @@ public class OpenGates : NetworkBehaviour
                 if (wait)
                     wait.GetComponent<TextMeshProUGUI>().enabled = true;
             }
+        }      
+    }
+
+    void SpawnEnemys()
+    {
+        if (gameMode.value == 0)
+        {
+            NetworkServer.Destroy(enemyPosSapawn.GetChild(2).gameObject);
+        }
+        else if (gameMode.value == 1)
+        {
+            NetworkServer.Destroy(enemyPosSapawn.GetChild(1).gameObject);
+            NetworkServer.Destroy(enemyPosSapawn.GetChild(2).gameObject);
         }
     }
 }

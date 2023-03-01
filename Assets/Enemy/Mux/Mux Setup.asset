@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b60da5cd6efa5b4bad24146abef5644, type: 3}
-  m_Name: ScareMan Setup
+  m_Name: Mux Setup
   m_EditorClassIdentifier: 
   maxVelocity: 10
   minVelocity: 2
