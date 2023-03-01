@@ -2464,8 +2464,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7823481797320664011}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 3026080349399431942}
+        m_TargetAssemblyTypeName: PlayerDisconnect, Assembly-CSharp
         m_MethodName: Disconnect
         m_Mode: 1
         m_Arguments:
@@ -9380,8 +9380,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7823481797320664011}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 3026080349399431942}
+        m_TargetAssemblyTypeName: PlayerDisconnect, Assembly-CSharp
         m_MethodName: Disconnect
         m_Mode: 1
         m_Arguments:
@@ -16849,6 +16849,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d02fbb17abccd4d824a3651df7a741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
   settings: {fileID: 11400000, guid: 64d270527731652429011bd4f604b27c, type: 2}
 --- !u!114 &292321598383274280
 MonoBehaviour:

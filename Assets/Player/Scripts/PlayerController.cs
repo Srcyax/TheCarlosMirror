@@ -4,6 +4,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
@@ -212,7 +213,15 @@ public class PlayerController : NetworkBehaviour
         if (version)
         {
             if (Application.version != version.GetGameVersion())
+            {
+                if (isClient)
+                    NetworkClient.Shutdown();
+
+                if (isServer)
+                    NetworkServer.Shutdown();
+
                 SceneManager.LoadScene("Game");
+            }
         }
 #endif
 
