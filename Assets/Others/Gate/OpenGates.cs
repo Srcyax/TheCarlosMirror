@@ -6,13 +6,14 @@ public class OpenGates : NetworkBehaviour
 {
     [SerializeField] private TMP_Dropdown gameMode;
     [SerializeField] private Transform enemyPosSapawn;
-    [SerializeField] GameObject[] gates;
+    GameObject[] gates;
     GameObject[] players;
     GameObject[] waitingForPlayers;
     NetworkManager network;
     void Start()
     {
         network = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>();
+        gates = GameObject.FindGameObjectsWithTag("Gate");
     }
 
     void Update()
