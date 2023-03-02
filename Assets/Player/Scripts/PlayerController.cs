@@ -69,7 +69,7 @@ public class PlayerController : NetworkBehaviour
 
     #region Others
     private CharacterController characterController;
-    private PlayerInventory inventory => GetComponent<PlayerInventory>();
+    private PlayerInventory playerInventory => GetComponent<PlayerInventory>();
     private Vector3 moveDirection = Vector3.zero;
     private GameObject[] players;
 
@@ -235,7 +235,7 @@ public class PlayerController : NetworkBehaviour
         playerCamera.enabled = isLocalPlayer;
         playerNameSystem.playerName.enabled = !isLocalPlayer;
         playerModel.SetActive(!isLocalPlayer);
-        inventory.inventoryObject.SetActive(isLocalPlayer);
+        playerInventory.inventoryObject.SetActive(isLocalPlayer);
         swayFlashlight.enabled = isLocalPlayer;
         characterController = GetComponent<CharacterController>();
         postProcess = playerCamera.GetComponent<PostProcessVolume>();
@@ -282,7 +282,7 @@ public class PlayerController : NetworkBehaviour
             }
             gameObject.tag = "Untagged";
             playerIsDead.enabled = true;
-            inventory.inventoryObject.SetActive(false);
+            playerInventory.inventoryObject.SetActive(false);
             playerModel.SetActive(false);
             flashLight.enabled = false;
             Destroy(playerHand);
@@ -375,7 +375,7 @@ public class PlayerController : NetworkBehaviour
     {
         get
         {
-            return inventory.inventoryObject.activeSelf;
+            return playerInventory.inventoryObject.activeSelf;
         }
     }
 

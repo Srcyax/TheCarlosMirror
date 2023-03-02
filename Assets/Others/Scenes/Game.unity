@@ -325,11 +325,11 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Standard
+    - m_Text: Carlos
       m_Image: {fileID: 0}
     - m_Text: PvP
       m_Image: {fileID: 0}
-    - m_Text: Standard + Mux
+    - m_Text: Carlos + Mux
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4054,7 +4054,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HenRi#8781
+  m_text: HenRi
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6849,7 +6849,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: cya#0533
+  m_text: cya
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13699,7 +13699,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  points: 0
+  points: 6
 --- !u!114 &1526954865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17491,7 +17491,7 @@ GameObject:
   - component: {fileID: 1931709161}
   - component: {fileID: 1931709160}
   m_Layer: 0
-  m_Name: Underground Studio
+  m_Name: Nexus Studio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17537,7 +17537,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Underground Studio
+  m_text: Nexus Studio
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 42c7381ae067c6b44b826b9d2467842b, type: 2}
   m_sharedMaterial: {fileID: 3912106599054571230, guid: 42c7381ae067c6b44b826b9d2467842b, type: 2}

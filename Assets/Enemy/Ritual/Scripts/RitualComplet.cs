@@ -11,11 +11,11 @@ public class RitualComplet : NetworkBehaviour
 
     [SyncVar] public int currentBones = 0;
 
-    private GameObject enemy;
+    private GameObject[] enemy;
 
     private void Start()
     {
-        enemy = GameObject.FindGameObjectWithTag("Enemy");
+        enemy = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
     void Update()
@@ -32,7 +32,8 @@ public class RitualComplet : NetworkBehaviour
         ritualCamera.enabled = true;
         audioSource.Play();
         Instantiate(enemyRitualPrefab, enemyRitualPos);
-        NetworkServer.Destroy(enemy);
+        for (int i = 0; i < enemy.Length; i++)
+            NetworkServer.Destroy(enemy[i]);
         currentBones = 0;
         PlayerController[] players = GameObject.FindObjectsOfType<PlayerController>();
         foreach (PlayerController player in players)
