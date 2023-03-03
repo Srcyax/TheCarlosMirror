@@ -29,6 +29,7 @@ TagManager:
   - Cabinet
   - Gate
   - JumpScare
+  - OpenGates
   layers:
   - Default
   - TransparentFX

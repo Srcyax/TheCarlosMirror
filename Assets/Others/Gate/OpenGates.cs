@@ -59,8 +59,8 @@ public class OpenGates : NetworkBehaviour
         }
         else if (gameMode.value == 1)
         {
-            NetworkServer.Destroy(enemyPosSapawn.GetChild(1).gameObject);
-            NetworkServer.Destroy(enemyPosSapawn.GetChild(2).gameObject);
+            NetworkServer.Destroy(enemyPosSapawn.GetChild(1).gameObject);           
+            NetworkServer.Destroy(enemyPosSapawn.GetChild(2).gameObject);           
         }
     }
 }
