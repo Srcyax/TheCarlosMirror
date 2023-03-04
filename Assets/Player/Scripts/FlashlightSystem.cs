@@ -20,7 +20,7 @@ public class FlashlightSystem : NetworkBehaviour
 
     [SerializeField] private Slider flashLightSlider;
 
-    private float flashLightTime = 100;
+    [HideInInspector] public float flashLightTime = 100;
     private PlayersAlreadyJoined server;
 
     void Start()

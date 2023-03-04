@@ -3069,7 +3069,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320691124891996303}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 1ce5a0f58a9178049bbf6d27733cebf3, type: 3}
+  m_Avatar: {fileID: 9000000, guid: d9c658302e38d2640826b35f70e6fb07, type: 3}
   m_Controller: {fileID: 9100000, guid: 46b682487e8286a43afd21a99148e4bc, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
@@ -4173,6 +4173,90 @@ Transform:
   m_Father: {fileID: 1015402682341746102}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2054385140707197132
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2247179324159651655}
+  - component: {fileID: 8794215957916490940}
+  - component: {fileID: 778724902965320037}
+  m_Layer: 10
+  m_Name: HandCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2247179324159651655
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054385140707197132}
+  m_LocalRotation: {x: -0.00000004650792, y: -1.4551915e-10, z: -9.845991e-10, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7823481796285217519}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &8794215957916490940
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054385140707197132}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 3
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.01
+  far clip plane: 100
+  field of view: 55
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!81 &778724902965320037
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054385140707197132}
+  m_Enabled: 1
 --- !u!1 &2056529017823473560
 GameObject:
   m_ObjectHideFlags: 0
@@ -8632,7 +8716,7 @@ GameObject:
   - component: {fileID: 7799958965624716824}
   - component: {fileID: 2917006022544549996}
   - component: {fileID: 6878798720293123263}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FlashLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16459,6 +16543,7 @@ Transform:
   m_Children:
   - {fileID: 5670232129518172978}
   - {fileID: 1893081582374688486}
+  - {fileID: 2247179324159651655}
   m_Father: {fileID: 4970403506420072190}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16817,7 +16902,7 @@ MonoBehaviour:
   playerCamera: {fileID: 7823481796285217512}
   playerCanvas: {fileID: 887930717687829743}
   playerHand: {fileID: 1665533656249330251}
-  playerModel: {fileID: 1320691124891996303}
+  playerModel: {fileID: 1604560748790712758}
   breath: {fileID: 4883943608122144266}
   animator: {fileID: 5764596445021687887}
   cameraAnimator: {fileID: 159937562656366691}
@@ -16998,6 +17083,7 @@ MonoBehaviour:
   turnOffClip: {fileID: 8300000, guid: 86d3e2274ab98f74ebb0e071a0ea215f, type: 3}
   flashLightAudio: {fileID: 2917006022544549996}
   flashLightSlider: {fileID: 5582977797077775386}
+  flashLightTime: 100
 --- !u!114 &3497388279061110151
 MonoBehaviour:
   m_ObjectHideFlags: 0

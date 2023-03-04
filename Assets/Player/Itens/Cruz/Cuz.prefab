@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9011754144661978901}
   - component: {fileID: 7528268448281603028}
   - component: {fileID: 5268124635078914029}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cuz
   m_TagString: Cruz
   m_Icon: {fileID: 0}
