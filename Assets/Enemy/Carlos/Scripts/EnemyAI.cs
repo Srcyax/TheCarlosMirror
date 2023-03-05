@@ -224,6 +224,8 @@ public class EnemyAI : NetworkBehaviour
             coolDownCruzzEffect = 0;
             cruzEffect = false;
             target.gameObject.GetComponent<PlayerController>().isDead = true;
+            int index = gameObject.name == "Carlos" ? 0 : 1;
+            target.gameObject.GetComponent<PlayerController>().PLayerDeadJumpScare(index);
             headSpot.ClearTargets();
             stateAI = AIstate.lookingforTarget;
         }

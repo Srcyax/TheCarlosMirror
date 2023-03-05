@@ -43,7 +43,7 @@ public class PlayerController : NetworkBehaviour
 
     [Space(10)]
 
-    [SerializeField] private GameObject jumpScare;
+    [SerializeField] private GameObject[] jumpScare;
     [SerializeField] private GameObject wiiJumpScare;
 
     [Space(10)]
@@ -251,15 +251,15 @@ public class PlayerController : NetworkBehaviour
     }
 
     void CheckEffects()
-    {
-        if (!IsLocalPlayerAlive)
-        {
-            jumpScare.SetActive(true);
-            StartCoroutine(JumpScare(jumpScare.GetComponent<Image>()));
-        }
-
+    {       
         if (energyEffect)
             StartCoroutine(EnergyEffectEnd());
+    }
+
+    public void PLayerDeadJumpScare(int index)
+    {   
+        jumpScare[index].SetActive(true);
+        StartCoroutine(JumpScare(jumpScare[index]));
     }
 
     public void JumpScare()
@@ -280,10 +280,10 @@ public class PlayerController : NetworkBehaviour
         energyEffectCheck = false;
     }
 
-    IEnumerator JumpScare(Image image)
+    IEnumerator JumpScare(GameObject obj)
     {
         yield return new WaitForSeconds(5f);
-        image.enabled = false;
+        Destroy(obj);
     }
 
     IEnumerator JumpScare2()
