@@ -573,9 +573,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 68.11715, y: 15.367696, z: 50.402054}
+    m_Target: {x: 30.28537, y: 49.523186, z: 42.833897}
     speed: 2
-    m_Value: {x: 68.11718, y: 15.367695, z: 50.402065}
+    m_Value: {x: 30.28537, y: 49.523186, z: 42.833897}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -622,13 +622,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.076
   m_Rotation:
-    m_Target: {x: 0.050307978, y: 0.9413165, z: -0.23710483, w: 0.2382701}
+    m_Target: {x: -0.23306634, y: -0.72010684, z: 0.311321, w: -0.57603735}
     speed: 2
-    m_Value: {x: 0.049912374, y: 0.9409209, z: -0.23699063, w: 0.23666872}
+    m_Value: {x: -0.23334487, y: -0.7186624, z: 0.31072047, w: -0.5766518}
   m_Size:
-    m_Target: 2.0266356
+    m_Target: 1.0862776
     speed: 2
-    m_Value: 2.0266356
+    m_Value: 1.0862776
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -646,7 +646,7 @@ MonoBehaviour:
     m_FarClip: 1000
     m_DynamicClip: 0
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: -0.06810292, y: 0.9306995, z: -0.3185835, w: -0.17101328}
+  m_LastSceneViewRotation: {x: 0.029942404, y: -0.93796015, z: 0.34433123, w: 0.048820794}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -686,21 +686,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 08f3fcff56f3fcffda1dfdff92d7ffff4ef5ffff66f5fffffefaffff
+      m_ExpandedIDs: 087efeff5a7efeffdea8fefffefaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Player Ragdoll(Clone)
-        m_OriginalName: Player Ragdoll(Clone)
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -179442
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -912,9 +912,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 1c03f8462553be94ebcd200e695d7248, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 35be328f7c750be4da9de258409b24a6, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: -3354341592570144488, guid: 1c03f8462553be94ebcd200e695d7248, type: 2}
+  - m_Target: {fileID: -2986545414214657470, guid: 35be328f7c750be4da9de258409b24a6, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -1008,10 +1008,10 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 58}
-    m_SelectedIDs: 60ab0000
-    m_LastClickedID: 43872
-    m_ExpandedIDs: 0000000042ab000056ab000060ab0000a4ab00000edf000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 60}
+    m_SelectedIDs: 74ab0000
+    m_LastClickedID: 43892
+    m_ExpandedIDs: 0000000042ab00006aab000074ab0000727a0100747a010000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1217,7 +1217,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 28494
+  m_LastSelectedObjectID: -1804
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
