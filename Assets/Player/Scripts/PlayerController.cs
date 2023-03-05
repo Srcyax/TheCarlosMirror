@@ -31,11 +31,10 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private Camera playerCamera;
     [SerializeField] private GameObject[] playerCanvas;
     [SerializeField] public GameObject playerHand;
-    [SerializeField] private GameObject playerModel;
+    [SerializeField] public GameObject playerModel;
     [SerializeField] private AudioSource breath;
     [SerializeField] private Animator animator;
     [SerializeField] private Animator cameraAnimator;
-    [SerializeField] private TextMeshProUGUI playerIsDead;
     [SerializeField] private TextMeshProUGUI waitForPlayers;
 
     [Space(10)]
@@ -49,12 +48,12 @@ public class PlayerController : NetworkBehaviour
 
     [Space(10)]
     [Header("Player flashlight")]
-    [SerializeField] private Light flashLight;
+    [SerializeField] public Light flashLight;
     [SerializeField] private Sway swayFlashlight;
 
     [Space(10)]
     [Header("Player screen Game state")]
-    [SerializeField] private GameObject gameOver;
+    [SerializeField] public GameObject gameOver;
     [SerializeField] GameObject bonePrefab;
 
     [Header("Stamine")]
@@ -102,9 +101,6 @@ public class PlayerController : NetworkBehaviour
         Stamine();
         CheckEffects();
         Graphics();
-
-        // Command server
-        CmdPlayerIsDead(isDead);
     }
 
     void PlayerControler()
@@ -264,44 +260,6 @@ public class PlayerController : NetworkBehaviour
 
         if (energyEffect)
             StartCoroutine(EnergyEffectEnd());
-    }
-
-    [Command]
-    public void CmdPlayerIsDead(bool isDead)
-    {
-        RpcPlayerIsDead(isDead);
-    }
-
-    [ClientRpc]
-    void RpcPlayerIsDead(bool isDead)
-    {
-        if (isDead)
-        {
-            gameObject.layer = 7;
-            foreach (Transform child in transform)
-            {
-                child.gameObject.layer = 7;
-            }
-            gameObject.tag = "Untagged";
-            playerIsDead.enabled = true;
-            playerInventory.inventoryObject.SetActive(false);
-            playerModel.SetActive(false);
-            flashLight.enabled = false;
-            Destroy(playerHand);
-        }
-
-        PlayersAlive();
-    }
-
-    void PlayersAlive()
-    {
-        players = GameObject.FindGameObjectsWithTag("Player");
-        if (players.Length < 1)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            gameOver.SetActive(true);
-        }
     }
 
     public void JumpScare()

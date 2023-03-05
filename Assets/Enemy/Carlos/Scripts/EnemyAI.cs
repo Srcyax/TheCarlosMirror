@@ -32,7 +32,6 @@ public class EnemyAI : NetworkBehaviour
 
     [Space(10)]
     [Header("Player components")]
-    [SerializeField] private GameObject playerRagdoll;
     [SerializeField] private GameObject jumpScare;
 
     [SerializeField] public AIstate stateAI;
@@ -224,9 +223,6 @@ public class EnemyAI : NetworkBehaviour
             SetDestinatation(target.position, 0, false, false, false, true, false);
             coolDownCruzzEffect = 0;
             cruzEffect = false;
-            if (!target.gameObject.GetComponent<PlayerController>().isDead)
-                Instantiate(playerRagdoll, new Vector3(target.position.x, target.position.y, target.position.z), Quaternion.identity).transform.parent = null;
-
             target.gameObject.GetComponent<PlayerController>().isDead = true;
             headSpot.ClearTargets();
             stateAI = AIstate.lookingforTarget;

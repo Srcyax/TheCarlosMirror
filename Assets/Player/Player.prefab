@@ -4183,7 +4183,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2247179324159651655}
   - component: {fileID: 8794215957916490940}
-  - component: {fileID: 778724902965320037}
   m_Layer: 10
   m_Name: HandCamera
   m_TagString: Untagged
@@ -4249,14 +4248,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &778724902965320037
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2054385140707197132}
-  m_Enabled: 1
 --- !u!1 &2056529017823473560
 GameObject:
   m_ObjectHideFlags: 0
@@ -16813,6 +16804,7 @@ GameObject:
   - component: {fileID: 3497388279061110151}
   - component: {fileID: 3026080349399431942}
   - component: {fileID: 292321598383274280}
+  - component: {fileID: 4186704469434779342}
   - component: {fileID: 5107051647581715850}
   - component: {fileID: 7823481797320664015}
   - component: {fileID: 6700677090540638104}
@@ -16908,7 +16900,6 @@ MonoBehaviour:
   breath: {fileID: 4883943608122144266}
   animator: {fileID: 5764596445021687887}
   cameraAnimator: {fileID: 159937562656366691}
-  playerIsDead: {fileID: 7696917350815670967}
   waitForPlayers: {fileID: 5613773516589272056}
   playerTutorial: {fileID: 8429468567815661174}
   playerTutorialText: {fileID: 6041630852063310288}
@@ -17127,6 +17118,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31073de21bc298844808d512cf086343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4186704469434779342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7823481797320664016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ba5cb5ba07b34c4a9a50527046ecbfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  playerIsDead: {fileID: 7696917350815670967}
+  playerRagdoll: {fileID: 5591314659802134351, guid: 945fc2c52786fe545b425e0a6664f1d1, type: 3}
 --- !u!114 &5107051647581715850
 MonoBehaviour:
   m_ObjectHideFlags: 0
