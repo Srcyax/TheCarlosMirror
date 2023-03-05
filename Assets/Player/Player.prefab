@@ -16900,7 +16900,9 @@ MonoBehaviour:
   playerNameSystem: {fileID: 7736337603173894544}
   playerPoints: {fileID: 2027115840548164578}
   playerCamera: {fileID: 7823481796285217512}
-  playerCanvas: {fileID: 887930717687829743}
+  playerCanvas:
+  - {fileID: 887930717687829743}
+  - {fileID: 8271318003153300828}
   playerHand: {fileID: 1665533656249330251}
   playerModel: {fileID: 1604560748790712758}
   breath: {fileID: 4883943608122144266}

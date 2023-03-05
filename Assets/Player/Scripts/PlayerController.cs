@@ -29,7 +29,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] public PlayerPoints playerPoints;
     [Space(10)]
     [SerializeField] private Camera playerCamera;
-    [SerializeField] private GameObject playerCanvas;
+    [SerializeField] private GameObject[] playerCanvas;
     [SerializeField] public GameObject playerHand;
     [SerializeField] private GameObject playerModel;
     [SerializeField] private AudioSource breath;
@@ -183,15 +183,16 @@ public class PlayerController : NetworkBehaviour
         }
         else
         {
-            timeStamine  = timeStamine < 3 ? timeStamine + Time.deltaTime : 2;
+            timeStamine  = timeStamine < 1 ? timeStamine + Time.deltaTime : 1;
 
-            if (timeStamine >= 2)
+            if (timeStamine >= 1)
             {
                 if (stamine < 100)
                     stamine += Time.deltaTime * 20;
             }
         }
 
+        // ativa a respiração do player caso estaja correndo e sua estamina está baixa
         breath.volume = isRunning && stamine < 60 ? breath.volume + Time.deltaTime * 0.3f : breath.volume - Time.deltaTime * 0.1f;
 
         stamineSlider.value = stamine;
@@ -230,12 +231,13 @@ public class PlayerController : NetworkBehaviour
         graphics.value = settings.graphics;
 
         GameObject.FindGameObjectWithTag("CanvasMenu")?.SetActive(false);
-        playerCanvas.SetActive(isLocalPlayer);
+        foreach(GameObject canvas in playerCanvas)
+            canvas.SetActive(isLocalPlayer);
         playerCamera.GetComponent<AudioListener>().enabled = isLocalPlayer;
         playerCamera.enabled = isLocalPlayer;
         playerNameSystem.playerName.enabled = !isLocalPlayer;
         playerModel.SetActive(!isLocalPlayer);
-        playerInventory.inventoryObject.SetActive(isLocalPlayer);
+        playerHand.SetActive(isLocalPlayer);
         swayFlashlight.enabled = isLocalPlayer;
         characterController = GetComponent<CharacterController>();
         postProcess = playerCamera.GetComponent<PostProcessVolume>();
