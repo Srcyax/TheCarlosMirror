@@ -123,7 +123,7 @@ public class EnemyAI : NetworkBehaviour
     {
         if (cruzEffect)
         {
-            SetDestinatation(target.position, carlosSetup.minVelocity - 3, false, false, false, false, true);
+            SetDestinatation(target.position, carlosSetup.cruzEffectVelocity, false, false, false, false, true);
         }
         else
         {
@@ -146,7 +146,7 @@ public class EnemyAI : NetworkBehaviour
     {
         if (cruzEffect)
         {
-            SetDestinatation(lastPositionKnown, carlosSetup.minVelocity - 3, false, false, false, false, true);
+            SetDestinatation(lastPositionKnown, carlosSetup.cruzEffectVelocity, false, false, false, false, true);
         }
         else
         {
