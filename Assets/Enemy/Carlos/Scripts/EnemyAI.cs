@@ -223,9 +223,18 @@ public class EnemyAI : NetworkBehaviour
             SetDestinatation(target.position, 0, false, false, false, true, false);
             coolDownCruzzEffect = 0;
             cruzEffect = false;
-            target.gameObject.GetComponent<PlayerController>().isDead = true;
-            int index = gameObject.name == "Carlos" ? 0 : 1;
-            target.gameObject.GetComponent<PlayerController>().PLayerDeadJumpScare(index);
+            if (target.gameObject.GetComponent<PlayerController>())
+            {
+                target.gameObject.GetComponent<PlayerController>().isDead = true;
+                int index = gameObject.name == "Carlos" ? 0 : 1;
+                target.gameObject.GetComponent<PlayerController>().PLayerDeadJumpScare(index);
+            }
+            else
+            {
+                target.gameObject.tag = "Untagged";
+                Destroy(target.GetChild(0).gameObject);
+            }
+
             headSpot.ClearTargets();
             stateAI = AIstate.lookingforTarget;
         }
@@ -237,6 +246,9 @@ public class EnemyAI : NetworkBehaviour
 
         for (int i = 0; i < players.Length; i++)
         {
+            if (!players[i].GetComponent<CharacterController>())
+                continue;
+
             if (Vector3.Distance(transform.position, players[i].transform.position) < 15 && players[i].GetComponent<CharacterController>().velocity.magnitude > 0)
             {
                 target = players[i].transform;
