@@ -129,7 +129,7 @@ public class NpcAI : NetworkBehaviour
             }
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(bones[i].transform.position - transform.position), Time.deltaTime);
             stateAI = NPCAIstate.searchBone;
-            SetDestinatation(bones[i].transform.position, carlosSetup.maxVelocity, false, true, false);
+            SetDestinatation(bones[i].transform.position, carlosSetup.minVelocity, true, false, false);
         }
     }
 
