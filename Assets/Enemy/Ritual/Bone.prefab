@@ -47,8 +47,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 179.88298, y: 324.9473, z: 136.12007}
-  m_Center: {x: 19.100027, y: -112.47547, z: 18.060038}
+  m_Size: {x: 468.20425, y: 412.7821, z: 288.3197}
+  m_Center: {x: 22.823215, y: -68.5582, z: -58.047665}
 --- !u!114 &6605971091524195712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +82,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   carlosSetup: {fileID: 11400000, guid: a2fd290f305b4884cbff6c24b716adbd, type: 2}
-  mensageCallback: ' coletou um osso humano'
+  messageCallback: 
 --- !u!114 &6605971091524195714
 MonoBehaviour:
   m_ObjectHideFlags: 0

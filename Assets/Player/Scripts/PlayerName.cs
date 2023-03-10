@@ -7,12 +7,20 @@ public class PlayerName : NetworkBehaviour
     [SerializeField] private Settings settings;
     [SerializeField] public TextMeshPro playerName;
     [SerializeField] private TextMeshProUGUI inventoryPlayerName;
+    bool IsBot = false;
+
+    private void Start()
+    {
+        IsBot = !GetComponent<PlayerController>();
+
+        playerName.text = "BOT-" + Random.Range(0, 1000).ToString();
+    }
 
     void Update()
     {
         CmdPlayerNameUGUI();
 
-        if (!isLocalPlayer)
+        if (!isLocalPlayer || IsBot)
             return;
 
         CmdPlayerName(settings.playerName);
@@ -29,7 +37,9 @@ public class PlayerName : NetworkBehaviour
     void RpcPlayerName(string name)
     {
         playerName.text = name;
-        inventoryPlayerName.text = name;
+
+        if ( !IsBot )
+            inventoryPlayerName.text = name;
     }
 
     [Command(requiresAuthority = false)]

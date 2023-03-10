@@ -17,15 +17,7 @@ public class PointSystem : NetworkBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            itemFeed = FindObjectsOfType<ItemFeed>();
-            foreach (ItemFeed item in itemFeed)
-            {
-                item.CmdItemFeedCallback(other.GetComponent<PlayerName>().playerName.text.ToString(), messageCallback + " x" + currentPoints.points);
-            }
-
-            carlosSetup.maxVelocity += 0.5f;
             currentPoints.points++;
-
             NetworkServer.Destroy(gameObject);
         }
     }

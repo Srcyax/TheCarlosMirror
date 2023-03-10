@@ -231,8 +231,9 @@ public class EnemyAI : NetworkBehaviour
             }
             else
             {
+                target.gameObject.GetComponent<NpcAI>().IsDead = true;
                 target.gameObject.tag = "Untagged";
-                Destroy ( target.GetChild ( 0 ).gameObject );
+                target.gameObject.layer = 7;
             }
 
             headSpot.ClearTargets ();

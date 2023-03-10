@@ -49,7 +49,7 @@ public class PlayerDead : NetworkBehaviour
         player.flashLight.enabled = false;
         Destroy(player.playerHand);
 
-        //HasPlayersAlive();
+        HasPlayersAlive();
     }
 
     void HasPlayersAlive()

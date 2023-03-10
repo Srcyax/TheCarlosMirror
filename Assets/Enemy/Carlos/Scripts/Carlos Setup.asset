@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b60da5cd6efa5b4bad24146abef5644, type: 3}
   m_Name: Carlos Setup
   m_EditorClassIdentifier: 
-  maxVelocity: 11
+  maxVelocity: 10
   minVelocity: 4
   cruzEffectVelocity: 4
