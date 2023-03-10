@@ -1,19 +1,19 @@
-using UnityEngine;
 using Mirror;
+using UnityEngine;
 
 public class Battery : NetworkBehaviour
 {
     public const float batteryCharge = 5f;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter( Collider other )
     {
-        if (!other.CompareTag("Player"))
+        if ( !other.CompareTag ( "Player" ) )
             return;
 
-        if (other.GetComponent<FlashlightSystem>().flashLightTime < 100)
+        if ( other.GetComponent<FlashlightSystem> ().flashLightTime < 100 )
         {
-            NetworkServer.Destroy(gameObject);
-            other.GetComponent<FlashlightSystem>().flashLightTime += batteryCharge;
+            NetworkServer.Destroy ( gameObject );
+            other.GetComponent<FlashlightSystem> ().flashLightTime += batteryCharge;
         }
     }
 }

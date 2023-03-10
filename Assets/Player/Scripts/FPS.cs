@@ -8,16 +8,16 @@ public class FPS : MonoBehaviour
     private float deltaTimee = 0.0f;
     private float fpss = 0.0f;
     private float updateRate = 4.0f;
-    void Update()
+    void Update ()
     {
         frameCount++;
         deltaTimee += Time.deltaTime;
-        if (deltaTimee > 1.0f / updateRate)
+        if ( deltaTimee > 1.0f / updateRate )
         {
             fpss = frameCount / deltaTimee;
             frameCount = 0;
             deltaTimee -= 1.0f / updateRate;
         }
-        fps.text = Mathf.Floor(fpss).ToString();
+        fps.text = Mathf.Floor ( fpss ).ToString ();
     }
 }

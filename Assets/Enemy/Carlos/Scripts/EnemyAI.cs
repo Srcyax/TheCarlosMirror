@@ -7,17 +7,17 @@ public enum AIstate
     walking, following, lookingforTarget, comeToPoint
 };
 
-[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent ( typeof ( NavMeshAgent ) )]
 public class EnemyAI : NetworkBehaviour
 {
     Vector3 lastPositionKnown = Vector3.zero;
-    Animator animator => GetComponent<Animator>();
-    NavMeshAgent navMesh => GetComponent<NavMeshAgent>();
-    AudioSource audioSource => GetComponent<AudioSource>();
+    Animator animator => GetComponent<Animator> ();
+    NavMeshAgent navMesh => GetComponent<NavMeshAgent> ();
+    AudioSource audioSource => GetComponent<AudioSource> ();
 
     [Header("Carlos setup")]
     [Tooltip("Get Carlos standard settings")]
-    [SerializeField] private CarlosSetup carlosSetup; 
+    [SerializeField] private CarlosSetup carlosSetup;
 
     [Space(10)]
     [Header("Raycast Spots")]
@@ -49,43 +49,43 @@ public class EnemyAI : NetworkBehaviour
 
     void Start()
     {
-        wayPoints = GameObject.FindGameObjectsWithTag("WayPoint");
+        wayPoints = GameObject.FindGameObjectsWithTag ( "WayPoint" );
 
-        Physics.IgnoreLayerCollision(0, 11);
-        currentWayPoint = Random.Range(0, wayPoints.Length);
+        Physics.IgnoreLayerCollision ( 0, 11 );
+        currentWayPoint = Random.Range ( 0, wayPoints.Length );
         stateAI = AIstate.walking;
 
-        server = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<PlayersAlreadyJoined>();
+        server = GameObject.FindGameObjectWithTag ( "NetworkManager" ).GetComponent<PlayersAlreadyJoined> ();
     }
 
     void Update()
     {
-        if (!server.PlayersAlreadyJoinedInServer())
+        if ( !server.PlayersAlreadyJoinedInServer () )
             return;
 
-        CmdMainCode();
-        CmdCruzEffect();
+        CmdMainCode ();
+        CmdCruzEffect ();
     }
 
-    [Command(requiresAuthority = false)]
+    [Command ( requiresAuthority = false )]
     void CmdMainCode()
     {
-        wayPointDistance = Vector3.Distance(wayPoints[currentWayPoint].transform.position, transform.position);
-        if (headSpot)
+        wayPointDistance = Vector3.Distance ( wayPoints[currentWayPoint].transform.position, transform.position );
+        if ( headSpot )
         {
-            switch (stateAI)
+            switch ( stateAI )
             {
                 case AIstate.walking:
-                    Walking();
+                    Walking ();
                     break;
                 case AIstate.following:
-                    Following();
+                    Following ();
                     break;
                 case AIstate.lookingforTarget:
-                    LookingForTarget();
+                    LookingForTarget ();
                     break;
                 case AIstate.comeToPoint:
-                    ComeToPoint();
+                    ComeToPoint ();
                     break;
             }
         }
@@ -93,19 +93,19 @@ public class EnemyAI : NetworkBehaviour
 
     void Walking()
     {
-        RpcMusicBackground();
+        RpcMusicBackground ();
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(wayPoints[currentWayPoint].transform.position - transform.position), Time.deltaTime);
-        if (wayPointDistance < 2)
+        transform.rotation = Quaternion.Slerp ( transform.rotation, Quaternion.LookRotation ( wayPoints[currentWayPoint].transform.position - transform.position ), Time.deltaTime );
+        if ( wayPointDistance < 2 )
         {
             wayPointTime += Time.deltaTime;
-            SetDestinatation(wayPoints[currentWayPoint].transform.position, 0, false, false, true, false, false);
-            if (wayPointTime > 4)
+            SetDestinatation ( wayPoints[currentWayPoint].transform.position, 0, false, false, true, false, false );
+            if ( wayPointTime > 4 )
             {
-                currentWayPoint = Random.Range(0, wayPoints.Length);
+                currentWayPoint = Random.Range ( 0, wayPoints.Length );
 
-                if (Vector3.Distance(wayPoints[currentWayPoint].transform.position, transform.position) < 40)
-                    currentWayPoint = Random.Range(0, wayPoints.Length);
+                if ( Vector3.Distance ( wayPoints[currentWayPoint].transform.position, transform.position ) < 40 )
+                    currentWayPoint = Random.Range ( 0, wayPoints.Length );
 
                 stateAI = AIstate.walking;
                 wayPointTime = 0;
@@ -113,29 +113,29 @@ public class EnemyAI : NetworkBehaviour
         }
         else
         {
-            SetDestinatation(wayPoints[currentWayPoint].transform.position, carlosSetup.minVelocity, true, false, false, false, false);
+            SetDestinatation ( wayPoints[currentWayPoint].transform.position, carlosSetup.minVelocity, true, false, false, false, false );
         }
 
-        FollowPlayer();
+        FollowPlayer ();
     }
 
     void Following()
     {
-        if (cruzEffect)
+        if ( cruzEffect )
         {
-            SetDestinatation(target.position, carlosSetup.cruzEffectVelocity, false, false, false, false, true);
+            SetDestinatation ( target.position, carlosSetup.cruzEffectVelocity, false, false, false, false, true );
         }
         else
         {
-            SetDestinatation(target.position, carlosSetup.maxVelocity, false, true, false, false, false);
+            SetDestinatation ( target.position, carlosSetup.maxVelocity, false, true, false, false, false );
         }
 
-        RpcMusicFollow();
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target.position - transform.position), Time.deltaTime);
+        RpcMusicFollow ();
+        transform.rotation = Quaternion.Slerp ( transform.rotation, Quaternion.LookRotation ( target.position - transform.position ), Time.deltaTime );
 
-        Kill();
+        Kill ();
 
-        if (!headSpot.visibleTarget.Contains(target))
+        if ( !headSpot.visibleTarget.Contains ( target ) )
         {
             lastPositionKnown = target.position;
             stateAI = AIstate.lookingforTarget;
@@ -144,25 +144,25 @@ public class EnemyAI : NetworkBehaviour
 
     void LookingForTarget()
     {
-        if (cruzEffect)
+        if ( cruzEffect )
         {
-            SetDestinatation(lastPositionKnown, carlosSetup.cruzEffectVelocity, false, false, false, false, true);
+            SetDestinatation ( lastPositionKnown, carlosSetup.cruzEffectVelocity, false, false, false, false, true );
         }
         else
         {
-            if (Vector3.Distance(transform.position, lastPositionKnown) > 3)
+            if ( Vector3.Distance ( transform.position, lastPositionKnown ) > 3 )
             {
-                SetDestinatation(lastPositionKnown, carlosSetup.maxVelocity, false, true, false, false, false);
+                SetDestinatation ( lastPositionKnown, carlosSetup.maxVelocity, false, true, false, false, false );
             }
 
-            if (Vector3.Distance(transform.position, lastPositionKnown) < 3)
+            if ( Vector3.Distance ( transform.position, lastPositionKnown ) < 3 )
             {
-                AnimationsManager(false, false, true, false, false);
-                RpcMusicBackground();
+                AnimationsManager ( false, false, true, false, false );
+                RpcMusicBackground ();
                 searchTime += Time.deltaTime;
             }
 
-            if (searchTime > 5)
+            if ( searchTime > 5 )
             {
                 searchTime = 0;
                 stateAI = AIstate.walking;
@@ -170,7 +170,7 @@ public class EnemyAI : NetworkBehaviour
             }
         }
 
-        FollowPlayer();
+        FollowPlayer ();
     }
 
     public void ComeToPoint()
@@ -178,11 +178,11 @@ public class EnemyAI : NetworkBehaviour
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         int sort = Random.Range(0, players.Length);
 
-        SetDestinatation(players[sort].transform.position, carlosSetup.maxVelocity, false, true, false, false, false);
+        SetDestinatation ( players[sort].transform.position, carlosSetup.maxVelocity, false, true, false, false, false );
 
-        RpcMusicFollow();
+        RpcMusicFollow ();
 
-        FollowPlayer();
+        FollowPlayer ();
     }
 
 
@@ -190,9 +190,9 @@ public class EnemyAI : NetworkBehaviour
     void RpcMusicBackground()
     {
         audioSource.clip = backgroundMusic;
-        if (!audioSource.isPlaying)
+        if ( !audioSource.isPlaying )
         {
-            audioSource.Play();
+            audioSource.Play ();
         }
 
     }
@@ -201,41 +201,41 @@ public class EnemyAI : NetworkBehaviour
     void RpcMusicFollow()
     {
         audioSource.clip = followingMusic;
-        if (!audioSource.isPlaying)
+        if ( !audioSource.isPlaying )
         {
-            audioSource.Play();
+            audioSource.Play ();
         }
     }
 
-    void AnimationsManager(bool a, bool b, bool c, bool d, bool e)
+    void AnimationsManager( bool a, bool b, bool c, bool d, bool e )
     {
-        animator.SetBool("walk", a);
-        animator.SetBool("run", b);
-        animator.SetBool("idle", c);
-        animator.SetBool("attack", d);
-        animator.SetBool("injured", e);
+        animator.SetBool ( "walk", a );
+        animator.SetBool ( "run", b );
+        animator.SetBool ( "idle", c );
+        animator.SetBool ( "attack", d );
+        animator.SetBool ( "injured", e );
     }
 
     void Kill()
     {
-        if (Vector3.Distance(transform.position, target.position) < 4)
+        if ( Vector3.Distance ( transform.position, target.position ) < 4 )
         {
-            SetDestinatation(target.position, 0, false, false, false, true, false);
+            SetDestinatation ( target.position, 0, false, false, false, true, false );
             coolDownCruzzEffect = 0;
             cruzEffect = false;
-            if (target.gameObject.GetComponent<PlayerController>())
+            if ( target.gameObject.GetComponent<PlayerController> () )
             {
-                target.gameObject.GetComponent<PlayerController>().isDead = true;
+                target.gameObject.GetComponent<PlayerController> ().isDead = true;
                 int index = gameObject.name == "Carlos" ? 0 : 1;
-                target.gameObject.GetComponent<PlayerController>().PLayerDeadJumpScare(index);
+                target.gameObject.GetComponent<PlayerController> ().PLayerDeadJumpScare ( index );
             }
             else
             {
                 target.gameObject.tag = "Untagged";
-                Destroy(target.GetChild(0).gameObject);
+                Destroy ( target.GetChild ( 0 ).gameObject );
             }
 
-            headSpot.ClearTargets();
+            headSpot.ClearTargets ();
             stateAI = AIstate.lookingforTarget;
         }
     }
@@ -244,12 +244,12 @@ public class EnemyAI : NetworkBehaviour
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-        for (int i = 0; i < players.Length; i++)
+        for ( int i = 0; i < players.Length; i++ )
         {
-            if (!players[i].GetComponent<CharacterController>())
+            if ( !players[i].GetComponent<CharacterController> () )
                 continue;
 
-            if (Vector3.Distance(transform.position, players[i].transform.position) < 15 && players[i].GetComponent<CharacterController>().velocity.magnitude > 0)
+            if ( Vector3.Distance ( transform.position, players[i].transform.position ) < 15 && players[i].GetComponent<CharacterController> ().velocity.magnitude > 0 )
             {
                 target = players[i].transform;
                 lastPositionKnown = target.position;
@@ -257,7 +257,7 @@ public class EnemyAI : NetworkBehaviour
             }
         }
 
-        if (headSpot.visibleTarget.Count > 0)
+        if ( headSpot.visibleTarget.Count > 0 )
         {
             target = headSpot.visibleTarget[0];
             lastPositionKnown = target.position;
@@ -265,21 +265,21 @@ public class EnemyAI : NetworkBehaviour
         }
     }
 
-    void SetDestinatation(Vector3 target, float speed, bool walk, bool run, bool idle, bool attack, bool injured)
+    void SetDestinatation( Vector3 target, float speed, bool walk, bool run, bool idle, bool attack, bool injured )
     {
-        AnimationsManager(walk, run, idle, attack, injured);
+        AnimationsManager ( walk, run, idle, attack, injured );
         navMesh.speed = speed;
-        navMesh.SetDestination(target);
+        navMesh.SetDestination ( target );
     }
 
-    [Command(requiresAuthority = false)]
+    [Command ( requiresAuthority = false )]
     void CmdCruzEffect()
     {
-        if (!cruzEffect)
+        if ( !cruzEffect )
             return;
 
         coolDownCruzzEffect += Time.deltaTime;
-        if (coolDownCruzzEffect > 5)
+        if ( coolDownCruzzEffect > 5 )
         {
             coolDownCruzzEffect = 0;
             cruzEffect = false;

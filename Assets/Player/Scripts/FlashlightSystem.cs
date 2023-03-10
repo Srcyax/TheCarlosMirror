@@ -6,7 +6,7 @@ public class FlashlightSystem : NetworkBehaviour
 {
 
     [SerializeField] private PlayerController player;
-    
+
 
     [Space(10)]
 
@@ -25,55 +25,55 @@ public class FlashlightSystem : NetworkBehaviour
 
     void Start()
     {
-        server = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<PlayersAlreadyJoined>();
+        server = GameObject.FindGameObjectWithTag ( "NetworkManager" ).GetComponent<PlayersAlreadyJoined> ();
     }
 
     void Update()
     {
-        if (flashLightTime <= 0)
+        if ( flashLightTime <= 0 )
             return;
 
-        if (player.IsInventoryActivated || !isLocalPlayer)
+        if ( player.IsInventoryActivated || !isLocalPlayer )
             return;
 
-        if (player.IsGameOver || !player.IsLocalPlayerAlive)
+        if ( player.IsGameOver || !player.IsLocalPlayerAlive )
             return;
 
         bool button = Input.GetKeyDown(KeyCode.F);
 
-        CmdFlashlight(button);
-        FlashLightTime();
+        CmdFlashlight ( button );
+        FlashLightTime ();
     }
 
-    [Command (requiresAuthority = false)]
-    void CmdFlashlight(bool button)
+    [Command ( requiresAuthority = false )]
+    void CmdFlashlight( bool button )
     {
-        RpcFlashlight(button);
+        RpcFlashlight ( button );
     }
 
     [ClientRpc]
-    void RpcFlashlight(bool button)
+    void RpcFlashlight( bool button )
     {
-        if (button)
+        if ( button )
         {
             playerLight.enabled = !playerLight.enabled;
             flashLightAudio.clip = playerLight.enabled ? turnOffClip : turnOnClip;
-            flashLightAudio.Play();
+            flashLightAudio.Play ();
         }
     }
 
     void FlashLightTime()
     {
-        if (!server.PlayersAlreadyJoinedInServer())
+        if ( !server.PlayersAlreadyJoinedInServer () )
             return;
 
-        if (playerLight && !playerLight.enabled)
+        if ( playerLight && !playerLight.enabled )
             return;
 
         flashLightTime = flashLightTime > 0 ? flashLightTime - Time.deltaTime : flashLightTime;
         flashLightSlider.value = flashLightTime;
 
-        if (flashLightTime < 9)
+        if ( flashLightTime < 9 )
             playerLight.intensity = flashLightTime / 10;
     }
 }
