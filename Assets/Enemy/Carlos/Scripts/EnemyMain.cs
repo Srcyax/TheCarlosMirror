@@ -62,7 +62,7 @@ public class EnemyMain : NetworkBehaviour
                 RaycastHit hitRaycast;
                 if (Physics.Raycast(enemyHead.position, rayDirection, out hitRaycast, visionDistance))
                 {
-                    if (hitRaycast.collider.gameObject.CompareTag(targetTag) && visibleTarget.Count < 1)
+                    if (hitRaycast.collider.gameObject.CompareTag(targetTag))
                     {
                         Debug.DrawLine(enemyHead.position, hitRaycast.point, Color.red);
 

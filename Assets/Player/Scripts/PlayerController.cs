@@ -266,7 +266,10 @@ public class PlayerController : NetworkBehaviour
         wiiJumpScare.SetActive ( true );
         whatIsItJumpscare = true;
         if ( whatIsItJumpscare )
-            StartCoroutine ( JumpScare2 () );
+        {
+            GetComponent<PlayerSanity>().sanity = Mathf.Lerp(GetComponent<PlayerSanity>().sanity, GetComponent<PlayerSanity>().sanity - 10, Time.deltaTime);
+            StartCoroutine(JumpScare2());
+        }
     }
 
     IEnumerator EnergyEffectEnd()

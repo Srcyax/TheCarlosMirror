@@ -48,11 +48,8 @@ public class NpcAI : NetworkBehaviour
 
     void Update()
     {
-        if ( !server.PlayersAlreadyJoinedInServer() || animator == null )
-        {
-            AnimationsManager(false, false, true);
+        if ( !server.PlayersAlreadyJoinedInServer())
             return;
-        }
 
         CmdMainCode();
         CmdPlayerIsDead(IsDead);

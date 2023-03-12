@@ -243,24 +243,20 @@ public class EnemyAI : NetworkBehaviour
 
     void FollowPlayer()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-
-        for ( int i = 0; i < players.Length; i++ )
-        {
-            if ( !players[i].GetComponent<CharacterController> () )
-                continue;
-
-            if ( Vector3.Distance ( transform.position, players[i].transform.position ) < 15 && players[i].GetComponent<CharacterController> ().velocity.magnitude > 0 )
-            {
-                target = players[i].transform;
-                lastPositionKnown = target.position;
-                stateAI = AIstate.following;
-            }
-        }
-
         if ( headSpot.visibleTarget.Count > 0 )
         {
-            target = headSpot.visibleTarget[0];
+            int index = 0;
+            float sanity = 999;
+            for (int i = 0; i < headSpot.visibleTarget.Count; i++ )
+            {
+                if ( headSpot.visibleTarget[i].gameObject.GetComponent<PlayerSanity>().sanity < sanity )
+                {
+                    sanity = headSpot.visibleTarget[i].gameObject.GetComponent<PlayerSanity>().sanity;
+                    index = i;
+                }   
+            }
+
+            target = headSpot.visibleTarget[index];
             lastPositionKnown = target.position;
             stateAI = AIstate.following;
         }

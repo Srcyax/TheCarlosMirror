@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
             if ((maxClient.value + 1) > 1)
             {
                 NetworkManager.singleton.StartHost();
-                transport.maxConnections = maxClient.value; // + o bot
+                transport.maxConnections = maxClient.value + 1; // + o bot
                 Instantiate(loadScreen);
             }
         });
