@@ -220,6 +220,7 @@ public class EnemyAI : NetworkBehaviour
     {
         if ( Vector3.Distance ( transform.position, target.position ) < 4 )
         {
+            headSpot.ClearTargets();
             SetDestinatation ( target.position, 0, false, false, false, true, false );
             coolDownCruzzEffect = 0;
             cruzEffect = false;
@@ -236,19 +237,27 @@ public class EnemyAI : NetworkBehaviour
                 target.gameObject.layer = 7;
             }
 
-            headSpot.ClearTargets ();
             stateAI = AIstate.lookingforTarget;
         }
     }
 
     void FollowPlayer()
     {
+        if ( !( headSpot.visibleTarget.Count > 0 ) )
+            return;
+
         if ( headSpot.visibleTarget.Count > 0 )
         {
             int index = 0;
             float sanity = 999;
             for (int i = 0; i < headSpot.visibleTarget.Count; i++ )
             {
+                if ( !( headSpot.visibleTarget[i].gameObject.GetComponent<PlayerSanity>() ) )
+                {
+                    index = 0;
+                    continue;
+                }
+
                 if ( headSpot.visibleTarget[i].gameObject.GetComponent<PlayerSanity>().sanity < sanity )
                 {
                     sanity = headSpot.visibleTarget[i].gameObject.GetComponent<PlayerSanity>().sanity;

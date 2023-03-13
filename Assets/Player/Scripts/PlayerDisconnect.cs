@@ -21,7 +21,6 @@ public class PlayerDisconnect : NetworkBehaviour
         }
         else
         {
-            print("client");
             NetworkClient.Shutdown();
             SceneManager.LoadScene("Game");
         }

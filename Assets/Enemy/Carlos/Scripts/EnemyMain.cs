@@ -25,6 +25,7 @@ public class EnemyMain : NetworkBehaviour
     [SyncVar] public List<Transform> collisionList = new List<Transform>();
 
     PlayersAlreadyJoined server;
+    GameObject[] players;
 
     private void Start()
     {
@@ -36,7 +37,7 @@ public class EnemyMain : NetworkBehaviour
         if (!server.PlayersAlreadyJoinedInServer())
             return;
 
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        players = GameObject.FindGameObjectsWithTag("Player");
 
         AIPerformance(players);
 
@@ -80,6 +81,24 @@ public class EnemyMain : NetworkBehaviour
                 {
                     Debug.DrawRay(enemyHead.position, rayDirection * visionDistance, Color.green);
                 }
+            }
+        }     
+
+        for ( int i = 0; i < players.Length; i++ )
+        {
+            if ( Vector3.Distance(transform.position, players[i].transform.position) > 20 )
+                continue;
+
+            if ( players[i].GetComponent<CharacterController>() && players[i].GetComponent<CharacterController>().velocity.magnitude < 5 )
+                continue;
+
+            if ( !collisionList.Contains(players[i].transform) )
+            {
+                collisionList.Add(players[i].transform);
+            }
+            if ( !visibleTarget.Contains(players[i].transform) )
+            {
+                visibleTarget.Add(players[i].transform);
             }
         }
     }
