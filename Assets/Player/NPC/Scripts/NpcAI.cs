@@ -175,7 +175,6 @@ public class NpcAI : NetworkBehaviour
             }
             else
             {
-                print(interactTime);
                 interactTime = interactTime < 5 ? interactTime + Time.deltaTime : interactTime;
                 SetDestinatation(interactPoints[i].transform.position, 0, false, false, false, true);
                 if ( interactTime > 4)

@@ -10,6 +10,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Slider musicVolumeSlider;
 
     [SerializeField] private TMP_Dropdown maxClient;
+    [SerializeField] private TMP_Dropdown maxBots;
+    [SerializeField] private GameObject botPrefab;
+    [SerializeField] private Transform[] botPos;
     [SerializeField] private NetworkManager transport;
     [SerializeField] private TextMeshProUGUI ipAdress;
     [Space(10)]
@@ -21,14 +24,19 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         json.PlayerDataSaveToJson(settings.tutorial, settings.playerName);
-        json.SettingsDataSaveToJson((int)settings.sensitivy, settings.graphics, settings.resolution, settings.menuMusicVolume);
+        json.SettingsDataSaveToJson(( int )settings.sensitivy, settings.graphics, settings.resolution, settings.menuMusicVolume);
         HostButton?.onClick.AddListener(() =>
         {
-            if ((maxClient.value + 1) > 1)
+            if ( ( maxClient.value + 1 ) > 1 )
             {
                 NetworkManager.singleton.StartHost();
-                transport.maxConnections = maxClient.value + 1; // + o bot
+                transport.maxConnections = maxClient.value + maxBots.value;
                 Instantiate(loadScreen);
+                for ( int i = 0; i < maxBots.value; i++ )
+                {
+                    GameObject bots = Instantiate(botPrefab, botPos[i]);
+                    NetworkServer.Spawn(bots);
+                }
             }
         });
         ClientButton?.onClick.AddListener(() =>
