@@ -13,3 +13,11 @@ public class SettingsData
     public int resolution;
     public float menuMusicVolume;
 }
+
+[System.Serializable]
+public class MatchMakingData {
+    public int maxConnection;
+    public int botConnection;
+    public int gameMode;
+    public string ipAdress;
+}

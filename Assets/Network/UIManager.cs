@@ -1,6 +1,7 @@
 using Mirror;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Purchasing.MiniJSON;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -11,6 +12,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private TMP_Dropdown maxClient;
     [SerializeField] private TMP_Dropdown maxBots;
+    [SerializeField] private TMP_Dropdown gameMode;
     [SerializeField] private GameObject botPrefab;
     [SerializeField] private Transform[] botPos;
     [SerializeField] private NetworkManager transport;
@@ -25,10 +27,12 @@ public class UIManager : MonoBehaviour
     {
         json.PlayerDataSaveToJson(settings.tutorial, settings.playerName);
         json.SettingsDataSaveToJson(( int )settings.sensitivy, settings.graphics, settings.resolution, settings.menuMusicVolume);
+        json.MatchMakingLoadFromJson(ipAdress, maxClient, maxBots, gameMode);
         HostButton?.onClick.AddListener(() =>
         {
             if ( ( maxClient.value + 1 ) > 1 )
             {
+                json.MatchMakingSaveToJson(ipAdress.text, maxClient.value, maxBots.value, gameMode.value);
                 NetworkManager.singleton.StartHost();
                 transport.maxConnections = maxClient.value + maxBots.value;
                 Instantiate(loadScreen);

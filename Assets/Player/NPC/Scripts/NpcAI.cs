@@ -1,9 +1,10 @@
 using Mirror;
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum NPCAIstate
-{
+public enum NPCAIstate {
     walking,
     searchBone,
     placeBone,
@@ -12,66 +13,73 @@ public enum NPCAIstate
 };
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class NpcAI : NetworkBehaviour
-{
-    private GameObject[] enemyTarget;
-
-    [SerializeField] Animator animator;
-    NavMeshAgent navMesh => GetComponent<NavMeshAgent>();
-
+public class NpcAI : NetworkBehaviour {
     [SerializeField] private CarlosSetup carlosSetup;
 
-    [SerializeField] public NPCAIstate stateAI;
+    [SerializeField] private Animator animator;
+    [SerializeField] private NPCAIstate stateAI;
     [SerializeField] private GameObject playerRagdoll;
     [SerializeField] private GameObject playerModel;
     [SerializeField] private Light flashLight;
+
+    [SyncVar] private float wayPointTime = 0;
+    [SyncVar] private float wayPointDistance;
+    [SyncVar] private int currentWayPoint;
+    [SyncVar] private bool IsTarget;
+    [SyncVar] public bool IsDead;
+
+    private PlayersAlreadyJoined server;
+    private NavMeshAgent navMesh;
     private GameObject[] wayPoints;
     private GameObject[] interactPoints;
     private GameObject[] bones;
+    private GameObject[] enemyTarget;
+    private bool move = false;
 
-    [SyncVar] float wayPointTime = 0;
-    [SyncVar] float wayPointDistance;
-    [SyncVar] int currentWayPoint;
-    [SyncVar] public bool IsDead;
-    [SyncVar] private bool IsTarget;
+    void Awake() {
+        navMesh = GetComponent<NavMeshAgent>();
+        Physics.IgnoreLayerCollision(0, 11);
+        stateAI = NPCAIstate.walking;
+    }
 
-    PlayersAlreadyJoined server;
-
-    void Start()
-    {
+    void Start() {
         enemyTarget = GameObject.FindGameObjectsWithTag("Enemy");
         wayPoints = GameObject.FindGameObjectsWithTag("NPCWalkPoint");
         interactPoints = GameObject.FindGameObjectsWithTag("NPCInteractPoint");
         bones = GameObject.FindGameObjectsWithTag("Points");
-
-        Physics.IgnoreLayerCollision(0, 11);
-        currentWayPoint = Random.Range(0, wayPoints.Length);
-        stateAI = NPCAIstate.walking;
-
         server = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<PlayersAlreadyJoined>();
+
+        /* random walk point */    
+        currentWayPoint = Random.Range(0, wayPoints.Length);
     }
 
-    void Update()
-    {
+    void Update() {
         if ( !server.PlayersAlreadyJoinedInServer() )
             return;
 
         if ( !this.gameObject )
             return;
 
+        if ( !move )
+            StartCoroutine(Move());
+
         CmdMainCode();
         CmdPlayerIsDead(IsDead);
     }
 
+    IEnumerator Move() {
+        yield return new WaitForSeconds(2f);
+        move = true;
+    }
+
     [Command(requiresAuthority = false)]
-    void CmdMainCode()
-    {
+    void CmdMainCode() {
         if ( IsDead )
             return;
 
         wayPointDistance = Vector3.Distance(wayPoints[currentWayPoint].transform.position, transform.position);
-        switch ( stateAI )
-        {
+        IsTarget = stateAI == NPCAIstate.run;
+        switch ( stateAI ) {
             case NPCAIstate.walking:
                 Walking();
                 break;
@@ -90,29 +98,18 @@ public class NpcAI : NetworkBehaviour
         }
     }
 
-    void Walking()
-    {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(wayPoints[currentWayPoint].transform.position - transform.position), Time.deltaTime);
-        IsTarget = false;
-        if ( wayPointDistance < 2 )
-        {
+    void Walking() {
+        if ( wayPointDistance < 2 ) {
             wayPointTime += Time.deltaTime;
-            SetDestinatation(Vector3.zero, 0, false, false, true, false);
-            if ( wayPointTime > 4 )
-            {
+            if ( wayPointTime > 4 ) {
                 currentWayPoint = Random.Range(0, wayPoints.Length);
-
-                if ( Vector3.Distance(wayPoints[currentWayPoint].transform.position, transform.position) < 40 )
-                    currentWayPoint = Random.Range(0, wayPoints.Length);
-
                 stateAI = NPCAIstate.walking;
                 wayPointTime = 0;
             }
         }
-        else
-        {
-            SetDestinatation(wayPoints[currentWayPoint].transform.position, carlosSetup.minVelocity, true, false, false, false);
-        }
+
+        Vector3 location = wayPointDistance < 2 ? Vector3.zero : wayPoints[currentWayPoint].transform.position;
+        SetDestinatation(location, carlosSetup.minVelocity, location != Vector3.zero, false, !( location != Vector3.zero), false);
 
         SearchForBones();
         RunAway();
@@ -120,78 +117,53 @@ public class NpcAI : NetworkBehaviour
         PlaceBones();
     }
 
-    void RunAway()
-    {
-        for ( int i = 0; i < enemyTarget.Length; i++ )
-        {
-            if ( !enemyTarget[i] || !( enemyTarget[i].GetComponent<EnemyMain>().visibleTarget.Count > 0 ) || !( enemyTarget[i].GetComponent<EnemyMain>().visibleTarget.Contains(gameObject.transform) ) )
-            {
+    void RunAway() {
+        for ( int i = 0; i < enemyTarget.Length; i++ ) {
+            if ( !enemyTarget[i] || !( enemyTarget[i].GetComponent<EnemyMain>().visibleTarget.Count > 0 ) || !( enemyTarget[i].GetComponent<EnemyMain>().visibleTarget.Contains(gameObject.transform) ) ) {
                 stateAI = NPCAIstate.walking;
                 continue;
             }
-            IsTarget = true;
-            stateAI = NPCAIstate.run;
-            if ( wayPointDistance < 2 )
-            {
-                currentWayPoint = Random.Range(0, wayPoints.Length);
 
-                if ( Vector3.Distance(wayPoints[currentWayPoint].transform.position, transform.position) < 40 )
-                    currentWayPoint = Random.Range(0, wayPoints.Length);
-            }
-            else
-            {
-                SetDestinatation(wayPoints[currentWayPoint].transform.position, carlosSetup.maxVelocity, false, true, false, false);
-            }
+            stateAI = NPCAIstate.run;
+            currentWayPoint = wayPointDistance < 2 ? Random.Range(0, wayPoints.Length) : currentWayPoint;        
+            SetDestinatation(wayPoints[currentWayPoint].transform.position, carlosSetup.maxVelocity, false, true, false, false);
         }
     }
 
-    void SearchForBones()
-    {
+    void SearchForBones() {
         if ( IsTarget )
             return;
 
-        for ( int i = 0; i < bones.Length; ++i )
-        {
-            if ( !bones[i] || Vector3.Distance(transform.position, bones[i].transform.position) > 20 )
-            {
+        for ( int i = 0; i < bones.Length; ++i ) {
+            if ( !bones[i] || Vector3.Distance(transform.position, bones[i].transform.position) > 20 ) {
                 stateAI = NPCAIstate.walking;
                 continue;
             }
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(bones[i].transform.position - transform.position), Time.deltaTime);
             stateAI = NPCAIstate.searchBone;
             SetDestinatation(bones[i].transform.position, carlosSetup.minVelocity, true, false, false, false);
         }
     }
 
-    float bonePlaceTime;
-    void PlaceBones()
-    {
+    void PlaceBones() {
         if ( IsTarget )
             return;
 
         GameObject[] bonePos = GameObject.FindGameObjectsWithTag("RitualPos");
         GameObject points = GameObject.FindGameObjectWithTag("PointHolder");
 
-        for ( int i = 0; i < bonePos.Length; i++ )
-        {
-            if ( Vector3.Distance(transform.position, bonePos[i].transform.position) > 20 || !( points.GetComponent<CurrentPoints>().points > 0 ) || bonePos[i].transform.GetChild(0).GetComponent<Animator>().enabled )
-            {
+        for ( int i = 0; i < bonePos.Length; i++ ) {
+            if ( Vector3.Distance(transform.position, bonePos[i].transform.position) > 20 || !( points.GetComponent<CurrentPoints>().points > 0 ) || bonePos[i].transform.GetChild(0).GetComponent<Animator>().enabled ) {
                 stateAI = NPCAIstate.walking;
-                bonePlaceTime = 0;
                 continue;
             }
 
             stateAI = NPCAIstate.placeBone;
 
-            if ( Vector3.Distance(transform.position, bonePos[i].transform.position) > 1.5f )
-            {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(bonePos[i].transform.position - transform.position), Time.deltaTime);
+            if ( Vector3.Distance(transform.position, bonePos[i].transform.position) > 1.5f ) {
                 SetDestinatation(bonePos[i].transform.position, carlosSetup.minVelocity, true, false, false, false);
             }
-            else
-            {
-                bonePlaceTime = bonePlaceTime < 5 ? bonePlaceTime + Time.deltaTime : bonePlaceTime;
+            else {
                 SetDestinatation(bonePos[i].transform.position, 0, false, false, true, false);
                 AudioSource audioSource = bonePos[i].GetComponent<AudioSource>();
                 RitualComplet ritual = GameObject.FindGameObjectWithTag("Ritual").GetComponent<RitualComplet>();
@@ -200,38 +172,28 @@ public class NpcAI : NetworkBehaviour
                 audioSource.Play();
                 points.GetComponent<CurrentPoints>().points--;
                 ritual.currentBones++;
-                if ( bonePlaceTime > 4 )
-                {
-                    stateAI = NPCAIstate.walking;
-                    bonePlaceTime = 0;
-                }
+                stateAI = NPCAIstate.walking;
             }
         }
     }
 
     float interactTime;
-    void InteractionPoints()
-    {
+    void InteractionPoints() {
         if ( IsTarget )
             return;
 
-        for ( int i = 0; i < interactPoints.Length; i++ )
-        {
+        for ( int i = 0; i < interactPoints.Length; i++ ) {
             if ( Vector3.Distance(transform.position, interactPoints[i].transform.position) > 15 || !interactPoints[i].gameObject.activeSelf )
                 continue;
 
             stateAI = NPCAIstate.interacting;
-
-            if ( Vector3.Distance(transform.position, interactPoints[i].transform.position) > 5 )
-            {
+            if ( Vector3.Distance(transform.position, interactPoints[i].transform.position) > 1.5f ) {
                 SetDestinatation(interactPoints[i].transform.position, carlosSetup.minVelocity, true, false, false, false);
             }
-            else
-            {
+            else {
                 interactTime = interactTime < 5 ? interactTime + Time.deltaTime : interactTime;
                 SetDestinatation(interactPoints[i].transform.position, 0, false, false, false, true);
-                if ( interactTime > 4 )
-                {
+                if ( interactTime > 4 ) {
                     interactPoints[i].SetActive(false);
                     stateAI = NPCAIstate.walking;
                     interactTime = 0;
@@ -240,43 +202,37 @@ public class NpcAI : NetworkBehaviour
         }
     }
 
-    void AnimationsManager(bool walk, bool run, bool idle, bool interacting)
-    {
+    void AnimationsManager(bool walk, bool run, bool idle, bool interacting) {
         animator.SetBool("walk", walk);
         animator.SetBool("run", run);
         animator.SetBool("idle", idle);
         animator.SetBool("interacting", interacting);
     }
 
-    void SetDestinatation(Vector3 target, float speed, bool walk, bool run, bool idle, bool interacting)
-    {
+    void SetDestinatation(Vector3 target, float speed, bool walk, bool run, bool idle, bool interacting) {
         AnimationsManager(walk, run, idle, interacting);
         navMesh.speed = speed;
         navMesh.SetDestination(target);
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdPlayerIsDead(bool isDead)
-    {
+    public void CmdPlayerIsDead(bool isDead) {
         RpcPlayerIsDead(isDead);
     }
 
     bool ragdollAlreadyInstantiate = false;
 
     [ClientRpc]
-    void RpcPlayerIsDead(bool isDead)
-    {
+    void RpcPlayerIsDead(bool isDead) {
         if ( !isDead )
             return;
 
         gameObject.layer = 7;
-        foreach ( Transform child in transform )
-        {
+        foreach ( Transform child in transform ) {
             child.gameObject.layer = 7;
         }
 
-        if ( !ragdollAlreadyInstantiate )
-        {
+        if ( !ragdollAlreadyInstantiate ) {
             ragdollAlreadyInstantiate = true;
             GameObject ragdoll = Instantiate(playerRagdoll, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
             NetworkServer.Spawn(ragdoll);

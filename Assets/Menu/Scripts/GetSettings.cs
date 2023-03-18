@@ -78,7 +78,7 @@ public class GetSettings : MonoBehaviour
     {
         if ( Directory.Exists("C:/userdata") )
         {
-            if ( File.Exists("C:/userdata/playerData.json") && File.Exists("C:/userdata/settingsData.json") )
+            if ( File.Exists("C:/userdata/playerData.json") && File.Exists("C:/userdata/settingsData.json") && File.Exists("C:/userdata/matchMakingData.json") )
             {
                 json.PlayerDataLoadFromJson(settings);
                 json.SettingsDataLoadFromJson(sense, graphics, resolution, musicVolumeSlider);
@@ -87,6 +87,7 @@ public class GetSettings : MonoBehaviour
             {
                 json.PlayerDataSaveToJson(true, playerName.text);
                 json.SettingsDataSaveToJson(3, 0, 0, 0.1f);
+                json.MatchMakingSaveToJson("ip", 0, 0, 0);
             }
             return true;
         }
@@ -96,6 +97,7 @@ public class GetSettings : MonoBehaviour
             di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
             json.PlayerDataSaveToJson(true, playerName.text);
             json.SettingsDataSaveToJson(3, 0, 0, 0.5f);
+            json.MatchMakingSaveToJson("ip", 0, 0, 0);
             return true;
         }
     }

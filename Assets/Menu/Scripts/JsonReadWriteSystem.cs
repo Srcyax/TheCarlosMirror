@@ -44,4 +44,24 @@ public class JsonReadWriteSystem : MonoBehaviour
         resolution.value = data.resolution;
         menuMusicVolume.value = data.menuMusicVolume;
     }
+
+    public void MatchMakingSaveToJson(string ipAdress, int maxConnections, int botConnections, int gameMode) {
+        MatchMakingData data = new MatchMakingData();
+        data.ipAdress = ipAdress;
+        data.maxConnection = maxConnections;
+        data.botConnection = botConnections;
+        data.gameMode = gameMode;
+
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText("C:/userdata/matchMakingData.json", json);
+    }
+
+    public void MatchMakingLoadFromJson(TextMeshProUGUI ipAdress, TMP_Dropdown maxConnections, TMP_Dropdown botConnections, TMP_Dropdown gameMode) {
+        string json = File.ReadAllText("C:/userdata/matchMakingData.json");
+        MatchMakingData data = JsonUtility.FromJson<MatchMakingData>(json);
+        ipAdress.text = data.ipAdress;
+        maxConnections.value = data.maxConnection;
+        botConnections.value = data.botConnection;
+        gameMode.value = data.gameMode;
+    }
 }

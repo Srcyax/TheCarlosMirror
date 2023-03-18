@@ -2805,6 +2805,7 @@ MonoBehaviour:
   musicVolumeSlider: {fileID: 0}
   maxClient: {fileID: 954192106}
   maxBots: {fileID: 2068661875}
+  gameMode: {fileID: 66332717}
   botPrefab: {fileID: 1250322538729052771, guid: acd8b14d0431d0a47b31f830d9804c5c, type: 3}
   botPos:
   - {fileID: 2130039344}
@@ -8920,7 +8921,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3153694609253806851, guid: 658223743a9a01e49bb1079ad881f63c, type: 3}
       propertyPath: m_Radius
-      value: 0.26
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3153694609253806851, guid: 658223743a9a01e49bb1079ad881f63c, type: 3}
       propertyPath: m_BaseOffset
@@ -13805,6 +13806,7 @@ MonoBehaviour:
   musicVolumeSlider: {fileID: 0}
   maxClient: {fileID: 0}
   maxBots: {fileID: 0}
+  gameMode: {fileID: 0}
   botPrefab: {fileID: 0}
   botPos: []
   transport: {fileID: 1538107499}

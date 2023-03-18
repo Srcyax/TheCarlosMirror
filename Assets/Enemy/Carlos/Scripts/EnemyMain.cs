@@ -101,6 +101,7 @@ public class EnemyMain : NetworkBehaviour
                 visibleTarget.Add(players[i].transform);
             }
         }
+        ClearTargets();
     }
 
     void AIPerformance(GameObject[] players)

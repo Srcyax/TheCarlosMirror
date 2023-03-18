@@ -164,9 +164,8 @@ public class EnemyAI : NetworkBehaviour
 
             if ( searchTime > 5 )
             {
-                searchTime = 0;
                 stateAI = AIstate.walking;
-                return;
+                searchTime = 0;
             }
         }
 

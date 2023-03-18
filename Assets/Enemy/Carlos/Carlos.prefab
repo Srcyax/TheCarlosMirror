@@ -1444,7 +1444,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 160
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -1490,17 +1490,8 @@ MonoBehaviour:
   musicSource: {fileID: 3153694609253806850}
   followingMusic: {fileID: 8300000, guid: f6362a565adfaf140a8ea220765fceef, type: 3}
   backgroundMusic: {fileID: 8300000, guid: d323878a9eb8e2f48b12cb77257e1527, type: 3}
-  playerRagdoll: {fileID: 5591314659802134351, guid: 945fc2c52786fe545b425e0a6664f1d1, type: 3}
   jumpScare: {fileID: 630615693396256821, guid: 09f36ff51cee19a4fb885b3f89d91890, type: 3}
   stateAI: 0
-  wayPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   cruzEffect: 0
 --- !u!114 &3153694609253806862
 MonoBehaviour:
