@@ -1,5 +1,4 @@
 using Mirror;
-using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -57,7 +56,7 @@ public class NpcAI : NetworkBehaviour
         if ( !server.PlayersAlreadyJoinedInServer() )
             return;
 
-        if ( !this )
+        if ( !this.gameObject )
             return;
 
         CmdMainCode();
