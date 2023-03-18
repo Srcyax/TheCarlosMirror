@@ -5,14 +5,13 @@ public class PlayersAlreadyJoined : MonoBehaviour
 {
     [SerializeField] private NetworkManager networkManager;
 
-    private int timer;
+    private float timer;
 
     public bool PlayersAlreadyJoinedInServer()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-        timer = players.Length >= networkManager.maxConnections ? timer + 1 : timer;
-
-        return timer > 0;      
+        timer = players.Length >= networkManager.maxConnections ? timer + Time.deltaTime : timer;
+        return timer > 10;      
     }
 }
