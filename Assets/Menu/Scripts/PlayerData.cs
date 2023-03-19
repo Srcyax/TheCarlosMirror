@@ -1,13 +1,11 @@
 [System.Serializable]
-public class PlayerData
-{
+public class PlayerData {
     public bool tutorial;
     public string playerName;
 }
 
 [System.Serializable]
-public class SettingsData
-{
+public class SettingsData {
     public int sensibility;
     public int graphics;
     public int resolution;
@@ -19,5 +17,4 @@ public class MatchMakingData {
     public int maxConnection;
     public int botConnection;
     public int gameMode;
-    public string ipAdress;
 }

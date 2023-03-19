@@ -1,26 +1,23 @@
-using UnityEngine;
 using Mirror;
 using TMPro;
+using UnityEngine;
 
-public class PlayerName : NetworkBehaviour
-{
+public class PlayerName : NetworkBehaviour {
     [SerializeField] private Settings settings;
     [SerializeField] public TextMeshPro playerName;
     [SerializeField] private TextMeshProUGUI inventoryPlayerName;
     bool IsBot = false;
 
-    private void Start()
-    {
+    private void Start() {
         IsBot = !GetComponent<PlayerController>();
 
         playerName.text = "BOT-" + Random.Range(0, 1000).ToString();
     }
 
-    void Update()
-    {
+    void Update() {
         CmdPlayerNameUGUI();
 
-        if (!isLocalPlayer || IsBot)
+        if ( !isLocalPlayer || IsBot )
             return;
 
         CmdPlayerName(settings.playerName);
@@ -28,14 +25,12 @@ public class PlayerName : NetworkBehaviour
 
 
     [Command]
-    void CmdPlayerName(string name)
-    {
+    void CmdPlayerName(string name) {
         RpcPlayerName(name);
     }
 
     [ClientRpc]
-    void RpcPlayerName(string name)
-    {
+    void RpcPlayerName(string name) {
         playerName.text = name;
 
         if ( !IsBot )
@@ -43,15 +38,13 @@ public class PlayerName : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    void CmdPlayerNameUGUI()
-    {
+    void CmdPlayerNameUGUI() {
         RpcPlayerNameUGUI();
     }
 
     [ClientRpc]
-    void RpcPlayerNameUGUI()
-    {
-        if (isLocalPlayer)
+    void RpcPlayerNameUGUI() {
+        if ( isLocalPlayer )
             return;
 
         playerName.enabled = Vector3.Distance(playerName.transform.position, Camera.main.transform.position) < 15;

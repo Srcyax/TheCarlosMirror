@@ -1,17 +1,15 @@
 using Mirror;
 using UnityEngine;
 
-public class PlayersAlreadyJoined : MonoBehaviour
-{
+public class PlayersAlreadyJoined : MonoBehaviour {
     [SerializeField] private NetworkManager networkManager;
 
     private float timer;
 
-    public bool PlayersAlreadyJoinedInServer()
-    {
+    public bool PlayersAlreadyJoinedInServer() {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
         timer = players.Length >= networkManager.maxConnections ? timer + Time.deltaTime : timer;
-        return timer > 10;      
+        return timer > 10;
     }
 }

@@ -1,21 +1,17 @@
 using Mirror;
 using UnityEngine;
 
-public class WhatIsIt : NetworkBehaviour
-{
+public class WhatIsIt : NetworkBehaviour {
     Animator animator => GetComponent<Animator>();
     private string anim;
 
-    void Update()
-    {
+    void Update() {
         ShowQuestionMark();
     }
 
-    void ShowQuestionMark()
-    {
+    void ShowQuestionMark() {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        for ( int i = 0; i < players.Length; i++ )
-        {
+        for ( int i = 0; i < players.Length; i++ ) {
             if ( !players[i].GetComponent<PlayerController>() )
                 continue;
 
@@ -24,8 +20,7 @@ public class WhatIsIt : NetworkBehaviour
             if ( Vector3.Distance(transform.position, players[i].transform.position) < 4 )
                 players[i].GetComponent<PlayerController>().JumpScare();
 
-            if ( players[i].GetComponent<PlayerController>().whatIsItJumpscare )
-            {
+            if ( players[i].GetComponent<PlayerController>().whatIsItJumpscare ) {
                 NetworkServer.Destroy(gameObject);
             }
         }

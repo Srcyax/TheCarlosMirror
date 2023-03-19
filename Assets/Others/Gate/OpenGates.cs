@@ -2,65 +2,53 @@ using Mirror;
 using TMPro;
 using UnityEngine;
 
-public class OpenGates : NetworkBehaviour
-{
+public class OpenGates : NetworkBehaviour {
     [SerializeField] private TMP_Dropdown gameMode;
     [SerializeField] private Transform enemyPosSapawn;
     GameObject[] gates;
     GameObject[] players;
     GameObject[] waitingForPlayers;
     NetworkManager network;
-    void Start()
-    {
+    void Start() {
         network = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>();
         gates = GameObject.FindGameObjectsWithTag("Gate");
     }
 
-    void Update()
-    {
+    void Update() {
         CmdOpenGates();
     }
 
     [Command(requiresAuthority = false)]
-    void CmdOpenGates()
-    {
+    void CmdOpenGates() {
         players = GameObject.FindGameObjectsWithTag("Player");
         waitingForPlayers = GameObject.FindGameObjectsWithTag("WaitingPlayers");
 
-        if ((players.Length >= network.maxConnections))
-        {
-            foreach (GameObject wait in waitingForPlayers)
-            {
+        if ( ( players.Length >= network.maxConnections ) ) {
+            foreach ( GameObject wait in waitingForPlayers ) {
                 Destroy(wait);
             }
 
-            foreach (GameObject gate in gates)
-            {
+            foreach ( GameObject gate in gates ) {
                 Destroy(gate);
                 Destroy(gameObject);
                 SpawnEnemys();
             }
         }
-        else
-        {
-            foreach (GameObject wait in waitingForPlayers)
-            {
-                if (wait)
+        else {
+            foreach ( GameObject wait in waitingForPlayers ) {
+                if ( wait )
                     wait.GetComponent<TextMeshProUGUI>().enabled = true;
             }
-        }      
+        }
     }
 
-    void SpawnEnemys()
-    {
-        if (gameMode.value == 0)
-        {
+    void SpawnEnemys() {
+        if ( gameMode.value == 0 ) {
             NetworkServer.Destroy(enemyPosSapawn.GetChild(2).gameObject);
         }
-        else if (gameMode.value == 1)
-        {
-            NetworkServer.Destroy(enemyPosSapawn.GetChild(1).gameObject);           
-            NetworkServer.Destroy(enemyPosSapawn.GetChild(2).gameObject);           
+        else if ( gameMode.value == 1 ) {
+            NetworkServer.Destroy(enemyPosSapawn.GetChild(1).gameObject);
+            NetworkServer.Destroy(enemyPosSapawn.GetChild(2).gameObject);
         }
     }
 }

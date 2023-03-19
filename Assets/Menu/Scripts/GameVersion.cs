@@ -1,11 +1,9 @@
 using TMPro;
 using UnityEngine;
 
-public class GameVersion : MonoBehaviour
-{
+public class GameVersion : MonoBehaviour {
     [SerializeField] private TextMeshPro version;
-    void Start()
-    {
+    void Start() {
         version.text = Application.version;
     }
 }

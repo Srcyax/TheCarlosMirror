@@ -2,8 +2,7 @@ using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FlashlightSystem : NetworkBehaviour
-{
+public class FlashlightSystem : NetworkBehaviour {
 
     [SerializeField] private PlayerController player;
 
@@ -23,13 +22,11 @@ public class FlashlightSystem : NetworkBehaviour
     [HideInInspector] public float flashLightTime = 100;
     private PlayersAlreadyJoined server;
 
-    void Start()
-    {
-        server = GameObject.FindGameObjectWithTag ( "NetworkManager" ).GetComponent<PlayersAlreadyJoined> ();
+    void Start() {
+        server = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<PlayersAlreadyJoined>();
     }
 
-    void Update()
-    {
+    void Update() {
         if ( flashLightTime <= 0 )
             return;
 
@@ -41,30 +38,26 @@ public class FlashlightSystem : NetworkBehaviour
 
         bool button = Input.GetKeyDown(KeyCode.F);
 
-        CmdFlashlight ( button );
-        FlashLightTime ();
+        CmdFlashlight(button);
+        FlashLightTime();
     }
 
-    [Command ( requiresAuthority = false )]
-    void CmdFlashlight( bool button )
-    {
-        RpcFlashlight ( button );
+    [Command(requiresAuthority = false)]
+    void CmdFlashlight(bool button) {
+        RpcFlashlight(button);
     }
 
     [ClientRpc]
-    void RpcFlashlight( bool button )
-    {
-        if ( button )
-        {
+    void RpcFlashlight(bool button) {
+        if ( button ) {
             playerLight.enabled = !playerLight.enabled;
             flashLightAudio.clip = playerLight.enabled ? turnOffClip : turnOnClip;
-            flashLightAudio.Play ();
+            flashLightAudio.Play();
         }
     }
 
-    void FlashLightTime()
-    {
-        if ( !server.PlayersAlreadyJoinedInServer () )
+    void FlashLightTime() {
+        if ( !server.PlayersAlreadyJoinedInServer() )
             return;
 
         if ( playerLight && !playerLight.enabled )

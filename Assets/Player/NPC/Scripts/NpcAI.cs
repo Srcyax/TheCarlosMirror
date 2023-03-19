@@ -1,6 +1,5 @@
 using Mirror;
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -49,7 +48,7 @@ public class NpcAI : NetworkBehaviour {
         bones = GameObject.FindGameObjectsWithTag("Points");
         server = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<PlayersAlreadyJoined>();
 
-        /* random walk point */    
+        /* random walk point */
         currentWayPoint = Random.Range(0, wayPoints.Length);
     }
 
@@ -109,7 +108,7 @@ public class NpcAI : NetworkBehaviour {
         }
 
         Vector3 location = wayPointDistance < 2 ? Vector3.zero : wayPoints[currentWayPoint].transform.position;
-        SetDestinatation(location, carlosSetup.minVelocity, location != Vector3.zero, false, !( location != Vector3.zero), false);
+        SetDestinatation(location, carlosSetup.minVelocity, location != Vector3.zero, false, !( location != Vector3.zero ), false);
 
         SearchForBones();
         RunAway();
@@ -125,7 +124,7 @@ public class NpcAI : NetworkBehaviour {
             }
 
             stateAI = NPCAIstate.run;
-            currentWayPoint = wayPointDistance < 2 ? Random.Range(0, wayPoints.Length) : currentWayPoint;        
+            currentWayPoint = wayPointDistance < 2 ? Random.Range(0, wayPoints.Length) : currentWayPoint;
             SetDestinatation(wayPoints[currentWayPoint].transform.position, carlosSetup.maxVelocity, false, true, false, false);
         }
     }

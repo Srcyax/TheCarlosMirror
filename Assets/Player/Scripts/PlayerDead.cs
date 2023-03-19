@@ -2,41 +2,35 @@ using Mirror;
 using TMPro;
 using UnityEngine;
 
-public class PlayerDead : NetworkBehaviour
-{ 
+public class PlayerDead : NetworkBehaviour {
     [SerializeField] private TextMeshProUGUI playerIsDead;
     [SerializeField] private GameObject playerRagdoll;
 
     private PlayerInventory playerInventory => GetComponent<PlayerInventory>();
     private PlayerController player => GetComponent<PlayerController>();
 
-    void Update()
-    {
+    void Update() {
         CmdPlayerIsDead(player.isDead);
     }
 
     [Command]
-    public void CmdPlayerIsDead(bool isDead)
-    {
+    public void CmdPlayerIsDead(bool isDead) {
         RpcPlayerIsDead(isDead);
     }
 
     bool ragdollAlreadyInstantiate = false;
 
     [ClientRpc]
-    void RpcPlayerIsDead(bool isDead)
-    {
-        if (!isDead)
+    void RpcPlayerIsDead(bool isDead) {
+        if ( !isDead )
             return;
 
         gameObject.layer = 7;
-        foreach (Transform child in transform)
-        {
+        foreach ( Transform child in transform ) {
             child.gameObject.layer = 7;
         }
 
-        if (!ragdollAlreadyInstantiate)
-        {
+        if ( !ragdollAlreadyInstantiate ) {
             ragdollAlreadyInstantiate = true;
             GameObject ragdoll = Instantiate(playerRagdoll, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
             NetworkServer.Spawn(ragdoll);
@@ -52,10 +46,9 @@ public class PlayerDead : NetworkBehaviour
         HasPlayersAlive();
     }
 
-    void HasPlayersAlive()
-    {
+    void HasPlayersAlive() {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        if (players.Length > 0)
+        if ( players.Length > 0 )
             return;
 
         Cursor.lockState = CursorLockMode.None;

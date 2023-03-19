@@ -1,11 +1,9 @@
 using Mirror;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Purchasing.MiniJSON;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
-{
+public class UIManager : MonoBehaviour {
     [SerializeField] private Button HostButton;
     [SerializeField] private Button ClientButton;
     [SerializeField] private Slider musicVolumeSlider;
@@ -23,37 +21,38 @@ public class UIManager : MonoBehaviour
     [Space(10)]
     [SerializeField] private GameObject loadScreen;
 
-    private void Start()
-    {
-        json.PlayerDataSaveToJson(settings.tutorial, settings.playerName);
-        json.SettingsDataSaveToJson(( int )settings.sensitivy, settings.graphics, settings.resolution, settings.menuMusicVolume);
-        json.MatchMakingLoadFromJson(ipAdress, maxClient, maxBots, gameMode);
-        HostButton?.onClick.AddListener(() =>
-        {
-            if ( ( maxClient.value + 1 ) > 1 )
-            {
-                json.MatchMakingSaveToJson(ipAdress.text, maxClient.value, maxBots.value, gameMode.value);
+    private void Start() {
+        ConfigData();
+
+        HostButton?.onClick.AddListener(() => {
+            if ( ( maxClient.value + 1 ) > 1 ) {
+                json.MatchMakingSaveToJson(maxClient.value, maxBots.value, gameMode.value);
                 NetworkManager.singleton.StartHost();
                 transport.maxConnections = maxClient.value + maxBots.value;
                 Instantiate(loadScreen);
-                for ( int i = 0; i < maxBots.value; i++ )
-                {
+
+                for ( int i = 0; i < maxBots.value; i++ ) {
                     GameObject bots = Instantiate(botPrefab, botPos[i]);
                     NetworkServer.Spawn(bots);
                 }
             }
         });
-        ClientButton?.onClick.AddListener(() =>
-        {
+
+        ClientButton?.onClick.AddListener(() => {
             NetworkManager.singleton.StartClient();
             Instantiate(loadScreen);
         });
     }
-    private void Update()
-    {
+    private void Update() {
 #if !UNITY_EDITOR
         HostButton.interactable = settings.playerName.Length > 1 && ipAdress.text.Length > 1;
         ClientButton.interactable = settings.playerName.Length > 1 && ipAdress.text.Length > 1;
 #endif
+    }
+
+    void ConfigData() {
+        json.PlayerDataSaveToJson(settings.tutorial, settings.playerName);
+        json.SettingsDataSaveToJson(( int )settings.sensitivy, settings.graphics, settings.resolution, settings.menuMusicVolume);
+        json.MatchMakingLoadFromJson(maxClient, maxBots, gameMode);
     }
 }
