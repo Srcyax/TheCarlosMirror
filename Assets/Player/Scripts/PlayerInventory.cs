@@ -13,7 +13,6 @@ public class PlayerInventory : MonoBehaviour
 
     void Update() => Inventory();
 
-    string animName;
     void Inventory()
     {
         if (player.IsGamePaused || !player.IsLocalPlayerAlive || player.IsGameOver)
@@ -31,7 +30,7 @@ public class PlayerInventory : MonoBehaviour
         Cursor.lockState = inventoryObject.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = inventoryObject.activeSelf;
 
-        animName = inventoryObject.activeSelf ? "Hide" : "UnHide";
+        string animName = inventoryObject.activeSelf ? "Hide" : "UnHide";
         player.playerHand.GetComponent<Animator>()?.Play(animName);
 
         CleanSelectedSlot();
@@ -42,21 +41,21 @@ public class PlayerInventory : MonoBehaviour
         if (player.IsInventoryActivated)
             return;
 
-        if (selectedSlot.childCount > 0)
+        if ( !( selectedSlot.childCount > 0 ) )
+            return;
+
+        for (int i = 0; i < inventoryObjects.Length; i++)
         {
-            for (int i = 0; i < inventoryObjects.Length; i++)
+            if ( inventoryObjects[i].transform.GetChild(0).childCount > 0 && !inventoryObjects[i].transform.GetChild(0).transform.GetChild(0).CompareTag(selectedSlot.transform.GetChild(0).gameObject.tag))
+                continue;
+
+            if ( inventoryObjects[i].transform.GetChild(0).childCount > 0 && !( inventoryObjects[i].transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<ItemInfo>().itemType == ItemType.Consumable))
+                continue;
+
+            if (Instantiate(selectedSlot.transform.GetChild(0).gameObject, inventoryObjects[i].transform.GetChild(0).transform))
             {
-                if (inventoryObjects[i].transform.GetChild(0).childCount > 0 && !inventoryObjects[i].transform.GetChild(0).transform.GetChild(0).CompareTag(selectedSlot.transform.GetChild(0).gameObject.tag))
-                    continue;
-
-                if (inventoryObjects[i].transform.GetChild(0).childCount > 0 && !(inventoryObjects[i].transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<ItemInfo>().itemType == ItemType.Consumable))
-                    continue;
-
-                if (Instantiate(selectedSlot.transform.GetChild(0).gameObject, inventoryObjects[i].transform.GetChild(0).transform))
-                {
-                    Destroy(selectedSlot.transform.GetChild(0).gameObject);
-                    break;
-                }
+                Destroy(selectedSlot.transform.GetChild(0).gameObject);
+                break;
             }
         }
     }

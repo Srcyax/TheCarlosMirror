@@ -8634,6 +8634,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1086880966}
     m_Modifications:
+    - target: {fileID: 1827102398347763042, guid: 4c86db9cd9e13a3499aeb9c587fe3cb5, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4967707382903070114, guid: 4c86db9cd9e13a3499aeb9c587fe3cb5, type: 3}
       propertyPath: m_Name
       value: Mux
