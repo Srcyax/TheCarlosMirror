@@ -32,7 +32,7 @@ public class PlayerInventory : MonoBehaviour
         Cursor.visible = inventoryObject.activeSelf;
 
         animName = inventoryObject.activeSelf ? "Hide" : "UnHide";
-        player.playerHand.GetComponent<Animator>().Play(animName);
+        player.playerHand.GetComponent<Animator>()?.Play(animName);
 
         CleanSelectedSlot();
     }

@@ -3,7 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour {
+public class UIManager : MonoBehaviour
+{
     [SerializeField] private Button HostButton;
     [SerializeField] private Button ClientButton;
     [SerializeField] private Slider musicVolumeSlider;
@@ -21,38 +22,40 @@ public class UIManager : MonoBehaviour {
     [Space(10)]
     [SerializeField] private GameObject loadScreen;
 
-    private void Start() {
+    private void Start()
+    {
         ConfigData();
 
-        HostButton?.onClick.AddListener(() => {
+        HostButton?.onClick.AddListener( () => {
             if ( ( maxClient.value + 1 ) > 1 ) {
-                json.MatchMakingSaveToJson(maxClient.value, maxBots.value, gameMode.value);
                 NetworkManager.singleton.StartHost();
                 transport.maxConnections = maxClient.value + maxBots.value;
-                Instantiate(loadScreen);
-
+                Instantiate( loadScreen );
+                json.MatchMakingSaveToJson( maxClient.value, maxBots.value, gameMode.value );
                 for ( int i = 0; i < maxBots.value; i++ ) {
                     GameObject bots = Instantiate(botPrefab, botPos[i]);
-                    NetworkServer.Spawn(bots);
+                    NetworkServer.Spawn( bots );
                 }
             }
-        });
+        } );
 
-        ClientButton?.onClick.AddListener(() => {
+        ClientButton?.onClick.AddListener( () => {
             NetworkManager.singleton.StartClient();
-            Instantiate(loadScreen);
-        });
+            Instantiate( loadScreen );
+        } );
     }
-    private void Update() {
+    private void Update()
+    {
 #if !UNITY_EDITOR
         HostButton.interactable = settings.playerName.Length > 1 && ipAdress.text.Length > 1;
         ClientButton.interactable = settings.playerName.Length > 1 && ipAdress.text.Length > 1;
 #endif
     }
 
-    void ConfigData() {
-        json.PlayerDataSaveToJson(settings.tutorial, settings.playerName);
-        json.SettingsDataSaveToJson(( int )settings.sensitivy, settings.graphics, settings.resolution, settings.menuMusicVolume);
-        json.MatchMakingLoadFromJson(maxClient, maxBots, gameMode);
+    void ConfigData()
+    {
+        json.PlayerDataSaveToJson( settings.tutorial, settings.playerName );
+        json.SettingsDataSaveToJson( (int)settings.sensitivy, settings.graphics, settings.resolution, settings.menuMusicVolume );
+        json.MatchMakingLoadFromJson( maxClient, maxBots, gameMode );
     }
 }

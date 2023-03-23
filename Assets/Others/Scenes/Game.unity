@@ -13804,9 +13804,9 @@ MonoBehaviour:
   HostButton: {fileID: 0}
   ClientButton: {fileID: 935944143}
   musicVolumeSlider: {fileID: 0}
-  maxClient: {fileID: 0}
-  maxBots: {fileID: 0}
-  gameMode: {fileID: 0}
+  maxClient: {fileID: 954192106}
+  maxBots: {fileID: 2068661875}
+  gameMode: {fileID: 66332717}
   botPrefab: {fileID: 0}
   botPos: []
   transport: {fileID: 1538107499}

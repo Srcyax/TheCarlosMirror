@@ -5,32 +5,34 @@ public class PlayerWhistle : NetworkBehaviour
 {
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip[] whistleClips;
-
+    [SyncVar] private int sort_clip;
 
     void Update()
     {
         if ( !isLocalPlayer )
             return;
 
-        CmdWhistle();
+        bool key = Input.GetKeyDown( KeyCode.V );
+
+        CmdWhistle( key );
     }
 
     [Command]
-    void CmdWhistle()
+    void CmdWhistle(bool key)
     {
-        RpcWhistle();
+        RpcWhistle(key);
     }
 
     [ClientRpc]
-    void RpcWhistle()
-    { 
-        if ( !Input.GetKeyDown( KeyCode.V ) )
+    void RpcWhistle(bool key)
+    {
+        if ( !key )
             return;
 
         if ( audioSource.isPlaying )
             return;
 
-        int sort_clip = Random.Range(whistleClips.Length - whistleClips.Length, whistleClips.Length);
+        sort_clip = Random.Range(whistleClips.Length - whistleClips.Length, whistleClips.Length);
 
         audioSource.clip = whistleClips[ sort_clip ];
         audioSource.Play();
