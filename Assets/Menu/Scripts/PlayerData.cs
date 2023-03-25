@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 [System.Serializable]
 public class PlayerData {
     public bool tutorial;
@@ -7,9 +9,8 @@ public class PlayerData {
 [System.Serializable]
 public class PlayerItems
 {
-    public string[] items;
+    public List<string> items = new List<string>();
 }
-
 
 [System.Serializable]
 public class SettingsData {

@@ -71,8 +71,6 @@ public class GetSettings : MonoBehaviour {
     }
 
     bool DataSetup() {
-        string[] items = {"cruz", "aff"};
-
         if ( Directory.Exists("C:/userdata") ) {
             if ( File.Exists("C:/userdata/playerData.json") && File.Exists("C:/userdata/settingsData.json") && 
                 File.Exists("C:/userdata/matchMakingData.json") && File.Exists( "C:/userdata/coins.json" ) && File.Exists( "C:/userdata/new.settings" ) && File.Exists( "C:/userdata/playerItems.json" ) ) {
@@ -85,7 +83,7 @@ public class GetSettings : MonoBehaviour {
                 json.SettingsDataSaveToJson(3, 0, 0, 0.1f);
                 json.MatchMakingSaveToJson(0, 0, 0);
                 json.PlayerCoinSaveToJson(0);
-                json.PlayerItemsSaveToJson( items );
+                json.PlayerItemsSaveToJson( null );
                 File.WriteAllText( "C:/userdata/new.settings", "" );
             }
             return true;
@@ -97,7 +95,7 @@ public class GetSettings : MonoBehaviour {
             json.SettingsDataSaveToJson(3, 0, 0, 0.5f);
             json.MatchMakingSaveToJson(0, 0, 0);
             json.PlayerCoinSaveToJson( 0 );
-            json.PlayerItemsSaveToJson( items );
+            json.PlayerItemsSaveToJson( null );
             File.WriteAllText( "C:/userdata/new.settings", "" );
             return true;
         }

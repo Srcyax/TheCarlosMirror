@@ -1876,6 +1876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrice: 0
+  itemName: 
 --- !u!1 &153281004
 GameObject:
   m_ObjectHideFlags: 0
@@ -6569,6 +6570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrice: 20
+  itemName: 
 --- !u!1 &420317029
 GameObject:
   m_ObjectHideFlags: 0
@@ -8234,6 +8236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrice: 0
+  itemName: 
 --- !u!1 &535154626
 GameObject:
   m_ObjectHideFlags: 0
@@ -15986,6 +15989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrice: 5
+  itemName: 
 --- !u!1 &1066157488
 GameObject:
   m_ObjectHideFlags: 0
@@ -17186,7 +17190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1142367283
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17409,6 +17413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrice: 0
+  itemName: 
 --- !u!4 &1155236185 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3119669641761947641, guid: 7e3bb9045d283aa4f8bba49bda1e5131, type: 3}
@@ -26962,6 +26967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrice: 0
+  itemName: 
 --- !u!1001 &1852934392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27952,6 +27958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrice: 0
+  itemName: 
 --- !u!1 &1987417145
 GameObject:
   m_ObjectHideFlags: 0
@@ -28973,6 +28980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrice: 0
+  itemName: 
 --- !u!1 &2054269391
 GameObject:
   m_ObjectHideFlags: 0

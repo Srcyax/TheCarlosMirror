@@ -5,7 +5,8 @@ public class PlayerInventory : MonoBehaviour
     [Header("Player inventory components")]
     [SerializeField] public GameObject inventoryObject;
     [SerializeField] private Transform selectedSlot;
-    [SerializeField] private GameObject[] inventoryObjects;
+    [SerializeField] private Transform[] inventoryObjects;
+    [SerializeField] private GameObject[] inventoryItems;
     [SerializeField] private Light flashLight;
 
     private PlayerController player => GetComponent<PlayerController>();
@@ -16,7 +17,7 @@ public class PlayerInventory : MonoBehaviour
     {
         json = GameObject.FindGameObjectWithTag( "NetworkManager" ).GetComponent<JsonReadWriteSystem>();
 
-        json?.PlayerItemsLoadFromJson();
+        json.PlayerItemsLoadFromJson( inventoryItems, inventoryObjects );
     }
 
     void Update() => Inventory();
@@ -53,13 +54,13 @@ public class PlayerInventory : MonoBehaviour
 
         for (int i = 0; i < inventoryObjects.Length; i++)
         {
-            if ( inventoryObjects[i].transform.GetChild(0).childCount > 0 && !inventoryObjects[i].transform.GetChild(0).transform.GetChild(0).CompareTag(selectedSlot.transform.GetChild(0).gameObject.tag))
+            if ( inventoryObjects[i].GetChild(0).childCount > 0 && !inventoryObjects[i].GetChild(0).transform.GetChild(0).CompareTag(selectedSlot.transform.GetChild(0).gameObject.tag))
                 continue;
 
-            if ( inventoryObjects[i].transform.GetChild(0).childCount > 0 && !( inventoryObjects[i].transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<ItemInfo>().itemType == ItemType.Consumable))
+            if ( inventoryObjects[i].GetChild(0).childCount > 0 && !( inventoryObjects[i].GetChild(0).transform.GetChild(0).gameObject.GetComponent<ItemInfo>().itemType == ItemType.Consumable))
                 continue;
 
-            if (Instantiate(selectedSlot.transform.GetChild(0).gameObject, inventoryObjects[i].transform.GetChild(0).transform))
+            if (Instantiate(selectedSlot.transform.GetChild(0).gameObject, inventoryObjects[i].GetChild(0).transform))
             {
                 Destroy(selectedSlot.transform.GetChild(0).gameObject);
                 break;

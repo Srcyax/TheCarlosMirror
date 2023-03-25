@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 1547120663918411338}
   - component: {fileID: 6220685461178765766}
   m_Layer: 0
-  m_Name: CuzPickture
+  m_Name: CruzPickture
   m_TagString: Cruz
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

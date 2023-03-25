@@ -5,15 +5,17 @@ public class BuyItem : MonoBehaviour
 {
     [SerializeField] private JsonReadWriteSystem data;
     private Button button => GetComponent<Button>();
-    int price => transform.parent.GetComponent<StoreItemInfo>().itemPrice;
+    int itemPrice => transform.parent.GetComponent<StoreItemInfo>().itemPrice;
+    string itemName => transform.parent.GetComponent<StoreItemInfo>().itemName;
 
     private void Start()
     {
         button?.onClick.AddListener( () => {
-            if ( !( data.PlayerCoinLoadFromJson() >= price ) )
+            if ( !( data.PlayerCoinLoadFromJson() >= itemPrice ) )
                 return;
 
-            data.PlayerCoinSaveToJson( -price );
+            data.PlayerItemsSaveToJson( itemName );
+            data.PlayerCoinSaveToJson( -itemPrice );
         } );
     }
 }

@@ -86,25 +86,38 @@ public class JsonReadWriteSystem : MonoBehaviour {
         return data.coin;
     }
 
-    public void PlayerItemsSaveToJson(string[] items)
+    public void PlayerItemsSaveToJson(string items)
     {
         PlayerItems data = new PlayerItems();
 
-        for (int i = 0; i < items.Length; i++ ) {
-            data.items = items;
+        if ( !data.items.Contains( items ) ) {
+            data.items.Add( items );
         }
+
+        print( data.items.Count );
 
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText( "C:/userdata/playerItems.json", EncryptDecrypt( json, key ) );
     }
 
-    public void PlayerItemsLoadFromJson()
+    public void PlayerItemsLoadFromJson(GameObject[] items, Transform[] itemPos)
     {
         string json = File.ReadAllText("C:/userdata/playerItems.json");
         PlayerItems data = JsonUtility.FromJson<PlayerItems>(EncryptDecrypt(json, key ));
 
-        for ( int i = 0; i < data.items.Length; i++ ) {
-            print( data.items[ i ] );
+        for ( int i = 0; i < data.items.Count; i++ ) {
+            if ( !data.items.Contains( items[ i ].name ) ) {
+                print( "no have: " + items[ i ].name );
+                continue;
+            }
+
+            for (int j = 0; j < itemPos.Length; j++ ) {
+                if ( itemPos[ j ].GetChild( 0 ).childCount > 0 )
+                    continue;
+
+                if ( Instantiate( items[ i ], itemPos[ j ].GetChild( 0 ) ) )
+                    break;
+            }     
         }
     }
 
