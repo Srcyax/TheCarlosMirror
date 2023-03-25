@@ -202,6 +202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9045890210182084010}
   - component: {fileID: 4165445786826149591}
+  - component: {fileID: -1341002632668235899}
   m_Layer: 0
   m_Name: EnergyItem
   m_TagString: Energy
@@ -239,3 +240,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3484602, y: 4.3856544, z: 1.4050245}
   m_Center: {x: -0.010287958, y: 1.6928277, z: -0.08069253}
+--- !u!114 &-1341002632668235899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8557584299541819152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114d6c640cc0c9a4a83139b1b5c3049e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 6052904898547524782, guid: 11a95ac2403a3c44380373f3653b3949, type: 3}

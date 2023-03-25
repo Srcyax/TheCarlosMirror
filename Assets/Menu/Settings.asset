@@ -14,5 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivy: 3
   graphics: 0
-  playerName: "\u200B"
-  playerModel: {fileID: 4361561784079262998, guid: 629fd0fd3d911db4f9f9bed2050f3220, type: 3}
+  resolution: 0
+  menuMusicVolume: 0.1
+  tutorial: 1
+  items:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  playerName: 

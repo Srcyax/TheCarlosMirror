@@ -13,6 +13,12 @@ public class PlayerItems
 }
 
 [System.Serializable]
+public class PlayerItemsEquiped
+{
+    public GameObject[] items;
+}
+
+[System.Serializable]
 public class SettingsData {
     public int sensibility;
     public int graphics;

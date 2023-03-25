@@ -9,6 +9,7 @@ public class Settings : ScriptableObject
     public int resolution;
     public float menuMusicVolume;
     public bool tutorial = true;
+    public GameObject[] items;
 
     [Space(10)]
 

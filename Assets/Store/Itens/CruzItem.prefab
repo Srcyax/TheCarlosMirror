@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 7158610902773975181}
   - component: {fileID: 6122543798629943080}
   - component: {fileID: 8292061964961264610}
+  - component: {fileID: -1200860289855106673}
   m_Layer: 0
   m_Name: CruzItem
   m_TagString: Cruz
@@ -178,3 +179,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-1200860289855106673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7499529242798232119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114d6c640cc0c9a4a83139b1b5c3049e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 7898828460064886862, guid: 23a8b552ecf378f40a25c451346453c8, type: 3}

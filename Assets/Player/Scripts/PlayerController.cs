@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class PlayerController : NetworkBehaviour {
     [Header("Settings")]
     [Tooltip("Get current settings player")]
-    [SerializeField] private Settings settings;
+    [SerializeField] public Settings settings;
     [SerializeField] private Slider sensitivity;
     [SerializeField] private TMP_Dropdown graphics;
     [SerializeField] public TMP_Dropdown resolution;
