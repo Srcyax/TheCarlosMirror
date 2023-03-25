@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour
     void ConfigData()
     {
         json.PlayerDataSaveToJson( settings.tutorial, settings.playerName );
+        json.PlayerCoinSaveToJson(0);
         json.SettingsDataSaveToJson( (int)settings.sensitivy, settings.graphics, settings.resolution, settings.menuMusicVolume );
         json.MatchMakingLoadFromJson( maxClient, maxBots, gameMode );
     }

@@ -9,7 +9,15 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private Light flashLight;
 
     private PlayerController player => GetComponent<PlayerController>();
+    private JsonReadWriteSystem json;
     private bool inventoryActive = false;
+
+    private void Start()
+    {
+        json = GameObject.FindGameObjectWithTag( "NetworkManager" ).GetComponent<JsonReadWriteSystem>();
+
+        json?.PlayerItemsLoadFromJson();
+    }
 
     void Update() => Inventory();
 
@@ -22,7 +30,6 @@ public class PlayerInventory : MonoBehaviour
             inventoryActive = !inventoryActive;
 
         inventoryObject.SetActive(inventoryActive);
-
         flashLight.enabled = inventoryObject.activeSelf || flashLight.enabled;
         player.chromaticAberration.intensity.value = inventoryObject.activeSelf ? 0.04f : .5f;
         player.bloom.intensity.value = inventoryObject.activeSelf ? 1f : 23f;

@@ -5,6 +5,13 @@ public class PlayerData {
 }
 
 [System.Serializable]
+public class PlayerItems
+{
+    public string[] items;
+}
+
+
+[System.Serializable]
 public class SettingsData {
     public int sensibility;
     public int graphics;
@@ -17,4 +24,10 @@ public class MatchMakingData {
     public int maxConnection;
     public int botConnection;
     public int gameMode;
+}
+
+[System.Serializable]
+public class PlayerCoin
+{
+    public int coin;
 }

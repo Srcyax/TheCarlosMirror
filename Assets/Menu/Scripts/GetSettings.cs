@@ -28,12 +28,13 @@ public class GetSettings : MonoBehaviour {
             wrongVersion.SetActive(Application.version != GetGameVersion());         
         }
 #endif
+        json.PlayerCoinSaveToJson( 1000 );
         if ( DataSetup() ) {
             string playerData = File.ReadAllText("C:/userdata/playerData.json");
-            PlayerData pData = JsonUtility.FromJson<PlayerData>(playerData);
+            PlayerData pData = JsonUtility.FromJson<PlayerData>(json.EncryptDecrypt(playerData, json.key));
 
             string settingsData = File.ReadAllText("C:/userdata/settingsData.json");
-            SettingsData sData = JsonUtility.FromJson<SettingsData>(settingsData);
+            SettingsData sData = JsonUtility.FromJson<SettingsData>(json.EncryptDecrypt(settingsData, json.key));
 
             playerName.text = pData.playerName != null ? pData.playerName : Environment.UserName;
             resolution.value = sData.resolution;
@@ -70,8 +71,12 @@ public class GetSettings : MonoBehaviour {
     }
 
     bool DataSetup() {
+        string[] items = {"cruz", "aff"};
+
         if ( Directory.Exists("C:/userdata") ) {
-            if ( File.Exists("C:/userdata/playerData.json") && File.Exists("C:/userdata/settingsData.json") && File.Exists("C:/userdata/matchMakingData.json") ) {
+            if ( File.Exists("C:/userdata/playerData.json") && File.Exists("C:/userdata/settingsData.json") && 
+                File.Exists("C:/userdata/matchMakingData.json") && File.Exists( "C:/userdata/coins.json" ) && File.Exists( "C:/userdata/new.settings" ) && File.Exists( "C:/userdata/playerItems.json" ) ) {
+
                 json.PlayerDataLoadFromJson(settings);
                 json.SettingsDataLoadFromJson(sense, graphics, resolution, musicVolumeSlider);
             }
@@ -79,6 +84,9 @@ public class GetSettings : MonoBehaviour {
                 json.PlayerDataSaveToJson(true, playerName.text);
                 json.SettingsDataSaveToJson(3, 0, 0, 0.1f);
                 json.MatchMakingSaveToJson(0, 0, 0);
+                json.PlayerCoinSaveToJson(0);
+                json.PlayerItemsSaveToJson( items );
+                File.WriteAllText( "C:/userdata/new.settings", "" );
             }
             return true;
         }
@@ -88,6 +96,9 @@ public class GetSettings : MonoBehaviour {
             json.PlayerDataSaveToJson(true, playerName.text);
             json.SettingsDataSaveToJson(3, 0, 0, 0.5f);
             json.MatchMakingSaveToJson(0, 0, 0);
+            json.PlayerCoinSaveToJson( 0 );
+            json.PlayerItemsSaveToJson( items );
+            File.WriteAllText( "C:/userdata/new.settings", "" );
             return true;
         }
     }
