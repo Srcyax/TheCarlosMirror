@@ -16,6 +16,7 @@ public class GetSettings : MonoBehaviour {
 
     [SerializeField] Settings settings;
     [SerializeField] JsonReadWriteSystem json;
+    [SerializeField] GameObject[] objects;
 
     [Space(10)]
     [SerializeField] GameObject wrongVersion;
@@ -70,10 +71,12 @@ public class GetSettings : MonoBehaviour {
         }
     }
 
+
     bool DataSetup() {
         if ( Directory.Exists("C:/userdata") ) {
             if ( File.Exists("C:/userdata/playerData.json") && File.Exists("C:/userdata/settingsData.json") && 
-                File.Exists("C:/userdata/matchMakingData.json") && File.Exists( "C:/userdata/coins.json" ) && File.Exists( "C:/userdata/new.settings" ) && File.Exists( "C:/userdata/playerItems.json" ) ) {
+                File.Exists("C:/userdata/matchMakingData.json") && File.Exists( "C:/userdata/coins.json" ) && File.Exists( "C:/userdata/new.settings" ) 
+                && File.Exists( "C:/userdata/playerItems.json" ) ) {
 
                 json.PlayerDataLoadFromJson(settings);
                 json.SettingsDataLoadFromJson(sense, graphics, resolution, musicVolumeSlider);
@@ -83,7 +86,7 @@ public class GetSettings : MonoBehaviour {
                 json.SettingsDataSaveToJson(3, 0, 0, 0.1f);
                 json.MatchMakingSaveToJson(0, 0, 0);
                 json.PlayerCoinSaveToJson(0);
-                json.PlayerItemsSaveToJson( null );
+                json.PlayerItemsSaveToJson( objects );
                 File.WriteAllText( "C:/userdata/new.settings", "" );
             }
             return true;
@@ -95,7 +98,7 @@ public class GetSettings : MonoBehaviour {
             json.SettingsDataSaveToJson(3, 0, 0, 0.5f);
             json.MatchMakingSaveToJson(0, 0, 0);
             json.PlayerCoinSaveToJson( 0 );
-            json.PlayerItemsSaveToJson( null );
+            json.PlayerItemsSaveToJson( objects );
             File.WriteAllText( "C:/userdata/new.settings", "" );
             return true;
         }

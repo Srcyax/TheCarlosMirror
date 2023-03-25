@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class PlayerData {
@@ -9,7 +9,7 @@ public class PlayerData {
 [System.Serializable]
 public class PlayerItems
 {
-    public List<string> items = new List<string>();
+    public GameObject[] items;
 }
 
 [System.Serializable]

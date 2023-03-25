@@ -6,7 +6,6 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] public GameObject inventoryObject;
     [SerializeField] private Transform selectedSlot;
     [SerializeField] private Transform[] inventoryObjects;
-    [SerializeField] private GameObject[] inventoryItems;
     [SerializeField] private Light flashLight;
 
     private PlayerController player => GetComponent<PlayerController>();
@@ -16,8 +15,6 @@ public class PlayerInventory : MonoBehaviour
     private void Start()
     {
         json = GameObject.FindGameObjectWithTag( "NetworkManager" ).GetComponent<JsonReadWriteSystem>();
-
-        json.PlayerItemsLoadFromJson( inventoryItems, inventoryObjects );
     }
 
     void Update() => Inventory();
