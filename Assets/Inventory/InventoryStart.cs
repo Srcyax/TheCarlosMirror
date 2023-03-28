@@ -9,19 +9,16 @@ public class InventoryStart : MonoBehaviour
 
     private void Start()
     {
-        data.PlayerItemsLoadFromJson( items ); 
+        data.PlayerItemsLoadFromJson( items );
     }
 
-    void Update()
-    {
+    public void InventoryUpdate()
+    {     
         for ( int i = 0; i < itemPos.Length; i++ ) {
-            if ( items[ i ] == null )
-                continue;
+            if ( itemPos[ i ].GetChild( 1 ).childCount > 0 && !itemPos[ i ].GetChild( 1 ).GetChild( 0 ).gameObject.CompareTag( items[ i ].tag ) )
+               continue;
 
-            if ( itemPos[ i ].GetChild( 1 ).childCount > 0 )
-                continue;
-
-            if ( Instantiate( items[ i ], itemPos[ i ].GetChild( 1 ).transform ) ) {
+            if ( Instantiate( items?[ i ], itemPos[ i ].transform.GetChild( 1 ) ) ) {
                 data.PlayerItemsSaveToJson( items );
                 continue;
             }

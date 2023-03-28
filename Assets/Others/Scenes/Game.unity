@@ -562,7 +562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 1538107506}
-  inventory: {fileID: 278368551}
+  inventory: {fileID: 991581381}
   item: {fileID: 1081511602}
 --- !u!1 &28074944
 GameObject:
@@ -4267,7 +4267,6 @@ GameObject:
   - component: {fileID: 278368548}
   - component: {fileID: 278368550}
   - component: {fileID: 278368549}
-  - component: {fileID: 278368551}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -4335,37 +4334,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 278368547}
   m_CullTransparentMesh: 1
---- !u!114 &278368551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 278368547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c661c7ddfa0cc394f8610dca53bb7b25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  items:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  itemPos:
-  - {fileID: 1203307758}
-  - {fileID: 1281181522}
-  - {fileID: 510072413}
-  - {fileID: 150678151}
-  - {fileID: 871890189}
-  - {fileID: 1941677731}
-  - {fileID: 995560621}
-  - {fileID: 698942862}
-  data: {fileID: 1538107506}
 --- !u!1 &279369684
 GameObject:
   m_ObjectHideFlags: 0
@@ -5776,6 +5744,7 @@ MonoBehaviour:
   equipText: {fileID: 1866150844}
   itemPos: {fileID: 939801723}
   settings: {fileID: 11400000, guid: 64d270527731652429011bd4f604b27c, type: 2}
+  data: {fileID: 0}
 --- !u!1 &332285620
 GameObject:
   m_ObjectHideFlags: 0
@@ -8568,7 +8537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 1538107506}
-  inventory: {fileID: 0}
+  inventory: {fileID: 991581381}
   item: {fileID: 0}
 --- !u!1 &479268132
 GameObject:
@@ -8708,6 +8677,7 @@ MonoBehaviour:
   equipText: {fileID: 1376981908}
   itemPos: {fileID: 1218323401}
   settings: {fileID: 11400000, guid: 64d270527731652429011bd4f604b27c, type: 2}
+  data: {fileID: 0}
 --- !u!1 &485469176
 GameObject:
   m_ObjectHideFlags: 0
@@ -9743,6 +9713,7 @@ MonoBehaviour:
   equipText: {fileID: 126433454}
   itemPos: {fileID: 2040707129}
   settings: {fileID: 11400000, guid: 64d270527731652429011bd4f604b27c, type: 2}
+  data: {fileID: 0}
 --- !u!1 &553966634
 GameObject:
   m_ObjectHideFlags: 0
@@ -9879,7 +9850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 1538107506}
-  inventory: {fileID: 0}
+  inventory: {fileID: 991581381}
   item: {fileID: 0}
 --- !u!1 &555954841
 GameObject:
@@ -16211,6 +16182,7 @@ GameObject:
   - component: {fileID: 991581379}
   - component: {fileID: 991581378}
   - component: {fileID: 991581377}
+  - component: {fileID: 991581381}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -16309,6 +16281,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 991581381}
+        m_TargetAssemblyTypeName: InventoryStart, Assembly-CSharp
+        m_MethodName: InventoryUpdate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &991581379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16347,6 +16331,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 991581375}
   m_CullTransparentMesh: 1
+--- !u!114 &991581381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991581375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c661c7ddfa0cc394f8610dca53bb7b25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  itemPos:
+  - {fileID: 1203307758}
+  - {fileID: 1281181522}
+  - {fileID: 510072413}
+  - {fileID: 150678151}
+  - {fileID: 871890189}
+  - {fileID: 1941677731}
+  - {fileID: 995560621}
+  - {fileID: 698942862}
+  data: {fileID: 1538107506}
 --- !u!1001 &995342712
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18558,7 +18573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 1538107506}
-  inventory: {fileID: 0}
+  inventory: {fileID: 991581381}
   item: {fileID: 0}
 --- !u!1 &1117515884
 GameObject:
@@ -18696,7 +18711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 1538107506}
-  inventory: {fileID: 0}
+  inventory: {fileID: 991581381}
   item: {fileID: 0}
 --- !u!1 &1123803846
 GameObject:
@@ -19912,6 +19927,7 @@ MonoBehaviour:
   equipText: {fileID: 1888155159}
   itemPos: {fileID: 28074945}
   settings: {fileID: 11400000, guid: 64d270527731652429011bd4f604b27c, type: 2}
+  data: {fileID: 0}
 --- !u!1001 &1176450755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21724,6 +21740,7 @@ MonoBehaviour:
   equipText: {fileID: 1952253018}
   itemPos: {fileID: 1606412277}
   settings: {fileID: 11400000, guid: 64d270527731652429011bd4f604b27c, type: 2}
+  data: {fileID: 0}
 --- !u!1 &1337488154
 GameObject:
   m_ObjectHideFlags: 0
@@ -22726,7 +22743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 1538107506}
-  inventory: {fileID: 278368551}
+  inventory: {fileID: 991581381}
   item: {fileID: 1869308665}
 --- !u!1 &1382622886
 GameObject:
@@ -23928,6 +23945,7 @@ MonoBehaviour:
   equipText: {fileID: 318015235}
   itemPos: {fileID: 1365254478}
   settings: {fileID: 11400000, guid: 64d270527731652429011bd4f604b27c, type: 2}
+  data: {fileID: 0}
 --- !u!1001 &1490484956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25175,6 +25193,7 @@ MonoBehaviour:
   equipText: {fileID: 1781431666}
   itemPos: {fileID: 867236547}
   settings: {fileID: 11400000, guid: 64d270527731652429011bd4f604b27c, type: 2}
+  data: {fileID: 0}
 --- !u!1 &1551330578
 GameObject:
   m_ObjectHideFlags: 0
@@ -27981,7 +28000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 1538107506}
-  inventory: {fileID: 0}
+  inventory: {fileID: 991581381}
   item: {fileID: 0}
 --- !u!1001 &1706754593
 PrefabInstance:
@@ -29439,7 +29458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 1538107506}
-  inventory: {fileID: 0}
+  inventory: {fileID: 991581381}
   item: {fileID: 0}
 --- !u!1 &1818043729
 GameObject:
@@ -30063,6 +30082,7 @@ MonoBehaviour:
   equipText: {fileID: 271418018}
   itemPos: {fileID: 176648542}
   settings: {fileID: 11400000, guid: 64d270527731652429011bd4f604b27c, type: 2}
+  data: {fileID: 0}
 --- !u!1 &1839725210
 GameObject:
   m_ObjectHideFlags: 0
