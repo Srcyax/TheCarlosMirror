@@ -16,15 +16,17 @@ public class PlayerInventory : MonoBehaviour
     {
         json = GameObject.FindGameObjectWithTag( "NetworkManager" ).GetComponent<JsonReadWriteSystem>();
 
-        for (int i = 0; i < inventoryObjects.Length; i++ ) {
-            if ( player.settings.items[ i ] && player.settings.items[i] == null )
+        for ( int j = 0; j < player.settings.items.Length; j++ ) {
+            if ( !player.settings.items[ j ] )
                 continue;
 
-            if ( inventoryObjects[ i ].GetChild( 0 ).childCount > 0 )
-                continue;
+            for ( int i = 0; i < inventoryObjects.Length; i++ ) {
+                if ( inventoryObjects[ i ].GetChild( 0 ).childCount > 0 )
+                    continue;
 
-            if ( Instantiate( player.settings.items[ i ], inventoryObjects[ i ].GetChild( 0 ).transform ) )
-                continue;
+                if ( Instantiate( player.settings.items[ j ], inventoryObjects[ i ].GetChild( 0 ).transform ) )
+                    break;
+            }
         }
     }
 

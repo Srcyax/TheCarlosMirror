@@ -23,8 +23,6 @@ public class InventoryStart : MonoBehaviour
                 if ( itemPos[ i ].childCount > 0 && !itemPos[ i ].GetChild( 0 ).gameObject.CompareTag( items[ j ].gameObject.tag ) )
                     continue;
 
-                print( items[ j ].name );
-
                 if ( Instantiate( items[ j ], itemPos[ i ].transform ) ) {
                     data.PlayerItemsSaveToJson( items );
                     break;
