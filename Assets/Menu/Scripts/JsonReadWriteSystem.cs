@@ -102,8 +102,12 @@ public class JsonReadWriteSystem : MonoBehaviour {
         string json = File.ReadAllText("C:/userdata/playerItems.json");
         PlayerItems data = JsonUtility.FromJson<PlayerItems>(EncryptDecrypt(json, key ));
 
-        for ( int i = 0; i < items.Length; i++ )
-            items[i] = data.items[i];
+        for ( int i = 0; i < items.Length; i++ ) {
+            if ( data.items[ i ] == null )
+                continue;
+
+            items[ i ] = data.items[ i ];
+        }
     }
 
     public void PlayerItemsEquipedSaveToJson( GameObject[] item )
@@ -112,8 +116,6 @@ public class JsonReadWriteSystem : MonoBehaviour {
         data.items = item;
         for ( int i = 0; i < item.Length; i++ )
             data.items[ i ] = item[ i ];
-
-        print( "salvou" );
 
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText( "C:/userdata/playerItemsEquiped.json", EncryptDecrypt( json, key ) );
@@ -124,8 +126,12 @@ public class JsonReadWriteSystem : MonoBehaviour {
         string json = File.ReadAllText("C:/userdata/playerItemsEquiped.json");
         PlayerItemsEquiped data = JsonUtility.FromJson<PlayerItemsEquiped>(EncryptDecrypt(json, key ));
 
-        for ( int i = 0; i < items.Length; i++ )
+        for ( int i = 0; i < items.Length; i++ ) {
+            if ( data.items[ i ] == null )
+                continue;
+
             items[ i ] = data.items[ i ];
+        }
     }
 
     public string EncryptDecrypt( string data, int key )

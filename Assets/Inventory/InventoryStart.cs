@@ -13,14 +13,22 @@ public class InventoryStart : MonoBehaviour
     }
 
     public void InventoryUpdate()
-    {     
-        for ( int i = 0; i < itemPos.Length; i++ ) {
-            if ( itemPos[ i ].GetChild( 1 ).childCount > 0 && !itemPos[ i ].GetChild( 1 ).GetChild( 0 ).gameObject.CompareTag( items[ i ].tag ) )
-               continue;
-
-            if ( Instantiate( items?[ i ], itemPos[ i ].transform.GetChild( 1 ) ) ) {
-                data.PlayerItemsSaveToJson( items );
+    {
+        for ( int j = 0; j < items.Length; j++ ) {
+            if ( !items[ j ] )
                 continue;
+
+            for ( int i = 0; i < itemPos.Length; i++ ) {
+
+                if ( itemPos[ i ].childCount > 0 && !itemPos[ i ].GetChild( 0 ).gameObject.CompareTag( items[ j ].gameObject.tag ) )
+                    continue;
+
+                print( items[ j ].name );
+
+                if ( Instantiate( items[ j ], itemPos[ i ].transform ) ) {
+                    data.PlayerItemsSaveToJson( items );
+                    break;
+                }
             }
         }
     }
