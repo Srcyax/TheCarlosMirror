@@ -17,5 +17,13 @@ MonoBehaviour:
   resolution: 0
   menuMusicVolume: 0.1
   tutorial: 1
-  items: []
+  items:
+  - {fileID: 7898828460064886862, guid: 23a8b552ecf378f40a25c451346453c8, type: 3}
+  - {fileID: 7898828460064886862, guid: 23a8b552ecf378f40a25c451346453c8, type: 3}
+  - {fileID: 6052904898547524782, guid: 11a95ac2403a3c44380373f3653b3949, type: 3}
+  - {fileID: 7898828460064886862, guid: 23a8b552ecf378f40a25c451346453c8, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   playerName: 
