@@ -11,6 +11,7 @@ public class EquipMenuItem : MonoBehaviour
     [SerializeField] private JsonReadWriteSystem data;
 
     private Button button => GetComponent<Button>();
+
     void Start()
     {
         data = GameObject.FindGameObjectWithTag( "NetworkManager" ).GetComponent<JsonReadWriteSystem>();
@@ -23,10 +24,13 @@ public class EquipMenuItem : MonoBehaviour
                     if ( settings.items[ i ] != null )
                         continue;
 
-
                     settings.items[ i ] = itemPos.transform.GetChild( 0 ).gameObject.GetComponent<InventoryItemInfo>().item;
                     data.PlayerItemsEquipedSaveToJson( settings.items );
+
                     for ( int j = 0; j < inventory.items.Length; j++ ) {
+                        if ( !inventory.items[ j ])
+                            continue;
+
                         if ( !inventory.items[ j ].CompareTag( itemPos.transform.GetChild( 0 ).gameObject.tag ) )
                             continue;
 
@@ -36,19 +40,7 @@ public class EquipMenuItem : MonoBehaviour
                     }
 
                     Destroy( itemPos.GetChild( 0 ).gameObject );
-                    break;
-                    
-
-                    /*else {
-                        for ( int k = 0; k < settings.items.Length; k++ ) {
-                            if ( settings.items[ k ] != itemPos.transform.GetChild( 0 ).gameObject.GetComponent<InventoryItemInfo>().item )
-                                continue;
-
-                            settings.items[ k ] = null;
-                            data.PlayerItemsEquipedSaveToJson( settings.items );
-                            break;
-                        }
-                    }*/
+                    break;               
                 }
             } );
         }

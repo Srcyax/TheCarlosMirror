@@ -29,7 +29,7 @@ public class GetSettings : MonoBehaviour {
             wrongVersion.SetActive(Application.version != GetGameVersion());         
         }
 #endif
-        json.PlayerCoinSaveToJson( 1000 );
+
         if ( DataSetup() ) {
             string playerData = File.ReadAllText("C:/userdata/playerData.json");
             PlayerData pData = JsonUtility.FromJson<PlayerData>(json.EncryptDecrypt(playerData, json.key));
@@ -40,6 +40,8 @@ public class GetSettings : MonoBehaviour {
             playerName.text = pData.playerName != null ? pData.playerName : Environment.UserName;
             resolution.value = sData.resolution;
             musicVolumeSlider.value = sData.menuMusicVolume;
+
+            LoadPlayerItems();
         }
     }
 
@@ -103,6 +105,14 @@ public class GetSettings : MonoBehaviour {
             File.WriteAllText( "C:/userdata/new.settings", "" );
             return true;
         }
+    }
+
+    void LoadPlayerItems()
+    {
+        for ( int i = 0; i < settings.items.Length; i++ )
+            settings.items[ i ] = null;
+
+        json.PlayerItemsEquipedLoadFromJson( settings.items );
     }
 
     public string GetGameVersion() {
