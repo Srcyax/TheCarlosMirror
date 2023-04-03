@@ -14,6 +14,16 @@ public class InventoryStart : MonoBehaviour
 
     public void InventoryUpdate()
     {
+        for ( int j = 0; j < itemPos.Length; j++ ) {
+            if ( !( itemPos[ j ].childCount > 0 ) )
+                continue;
+
+            for (int k = 0; k < itemPos[ j ].childCount; k++ ) {
+                Destroy( itemPos[ j ].GetChild( k ).gameObject );
+            }
+        }
+
+
         for ( int j = 0; j < items.Length; j++ ) {
             if ( !items[ j ] )
                 continue;

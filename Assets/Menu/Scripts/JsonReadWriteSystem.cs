@@ -86,7 +86,7 @@ public class JsonReadWriteSystem : MonoBehaviour {
         return data.coin;
     }
 
-    public void PlayerItemsSaveToJson(GameObject[] item)
+    public bool PlayerItemsSaveToJson(GameObject[] item)
     {
         PlayerItems data = new PlayerItems();
         data.items = item;
@@ -95,19 +95,23 @@ public class JsonReadWriteSystem : MonoBehaviour {
 
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText( "C:/userdata/playerItems.json", EncryptDecrypt( json, key ) );
+
+        return true;
     }
 
-    public void PlayerItemsLoadFromJson(GameObject[] items)
+    public bool PlayerItemsLoadFromJson(GameObject[] items)
     {
         string json = File.ReadAllText("C:/userdata/playerItems.json");
         PlayerItems data = JsonUtility.FromJson<PlayerItems>(EncryptDecrypt(json, key ));
 
-        for ( int i = 0; i < items.Length; i++ ) {
-            if ( data.items[ i ] == null )
+        for ( int i = 0; i < data.items.Length; i++ ) {
+            if ( !data.items[ i ] )
                 continue;
 
             items[ i ] = data.items[ i ];
         }
+
+        return true;
     }
 
     public void PlayerItemsEquipedSaveToJson( GameObject[] item )
