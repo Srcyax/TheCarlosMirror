@@ -101,7 +101,10 @@ public class JsonReadWriteSystem : MonoBehaviour {
 
     public bool PlayerItemsLoadFromJson(GameObject[] items)
     {
-        string json = File.ReadAllText("C:/userdata/playerItems.json");
+        if ( !File.Exists( "C:/userdata/playerItems.json" ) )
+            return false;
+
+        string json = File.ReadAllText("C:/userdata/playerItems.json");       
         PlayerItems data = JsonUtility.FromJson<PlayerItems>(EncryptDecrypt(json, key ));
 
         for ( int i = 0; i < data.items.Length; i++ ) {
