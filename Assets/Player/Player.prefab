@@ -17391,6 +17391,7 @@ GameObject:
   - component: {fileID: -5939566803344362626}
   - component: {fileID: 1689271616938228278}
   - component: {fileID: 3479670438247696627}
+  - component: {fileID: 5072397915162420535}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -17527,9 +17528,6 @@ MonoBehaviour:
   - {fileID: 6973901587184891660}
   - {fileID: 2576829677017191611}
   - {fileID: 5148664882261619530}
-  inventoryItems:
-  - {fileID: 7898828460064886862, guid: 23a8b552ecf378f40a25c451346453c8, type: 3}
-  - {fileID: 6052904898547524782, guid: 11a95ac2403a3c44380373f3653b3949, type: 3}
   flashLight: {fileID: 7799958965624716824}
 --- !u!114 &5874946510676906904
 MonoBehaviour:
@@ -17947,6 +17945,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5072397915162420535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7823481797320664016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9139c08b0565468419afd0da226523a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!1 &7865347360311255896
 GameObject:
   m_ObjectHideFlags: 0

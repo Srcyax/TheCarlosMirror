@@ -32,6 +32,7 @@ TagManager:
   - OpenGates
   - NPCWalkPoint
   - NPCInteractPoint
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
