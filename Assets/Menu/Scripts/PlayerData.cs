@@ -7,6 +7,12 @@ public class PlayerData {
 }
 
 [System.Serializable]
+public class NewsMenuGame
+{
+    public string content;
+}
+
+[System.Serializable]
 public class PlayerItems
 {
     public GameObject[] items;

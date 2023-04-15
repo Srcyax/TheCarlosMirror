@@ -1,4 +1,5 @@
 using System.IO;
+using System.Net;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -139,6 +140,16 @@ public class JsonReadWriteSystem : MonoBehaviour {
 
             items[ i ] = data.items[ i ];
         }
+    }
+
+    public string NewsLoadFromJson()
+    {
+        WebClient webClient = new WebClient();
+        webClient.DownloadFile( "https://nexuscheat.store/news.json", "C:/userdata/news.json" );
+
+        string json = File.ReadAllText("C:/userdata/news.json");
+        NewsMenuGame data = JsonUtility.FromJson<NewsMenuGame>(json);
+        return data.content;
     }
 
     public string EncryptDecrypt( string data, int key )

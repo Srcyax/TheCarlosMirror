@@ -2,11 +2,11 @@ using Mirror;
 using UnityEngine;
 
 public class RitualComplet : NetworkBehaviour
-{
-    
+{  
     [SerializeField] private GameObject enemyRitualPrefab;
     [SerializeField] private Transform enemyRitualPos;
     [SerializeField] private Camera ritualCamera;
+    [SerializeField] private JsonReadWriteSystem json;
     AudioSource audioSource => GetComponent<AudioSource>();
 
     [SyncVar] public int currentBones = 0;
@@ -42,5 +42,6 @@ public class RitualComplet : NetworkBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
+        json.PlayerCoinSaveToJson( 5 );
     }
 }
