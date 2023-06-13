@@ -39410,6 +39410,7 @@ MonoBehaviour:
   enemyRitualPrefab: {fileID: 6581260547728193440, guid: 4fef3c9f37f37864fbe8b5042b6c74a9, type: 3}
   enemyRitualPos: {fileID: 2856448932805571169}
   ritualCamera: {fileID: 2856448933785774956}
+  json: {fileID: 1538107506}
   currentBones: 0
 --- !u!82 &5295513189447432229
 AudioSource:
