@@ -17619,6 +17619,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  playerController: {fileID: 7823481797320664011}
 --- !u!114 &2412742043826749293
 MonoBehaviour:
   m_ObjectHideFlags: 0

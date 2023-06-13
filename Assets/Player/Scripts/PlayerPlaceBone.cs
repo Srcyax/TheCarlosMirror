@@ -2,6 +2,8 @@ using Mirror;
 using UnityEngine;
 
 public class PlayerPlaceBone : NetworkBehaviour {
+    [SerializeField] private PlayerController playerController;
+
     private CurrentPoints current;
 
     void Start() {
@@ -11,6 +13,9 @@ public class PlayerPlaceBone : NetworkBehaviour {
 
     void Update() {
         if ( !( current.points > 0 ) )
+            return;
+
+        if ( !playerController.IsLocalPlayerAlive )
             return;
 
         CmdPlaceBone();
